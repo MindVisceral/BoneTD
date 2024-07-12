@@ -34,7 +34,7 @@ extends StaticBody2D
 ## Time until the next shot can be fired
 @export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
 
-## Does this Tower rotate to face the Enemy?
+## Does this Tower rotate to face the Enemy? If not, only the Bullet will be rotated.
 @export var tower_rotates_to_enemy: bool = true
 
 ###-------------------------------------------------------------------------###
@@ -139,11 +139,9 @@ func instantiate_bullet() -> void:
 	if tower_rotates_to_enemy == true:
 		self.rotation = angle_to_current_target
 		bullet.rotation = angle_to_current_target
-	## Otherwise, make the Bullet itself rotate to face the Enemy.
+	## Otherwise, make only the Bullet itself rotate to face the Enemy.
 	else:
 		bullet.rotation = angle_to_current_target
-	
-	print(angle_to_current_target)
 	
 	## And add the Bullet to the Tree
 	get_tree().get_root().add_child(bullet)
