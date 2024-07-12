@@ -436,7 +436,24 @@ z_index = 1
 curve = SubResource("Curve2D_ja27w")
 
 [node name="BaseEnemy" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(-26, 232)
+position = Vector2(-20.9686, 232)
+progress = 5.0
+
+[node name="BaseEnemy2" parent="MovementPath" instance=ExtResource("2_t1gu8")]
+position = Vector2(-11.0176, 232)
+progress = 15.0
+
+[node name="BaseEnemy3" parent="MovementPath" instance=ExtResource("2_t1gu8")]
+position = Vector2(-1.00915, 232)
+progress = 25.0
+
+[node name="BaseEnemy4" parent="MovementPath" instance=ExtResource("2_t1gu8")]
+position = Vector2(9.99731, 232)
+progress = 36.0
+
+[node name="BaseEnemy5" parent="MovementPath" instance=ExtResource("2_t1gu8")]
+position = Vector2(34.0177, 232)
+progress = 60.0
 
 [node name="Towers" type="Node2D" parent="."]
 
