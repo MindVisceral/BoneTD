@@ -1,6 +1,10 @@
 class_name BaseWave
 extends Node2D
 
+###-------------------------------------------------------------------------###
+##### Exported variables
+###-------------------------------------------------------------------------###
+
 @export_group("References")
 
 ## Enemy kinds that appear this wave
@@ -20,6 +24,10 @@ extends Node2D
 ###-------------------------------------------------------------------------###
 ##### Misc. variables
 ###-------------------------------------------------------------------------###
+
+## This signal is emmited when all the Enemies are done spawning.
+## Used by this Wave's Round node to start the next wave.
+signal enemies_done_spawning
 
 ## We need a reference to the level's Path2D Node. The Round Nodes know this and pass it on.
 var path_reference: Path2D
@@ -52,6 +60,12 @@ func initialize() -> void:
 		
 		## Now we wait a moment before spawning the next Enemy.
 		await get_tree().create_timer(time_between_enemies_this_wave[enemy]).timeout
+	
+	## All Enemies have been spawned already.
+	## Send a signal to the Round (that this Wave is a part of) to send in the next Wave.
+	enemies_done_spawning.emit()
+	
+	## This wave is done and now it waits until all of its Enemies are dead.
 
 ## An Enemy that was spawned by this Wave is dead, so we will remove it from
 ## the enemies_left_this_wave Array.
@@ -61,6 +75,7 @@ func enemy_is_dead(enemy: BaseEnemy) -> void:
 	
 	## Since all the Enemies are dead, this Wave can be removed too.
 	if enemies_left_this_wave.is_empty():
+		print("WAVE: ALL ENEMIES IN WAVE ", self, " ARE DEAD")
 		wave_is_over()
 
 ## This Wave is over, it should be queue_free-d.
@@ -69,6 +84,6 @@ func wave_is_over() -> void:
 	## Once all the Waves are over, the next Round can begin.
 	if wave_round:
 		wave_round.wave_is_over(self)
+		print("WAVE: ", self, " - I AM OVER")
 	
-	print("WAVE ", self, " IS OVER")
 	queue_free()

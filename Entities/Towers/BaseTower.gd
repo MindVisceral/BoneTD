@@ -130,7 +130,7 @@ func instantiate_bullet() -> void:
 func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.append(Enemy)
 	
-	print("ENTERED")
+	#print("ENTERED")
 	
 	## A new Enemy has entered the Tower's range. Check if it should become the new current_target
 	change_current_target()
@@ -139,7 +139,7 @@ func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 func new_enemy_out_of_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.erase(Enemy)
 	
-	print("EXITED")
+	#print("EXITED")
 	
 	## This Enemy which just went out of range may have been the current_target.
 	change_current_target()

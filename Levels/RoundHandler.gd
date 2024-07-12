@@ -10,6 +10,10 @@ extends Node2D
 ## Different Rounds that appear in this level
 @export var round_scenes: Array[PackedScene]
 
+## Button the Player presses to start the next round
+@export var nextRound_button: Button
+
+
 @export_group("Rounds")
 
 ## Number of Rounds in this level
@@ -37,6 +41,11 @@ func _ready() -> void:
 
 ## We use this instead of _ready() to avoid bugs.
 func initialize() -> void:
+	
+	## Before anything happens, wait for the Player to start the next round
+	await nextRound_button.pressed
+	
+	## Round started!
 	## Loop through all the Waves this round. We will make them happen in order,
 	## as dictated by the waves_in_order Array.
 	for round in rounds_in_order:
@@ -48,14 +57,15 @@ func initialize() -> void:
 		## (we get that specific Wave PackedScene), and we instantiate it.
 		var new_round = round_scenes[round].instantiate()
 		new_round.path_reference = path_reference
+		## Tell this Round who made it
+		new_round.round_handler = self
 		self.add_child(new_round)
 		
 		new_round.initialize()
 		
-		## Now we wait for Player Input to start the next Round.
-		await false
-		print("NEXT ROUND")
-
-## 
-func round_is_over(round: BaseRound) -> void:
-	print("ROUND X IS OVER")
+		## We wait for this Round to be over before we start the next one.
+		await new_round.round_is_over_signal
+		print("ROUND: ", new_round, " IS OVER, queue_free-d")
+		## This round is over, now we can (and will) wait for the Player to start the next round
+		await nextRound_button.pressed
+		print("NEXT ROUND started")

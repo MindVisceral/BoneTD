@@ -5,5 +5,5 @@
 
 [node name="BaseRound" type="Node2D"]
 script = ExtResource("1_uus8k")
-wave_scenes = Array[PackedScene]([ExtResource("2_5b1hq"), ExtResource("2_5b1hq")])
-waves_in_order = Array[int]([0, 0])
+wave_scenes = Array[PackedScene]([ExtResource("2_5b1hq")])
+waves_in_order = Array[int]([0, 0, 0])

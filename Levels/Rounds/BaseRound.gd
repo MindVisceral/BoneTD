@@ -1,6 +1,10 @@
 class_name BaseRound
 extends Node2D
 
+###-------------------------------------------------------------------------###
+##### Exported variables
+###-------------------------------------------------------------------------###
+
 @export_group("References")
 
 ## Different Waves that appear this Round
@@ -13,6 +17,14 @@ extends Node2D
 ## This is an Array of numbers. "0" corresponds to the "0" Wave in the wave_scenes Array
 @export var waves_in_order: Array[int]
 
+
+###-------------------------------------------------------------------------###
+##### Misc. variables
+###-------------------------------------------------------------------------###
+
+## This signal is emmited when this Round is over (all the Enemies are dead and the Waves are gone)
+## Used by the RoundHandler node to start the next Round.
+signal round_is_over_signal
 
 ## We need a reference to the level's Path2D Node. The RoundHandler knows this and passes it.
 var path_reference: Path2D
@@ -39,20 +51,28 @@ func initialize() -> void:
 		## (we get that specific Wave PackedScene), and we instantiate it.
 		var new_wave = wave_scenes[wave].instantiate()
 		new_wave.path_reference = path_reference
-		print("NEW WAVE path: ", new_wave.path_reference)
-		self.get_parent().add_child(new_wave)
+		## Tell this Wave who made it
+		new_wave.wave_round = self
 		
+		self.get_parent().add_child(new_wave)
 		new_wave.initialize()
 		
-		## Now we wait a moment before spawning the next Wave.
-		await true
+		## This Wave is ready, so add it to waves_left
+		waves_left.append(new_wave)
+		
+		## Now we wait until the current Wave is done spawning all the Enemies.
+		## Then we start the next round immediately.
+		await new_wave.enemies_done_spawning
+		## NOTE: Could add time between waves here!
 
-## An Enemy that was spawned by this Wave is dead, so we will remove it from
-## the enemies_left_this_wave Array.
+
+## A Wave that was spawned by this Round is over, so we will remove it from
+## the waves_left Array.
 func wave_is_over(wave: BaseWave) -> void:
 	if wave in waves_left:
 		waves_left.erase(wave)
-		print("waves erased from Round")
+		print("WAVE: ", wave, " - ERASED FROM THIS ROUND")
+		print("WAVES LEFT: ", waves_left)
 	
 	## Since all the Enemies are dead, this Wave can be removed too.
 	if waves_left.is_empty():
@@ -62,6 +82,6 @@ func wave_is_over(wave: BaseWave) -> void:
 func round_is_over() -> void:
 	## We must tell the RoundHandler (that this Round is a part of) that it's over.
 	## Now the next Round can begin.
-	round_handler.round_is_over(self)
-	print("ROUND", self, " IS OVER, queue_free()")
+	round_is_over_signal.emit()
+	
 	queue_free()
