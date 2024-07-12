@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://biabsi02mwe5m"]
+
+[ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_lx0mq"]
+
+[node name="BaseEnemy" type="Node2D"]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_lx0mq")
