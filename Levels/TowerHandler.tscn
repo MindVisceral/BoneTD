@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ixusat1leq8h"]
+
+[ext_resource type="Script" path="res://Levels/TowerHandler.gd" id="1_bnhgg"]
+
+[node name="TowerHandler" type="Node2D" node_paths=PackedStringArray("towers_node_reference")]
+script = ExtResource("1_bnhgg")
+towers_node_reference = NodePath("Towers")
+
+[node name="Towers" type="Node2D" parent="."]
