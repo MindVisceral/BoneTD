@@ -25,6 +25,13 @@ window/size/viewport_height=270
 2d_physics/layer_1="Environment"
 2d_navigation/layer_1="Enemy Movement Layer"
 2d_physics/layer_2="Tower"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Bullet"
+2d_physics/layer_5="Hitbox"
+2d_physics/layer_6="Hurtbox"
+2d_physics/layer_7="TowerDetection"
+2d_physics/layer_8="EnemyDetected"
+2d_physics/layer_9="Path"
 
 [rendering]
 

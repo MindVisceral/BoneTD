@@ -9,7 +9,7 @@ extends PathFollow2D
 @export_group("Base movement")
 
 ## Enemy speed in pixels travelled every frame
-@export_range(10, 9999, 1) var speed: int = 75
+@export_range(5, 9999, 1) var speed: int = 20
 
 
 

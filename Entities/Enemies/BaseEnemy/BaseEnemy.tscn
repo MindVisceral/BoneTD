@@ -22,7 +22,7 @@ Entity = NodePath("..")
 [node name="Collider" parent="EnemyDetectedArea" index="0"]
 shape = SubResource("RectangleShape2D_wvokt")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_lx0mq")
 
