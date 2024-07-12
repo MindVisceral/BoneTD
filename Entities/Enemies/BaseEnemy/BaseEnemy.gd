@@ -25,6 +25,14 @@ extends PathFollow2D
 var current_health: int = 1
 
 
+###-------------------------------------------------------------------------###
+##### Misc. variables
+###-------------------------------------------------------------------------###
+
+## This Enemy was spawned by this specific Wave.
+## This Wave wants to know when this Enemy dies, so we will call it to tell it that.
+var enemy_wave: BaseWave
+
 
 func _ready() -> void:
 	apply_stats()
@@ -44,11 +52,14 @@ func receive_DamageData(damageData: DamageData) -> void:
 	## Lose some Health
 	self.current_health -= damageData.damage_value
 	
-	## Health is all gone, time to die.
+	## If health is all gone, time to die.
 	if current_health <= 0:
 		death()
 
 
 ## Make the Enemy die
 func death() -> void:
+	## We must tell the Wave (that this Enemy is a part of) that it has died
+	enemy_wave.enemy_is_dead(self)
+	print("ENEMY ", self, " IS DEAD")
 	queue_free()

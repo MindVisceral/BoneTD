@@ -1,21 +1,61 @@
-class_name WaveHandler
+class_name RoundHandler
 extends Node2D
 
+@export_group("References")
+
+## New Enemies must be added as children of the Path to work properly.
+## Waves handle that, so this must be passed to each new Wave
 @export var path_reference: Path2D
 
-@export var enemy_scene: PackedScene
+## Different Rounds that appear in this level
+@export var round_scenes: Array[PackedScene]
 
-@export var enemy_number: int = 6
-@export var time_between_enemy_spawns: float = 0.8
+@export_group("Rounds")
 
-@export var time_before_wave_start: float = 1.5
+## Number of Rounds in this level
+@export_range(1, 999, 1) var number_of_rounds: int = 0
+
+## Which different Rounds will happen now. Rounds earlier in the Array happen first.
+## This is an Array of numbers. "0" corresponds to the "0" Round in the round_scenes Array
+@export var rounds_in_order: Array[int]
+
+@export_group("Start")
+## This map will start with this round
+@export_range(0, 999, 1) var starting_round: int = 0
+## If not 0, this round will start during this wave. Typically rounds start with Wave 0
+@export_range(0, 999, 1) var starting_wave: int = 0
+
+
+@export_group("End")
+## This map will end with this round
+@export_range(1, 999, 1) var ending_round: int = 0
+## If not 999, this round will end after this wave. Typically rounds just end with the last wave
+@export_range(0, 999, 1) var ending_wave: int = 0
 
 func _ready() -> void:
-	for i in enemy_number:
-		if i != 0:
-			await get_tree().create_timer(time_between_enemy_spawns).timeout
-		else:
-			await get_tree().create_timer(time_before_wave_start).timeout
+	call_deferred("initialize")
+
+## We use this instead of _ready() to avoid bugs.
+func initialize() -> void:
+	## Loop through all the Waves this round. We will make them happen in order,
+	## as dictated by the waves_in_order Array.
+	for round in rounds_in_order:
 		
-		var new_enemy = enemy_scene.instantiate()
-		path_reference.add_child(new_enemy)
+		## This is complicated;
+		## waves_in_order Array says which Wave will be instantiated now.
+		## For example, let's say that waves_in_order wants to spawn a Wave of kind "1".
+		## We ask the wave_scenes Array what kind of a Wave a "Wave of kind '1'" is
+		## (we get that specific Wave PackedScene), and we instantiate it.
+		var new_round = round_scenes[round].instantiate()
+		new_round.path_reference = path_reference
+		self.add_child(new_round)
+		
+		new_round.initialize()
+		
+		## Now we wait for Player Input to start the next Round.
+		await false
+		print("NEXT ROUND")
+
+## 
+func round_is_over(round: BaseRound) -> void:
+	print("ROUND X IS OVER")

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
-[ext_resource type="PackedScene" uid="uid://biabsi02mwe5m" path="res://Entities/Enemies/BaseEnemy/BaseEnemy.tscn" id="2_t1gu8"]
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower.tscn" id="3_1ca6c"]
+[ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -434,10 +434,9 @@ layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506,
 
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
-enemy_scene = ExtResource("2_t1gu8")
-enemy_number = 4
-time_between_enemy_spawns = 1.2
-time_before_wave_start = 1.0
+number_of_rounds = 3
+
+[node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1
@@ -450,3 +449,19 @@ position = Vector2(88, 107)
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 offset = Vector2(240, 135)
+
+[node name="TemporaryGUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="TemporaryGUI"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "ROUND: "
