@@ -1,7 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqmttjx0vrf5k"]
+[gd_scene load_steps=6 format=3 uid="uid://cqmttjx0vrf5k"]
 
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_s74lq"]
+[ext_resource type="PackedScene" uid="uid://c6033qphpoajv" path="res://Entities/Towers/StickGuy/StickBullet.tscn" id="2_ddlig"]
+[ext_resource type="Texture2D" uid="uid://cb5o1u3dfx3li" path="res://placeholder_3.png" id="3_y2g6i"]
 
-[node name="BaseTower" instance=ExtResource("1_s74lq")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_7qmdv"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qbvre"]
+radius = 8.0
+
+[node name="StickGuy" instance=ExtResource("1_s74lq")]
+bullet_scene = ExtResource("2_ddlig")
+shot_delay = 0.5
+bullet_speed = 3
+bullet_damage = 0
+bullet_piercing_amount = 4
+
+[node name="Collider" parent="TowerDetectionArea" index="0"]
+shape = SubResource("CircleShape2D_7qmdv")
+
+[node name="Collider" parent="." index="2"]
+shape = SubResource("CircleShape2D_qbvre")
+
+[node name="BulletSpawnPoint" parent="." index="4"]
+position = Vector2(25, 0)
+
+[node name="placeholder" type="Sprite2D" parent="." index="5"]
+position = Vector2(25, 1)
+texture = ExtResource("3_y2g6i")
 
 [editable path="TowerDetectionArea"]

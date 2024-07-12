@@ -2,6 +2,15 @@ class_name BaseTower
 extends StaticBody2D
 
 ###-------------------------------------------------------------------------###
+##### References
+###-------------------------------------------------------------------------###
+
+@export_group("References")
+
+@export var bullet_spawn_point: Marker2D
+
+
+###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
 ###-------------------------------------------------------------------------###
 
@@ -20,11 +29,13 @@ extends StaticBody2D
 
 ## Reference to the Bullet scene, which this Tower will 'shoot' (instantiate)
 @export var bullet_scene: PackedScene = \
-	preload("res://Entities/Towers/BaseBullet.tscn")
+	preload("res://Entities/Towers/BaseTower/BaseBullet.tscn")
 
 ## Time until the next shot can be fired
-@export_range(0.05, 2.0, 0.05) var shot_delay: float = 1.0
+@export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
 
+## Does this Tower rotate to face the Enemy?
+@export var tower_rotates_to_enemy: bool = true
 
 ###-------------------------------------------------------------------------###
 ##### Bullet Variables
@@ -37,10 +48,10 @@ extends StaticBody2D
 	preload("res://icon.svg")
 
 ## Bullet's base speed
-@export_range(20, 9999, 1) var bullet_speed: int = 80
+@export_range(0, 9999, 1) var bullet_speed: int = 80
 
 ## Default damage dealt by the bullet
-@export_range(1, 9999, 1) var bullet_damage: int = 1
+@export_range(0, 9999, 1) var bullet_damage: int = 1
 
 ## How many times a Bullet created by this Tower can go through an Enemy/Enemies before breaking.
 ## "0" means that this Bullet does not pierce - it deals damage once and is destroyed,
@@ -86,9 +97,18 @@ func _physics_process(delta: float) -> void:
 
 
 func shoot_at_target() -> void:
-	## Get the angle between the Tower and its Target (in radians).
+	
+	## If this Tower is set to rotate to look at the Enemy,
+	## get the angle between the Tower and its Target (in radians).
+	## The Bullet will inherit the Tower's rotation.
+	if tower_rotates_to_enemy == true:
+		angle_to_current_target = \
+			self.global_position.angle_to_point(current_target.global_position)
+	## Otherwise get the angle between the Tower's BulletSpawnPoint and its Target (in radians).
 	## The bullet will be fired at this angle.
-	angle_to_current_target = self.global_position.angle_to_point(current_target.global_position)
+	else:
+		angle_to_current_target = \
+			bullet_spawn_point.global_position.angle_to_point(current_target.global_position)
 	
 	
 	instantiate_bullet()
@@ -111,12 +131,21 @@ func instantiate_bullet() -> void:
 	## Bullet visuals
 	bullet.sprite_texture = bullet_sprite
 	
-	## Put it at this Tower's global_position...
-	bullet.global_position = self.global_position
-	## ...at the angle that will point it at the current_target.
-	bullet.rotation = angle_to_current_target
+	## Put it at this BulletSpawnPoint's global_position...
+	bullet.global_position = bullet_spawn_point.global_position
 	
-	## And add it to the Tree
+	
+	## If this tower is meant to rotate towards the Enemy, do that.
+	if tower_rotates_to_enemy == true:
+		self.rotation = angle_to_current_target
+		bullet.rotation = angle_to_current_target
+	## Otherwise, make the Bullet itself rotate to face the Enemy.
+	else:
+		bullet.rotation = angle_to_current_target
+	
+	print(angle_to_current_target)
+	
+	## And add the Bullet to the Tree
 	get_tree().get_root().add_child(bullet)
 
 
@@ -130,7 +159,7 @@ func instantiate_bullet() -> void:
 func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.append(Enemy)
 	
-	#print("ENTERED")
+	print("ENTERED")
 	
 	## A new Enemy has entered the Tower's range. Check if it should become the new current_target
 	change_current_target()
@@ -139,7 +168,7 @@ func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 func new_enemy_out_of_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.erase(Enemy)
 	
-	#print("EXITED")
+	print("EXITED")
 	
 	## This Enemy which just went out of range may have been the current_target.
 	change_current_target()

@@ -1,9 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cs8y67w2tt7sd"]
 
-[ext_resource type="Script" path="res://Entities/Towers/TowerDetectionArea.gd" id="1_xr6is"]
+[ext_resource type="Script" path="res://Entities/Towers/BaseTower/TowerDetectionArea.gd" id="1_o1go0"]
 
 [node name="TowerDetectionArea" type="Area2D"]
-script = ExtResource("1_xr6is")
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_o1go0")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 

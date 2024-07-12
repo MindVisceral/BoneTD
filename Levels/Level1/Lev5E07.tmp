@@ -441,8 +441,8 @@ number_of_rounds = 3
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="StickGuy" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
-position = Vector2(72, 119)
+[node name="BaseTower" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
+position = Vector2(73, 64)
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1
