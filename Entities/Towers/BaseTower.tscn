@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://u1qyk1m1yco0"]
+[gd_scene load_steps=6 format=3 uid="uid://dkq2v5d0oonov"]
 
-[ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
+[ext_resource type="Script" path="res://Entities/Towers/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
-[ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerDetectionArea.tscn" id="2_12v22"]
+[ext_resource type="PackedScene" path="res://Entities/Towers/TowerDetectionArea.tscn" id="2_12v22"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1qky"]
 radius = 50.0
@@ -15,10 +15,11 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qn6n7")
 
-[node name="TowerDetectionArea" parent="." instance=ExtResource("2_12v22")]
+[node name="TowerDetectionArea" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_12v22")]
 collision_layer = 64
 collision_mask = 128
 monitorable = false
+Tower = NodePath("..")
 
 [node name="Collider" parent="TowerDetectionArea" index="0"]
 shape = SubResource("CircleShape2D_r1qky")

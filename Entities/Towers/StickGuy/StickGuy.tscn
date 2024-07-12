@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqmttjx0vrf5k"]
 
-[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower.tscn" id="1_s74lq"]
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_s74lq"]
 
 [node name="BaseTower" instance=ExtResource("1_s74lq")]
 
