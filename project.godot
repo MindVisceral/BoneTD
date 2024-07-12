@@ -22,7 +22,9 @@ window/size/viewport_height=270
 
 [layer_names]
 
+2d_physics/layer_1="Environment"
 2d_navigation/layer_1="Enemy Movement Layer"
+2d_physics/layer_2="Tower"
 
 [rendering]
 

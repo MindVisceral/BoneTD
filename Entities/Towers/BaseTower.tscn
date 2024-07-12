@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/TowerDetectionArea.tscn" id="2_12v22"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r1qky"]
-radius = 120.0
+radius = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oalb8"]
 size = Vector2(45, 45)
 
 [node name="BaseTower" type="StaticBody2D"]
+collision_layer = 2
 script = ExtResource("1_qn6n7")
 
 [node name="TowerDetectionArea" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_12v22")]
