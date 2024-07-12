@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjsrrnnyn21fc"]
+
+[ext_resource type="Script" path="res://Entities/Enemies/BaseEnemy/EnemyDetectedArea.gd" id="1_p83s5"]
+
+[node name="EnemyDetectedArea" type="Area2D"]
+script = ExtResource("1_p83s5")
+
+[node name="Collider" type="CollisionShape2D" parent="."]

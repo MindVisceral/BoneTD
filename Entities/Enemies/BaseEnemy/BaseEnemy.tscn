@@ -1,13 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://biabsi02mwe5m"]
+[gd_scene load_steps=7 format=3 uid="uid://biabsi02mwe5m"]
 
+[ext_resource type="Script" path="res://Entities/Enemies/BaseEnemy/BaseEnemy.gd" id="1_lgemf"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_lx0mq"]
+[ext_resource type="PackedScene" uid="uid://bjsrrnnyn21fc" path="res://Entities/Enemies/BaseEnemy/EnemyDetectedArea.tscn" id="2_68rp6"]
+[ext_resource type="PackedScene" uid="uid://d2nhv2gaegs3h" path="res://Entities/Entity Elements/Hurtbox.tscn" id="2_cegvm"]
 
-[node name="BaseEnemy" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvokt"]
+size = Vector2(50, 50)
 
-[node name="PathFollow2D" type="PathFollow2D" parent="."]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7cw0"]
+size = Vector2(38, 38)
+
+[node name="BaseEnemy" type="PathFollow2D"]
 rotates = false
 loop = false
+script = ExtResource("1_lgemf")
+
+[node name="EnemyDetectedArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_68rp6")]
+Entity = NodePath("..")
+
+[node name="Collider" parent="EnemyDetectedArea" index="0"]
+shape = SubResource("RectangleShape2D_wvokt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.7, 0.7)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_lx0mq")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_cegvm")]
+editor_description = "Hurtbox of the Enemy"
+Entity = NodePath("..")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("RectangleShape2D_w7cw0")
+
+[editable path="EnemyDetectedArea"]
+[editable path="Hurtbox"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs8y67w2tt7sd"]
+
+[ext_resource type="Script" path="res://Entities/Towers/TowerDetectionArea.gd" id="1_xr6is"]
+
+[node name="TowerDetectionArea" type="Area2D"]
+script = ExtResource("1_xr6is")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_entered"]
+[connection signal="area_exited" from="." to="." method="_on_exited"]

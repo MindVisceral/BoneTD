@@ -1,6 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=14 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
+[ext_resource type="PackedScene" uid="uid://biabsi02mwe5m" path="res://Entities/Enemies/BaseEnemy/BaseEnemy.tscn" id="2_t1gu8"]
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower.tscn" id="3_1ca6c"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -433,7 +435,13 @@ layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506,
 z_index = 1
 curve = SubResource("Curve2D_ja27w")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="MovementPath"]
+[node name="BaseEnemy" parent="MovementPath" instance=ExtResource("2_t1gu8")]
 position = Vector2(-26, 232)
-rotates = false
-loop = false
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="BaseTower" parent="Towers" instance=ExtResource("3_1ca6c")]
+position = Vector2(88, 107)
+
+[node name="LevelCamera" type="Camera2D" parent="."]
+offset = Vector2(240, 135)
