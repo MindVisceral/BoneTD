@@ -27,6 +27,22 @@ extends StaticBody2D
 
 
 ###-------------------------------------------------------------------------###
+##### Bullet Variables
+###-------------------------------------------------------------------------###
+
+## Bullet's base speed
+@export_range(20, 9999, 1) var bullet_speed: int = 80
+
+## Default damage dealt by the bullet
+@export_range(1, 9999, 1) var bullet_damage: int = 1
+
+## How many times a Bullet created by this Tower can go through an Enemy/Enemies before breaking.
+## "0" means that this Bullet does not pierce - it deals damage once and is destroyed,
+## "1" means that this Bullet can deal damage up to two times and it's destroyed on the second hit
+@export_range(0, 9999, 1) var bullet_piercing_amount: int = 0
+
+
+###-------------------------------------------------------------------------###
 ##### Onready Variables
 ###-------------------------------------------------------------------------###
 
@@ -68,16 +84,35 @@ func shoot_at_target() -> void:
 	## The bullet will be fired at this angle.
 	angle_to_current_target = self.global_position.angle_to_point(current_target.global_position)
 	
-	## Instantiate a bullet...
-	var bullet: BaseBullet = bullet_scene.instantiate()
-	## ...at this Tower's global_position...
-	bullet.global_position = self.global_position
-	## ...at the angle that will point it at the current_target.
-	bullet.rotation = angle_to_current_target
-	get_tree().get_root().add_child(bullet)
+	
+	instantiate_bullet()
 	
 	## Start the Timer again
 	ShotDelayTimer.start()
+
+
+## Instantiates a bullet...
+func instantiate_bullet() -> void:
+	var bullet: BaseBullet = bullet_scene.instantiate()
+	
+	## Pass on the bullet variables
+	## NOTE: This is done this way so I don't have to create a thousand different bullets
+	## NOTE: for each Tower upgrade. The Tower handles it all.
+	bullet.speed = bullet_speed
+	bullet.damage = bullet_damage
+	bullet.piercings_left = bullet_piercing_amount
+	
+	
+	## Put it at this Tower's global_position...
+	bullet.global_position = self.global_position
+	## ...at the angle that will point it at the current_target.
+	bullet.rotation = angle_to_current_target
+	
+	## And add it to the Tree
+	get_tree().get_root().add_child(bullet)
+
+
+
 
 ###-------------------------------------------------------------------------###
 ##### Targetting functions

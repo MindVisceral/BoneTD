@@ -1,11 +1,22 @@
 class_name BaseBullet
 extends Area2D
 
-## Bullet's speed
-@export_range(20, 9999, 1) var speed: int = 80
+###-------------------------------------------------------------------------###
+##### Bullet Variables
+###-------------------------------------------------------------------------###
 
+## NOTE: These are all set by the Tower which shoots this Bullet.
+## NOTE: Check the BaseTower script for more information
+
+## Bullet's base speed
+var speed: int = 80
 ## Default damage dealt by this bullet
-@export_range(1, 9999, 1) var damage: int = 1
+var damage: int = 1
+## How many times this Bullet can go through an Enemy/Enemies before breaking.
+## "0" means that this Bullet does not pierce - it deals damage once and is destroyed,
+## "1" means that this Bullet can deal damage up to two times and it's destroyed on the second hit
+var piercings_left: int = 0
+
 
 func _physics_process(delta: float) -> void:
 	## Make the bullet move at speed over time
@@ -23,8 +34,13 @@ func _on_area_entered(area: Area2D) -> void:
 		## Finally, pass over that DamageData
 		area.pass_DamageData(damageData)
 		
-		## And destroy the bullet
-		queue_free()
+		## If the Bullet still has some piercing power after this hit, let it continue
+		if piercings_left > 0:
+			piercings_left -= 1
+		## This Bullet cannot pierce anymore. Time to be destroyed
+		else:
+			## And destroy the bullet
+			queue_free()
 
 ## Check for Environment
 func _on_body_entered(body: Node2D) -> void:
