@@ -30,6 +30,12 @@ extends StaticBody2D
 ##### Bullet Variables
 ###-------------------------------------------------------------------------###
 
+@export_group("Bullet stuff")
+
+## The Tower holds the Bullet's sprite
+@export var bullet_sprite: Texture = \
+	preload("res://icon.svg")
+
 ## Bullet's base speed
 @export_range(20, 9999, 1) var bullet_speed: int = 80
 
@@ -102,6 +108,8 @@ func instantiate_bullet() -> void:
 	bullet.damage = bullet_damage
 	bullet.piercings_left = bullet_piercing_amount
 	
+	## Bullet visuals
+	bullet.sprite_texture = bullet_sprite
 	
 	## Put it at this Tower's global_position...
 	bullet.global_position = self.global_position

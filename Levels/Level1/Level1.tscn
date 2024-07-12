@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=15 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
+[ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="PackedScene" uid="uid://biabsi02mwe5m" path="res://Entities/Enemies/BaseEnemy/BaseEnemy.tscn" id="2_t1gu8"]
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower.tscn" id="3_1ca6c"]
 
@@ -431,29 +432,16 @@ layer_1/name = "walk layer"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506, 65536, 0, 917507, 131072, 2, 851971, 131072, 1, 786435, 131072, 1, 720899, 0, 1, 655363, 0, 1, 589827, 0, 1, 524291, 131072, 1, 458755, 131072, 1, 393219, 0, 1, 327683, 0, 1, 262147, 131072, 1, 196611, 131072, 1, 131075, 0, 0, 131076, 65536, 0, 131077, 65536, 0, 131078, 65536, 0, 131079, 131072, 0, 196615, 131072, 1, 262151, 131072, 1, 327687, 0, 1, 393223, 131072, 1, 458759, 131072, 1, 524295, 131072, 1, 589831, 131072, 1, 655367, 0, 1, 720903, 0, 1, 786439, 131072, 1, 851975, 131072, 1, 917511, 0, 2, 917512, 65536, 0, 917513, 65536, 0, 917514, 65536, 0, 917515, 131072, 2, 851979, 131072, 1, 786443, 131072, 1, 720907, 131072, 1, 655371, 131072, 1, 589835, 131072, 1, 524299, 131072, 1, 458763, 131072, 1, 393227, 131072, 1, 327691, 0, 1, 262155, 131072, 1, 196619, 0, 1, 131083, 0, 0, 131084, 65536, 2, 131085, 65536, 2, 131086, 65536, 2, 131087, 131072, 0, 196623, 131072, 1, 262159, 0, 1, 327695, 0, 1, 393231, 131072, 1, 458767, 0, 1, 524303, 0, 1, 589839, 0, 1, 655375, 0, 1, 720911, 131072, 1, 786447, 131072, 1, 851983, 0, 1, 917519, 0, 2, 917520, 65536, 2, 917521, 65536, 0, 917522, 65536, 0, 917523, 131072, 2, 851987, 131072, 1, 786451, 131072, 1, 720915, 131072, 1, 655379, 0, 1, 589843, 0, 1, 524307, 131072, 1, 458771, 0, 1, 393235, 131072, 1, 327699, 0, 1, 262163, 0, 1, 196627, 0, 1, 131091, 0, 0, 131092, 65536, 0, 131093, 65536, 2, 131094, 65536, 0, 131095, 131072, 0, 196631, 0, 1, 262167, 131072, 1, 393239, 131072, 1, 458775, 131072, 1, 524311, 131072, 1, 589847, 131072, 1, 655383, 0, 1, 720919, 131072, 1, 786455, 131072, 1, 851991, 131072, 1, 917527, 0, 2, 327703, 0, 1, 917528, 65536, 2, 917529, 65536, 0, 917530, 65536, 0, 917531, 131072, 2, 851995, 131072, 1, 786459, 131072, 1, 720923, 131072, 1, 655387, 131072, 1, 589851, 0, 1, 524315, 0, 1, 458779, 131072, 1, 393243, 0, 1, 327707, 0, 1, 262171, 0, 1, 196635, 131072, 1, 131099, 0, 0, 131100, 65536, 2, 131101, 65536, 0, 131102, 65536, 4, 983039, 0, 4)
 
+[node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference") instance=ExtResource("2_7b7bi")]
+path_reference = NodePath("../MovementPath")
+enemy_scene = ExtResource("2_t1gu8")
+enemy_number = 4
+time_between_enemy_spawns = 1.2
+time_before_wave_start = 1.0
+
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1
 curve = SubResource("Curve2D_ja27w")
-
-[node name="BaseEnemy" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(-20.9686, 232)
-progress = 5.0
-
-[node name="BaseEnemy2" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(-11.0176, 232)
-progress = 15.0
-
-[node name="BaseEnemy3" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(-1.00915, 232)
-progress = 25.0
-
-[node name="BaseEnemy4" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(9.99731, 232)
-progress = 36.0
-
-[node name="BaseEnemy5" parent="MovementPath" instance=ExtResource("2_t1gu8")]
-position = Vector2(34.0177, 232)
-progress = 60.0
 
 [node name="Towers" type="Node2D" parent="."]
 

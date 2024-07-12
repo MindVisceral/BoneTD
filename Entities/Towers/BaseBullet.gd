@@ -17,6 +17,18 @@ var damage: int = 1
 ## "1" means that this Bullet can deal damage up to two times and it's destroyed on the second hit
 var piercings_left: int = 0
 
+## The Texture which this Bullet's Sprite will use. This is the default
+var sprite_texture: CompressedTexture2D = preload("res://icon.svg")
+
+
+###-------------------------------------------------------------------------###
+##### Onready Variables
+###-------------------------------------------------------------------------###
+
+@onready var sprite: Sprite2D = $Sprite
+
+func _ready() -> void:
+	sprite.texture = sprite_texture
 
 func _physics_process(delta: float) -> void:
 	## Make the bullet move at speed over time
