@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=17 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="PackedScene" uid="uid://cqmttjx0vrf5k" path="res://Entities/Towers/StickGuy/StickGuy.tscn" id="5_0yo07"]
+[ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -440,6 +441,7 @@ number_of_rounds = 3
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
+tower_scenes = Array[PackedScene]([ExtResource("5_0yo07")])
 
 [node name="StickGuy" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
 position = Vector2(72, 119)
@@ -497,50 +499,28 @@ offset_bottom = 85.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="TemporaryGUI/Panel2"]
+[node name="VFlowContainer" type="HFlowContainer" parent="TemporaryGUI/Panel2"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.5
-offset_right = 50.0
-offset_bottom = 50.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TemporaryGUI/Panel2/VBoxContainer2"]
+[node name="BaseSelectButton" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/VBoxContainer"]
+[node name="BaseSelectButton2" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-text = "TOWER1"
 
-[node name="Button2" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/VBoxContainer"]
+[node name="BaseSelectButton3" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-text = "TOWER2"
 
-[node name="Button3" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/VBoxContainer"]
+[node name="BaseSelectButton4" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-text = "TOWER3"
 
-[node name="Button4" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/VBoxContainer"]
+[node name="BaseSelectButton5" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-text = "TOWER4"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TemporaryGUI/Panel2/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="Button" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "UPGR"
-
-[node name="Button2" type="Button" parent="TemporaryGUI/Panel2/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "SELL"
 
 [node name="Button" type="Button" parent="TemporaryGUI"]
 layout_mode = 1
