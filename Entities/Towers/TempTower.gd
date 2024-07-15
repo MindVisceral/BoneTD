@@ -9,6 +9,12 @@ var tower_to_be_placed: PackedScene
 var towers_node_reference: Node2D
 
 
+## The Menu and other UI elements are Areas. If this is true, then the Tower can be placed.
+var areas_clear: bool = true
+
+## Towers and the Environment are Bodies. If this is true, then the Tower can be placed.
+var bodies_clear: bool = true
+
 func _ready() -> void:
 	pass
 
@@ -21,13 +27,36 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	## Placing button pressed; instantiate the right Tower and kill this Node
 	if Input.is_action_just_pressed("LMB"):
-		var new_tower: BaseTower = tower_to_be_placed.instantiate()
-		
-		new_tower.global_position = self.global_position
-		towers_node_reference.add_child(new_tower)
-		
-		self.queue_free()
+		if areas_clear == true and bodies_clear == true:
+			var new_tower: BaseTower = tower_to_be_placed.instantiate()
+			
+			new_tower.global_position = self.global_position
+			towers_node_reference.add_child(new_tower)
+			
+			self.queue_free()
 	
 	## Cancel placing the Tower.
 	elif Input.is_action_just_pressed("RMB"):
 		self.queue_free()
+
+
+## Touches a Menu, can't be placed.
+func _on_area_entered(area: Area2D) -> void:
+	areas_clear = false
+	print("areas taken")
+
+## All Areas clear, can be placed now.
+func _on_area_exited(area: Area2D) -> void:
+	areas_clear = true
+	print("areas clear")
+
+
+## Touches another Tower or the Environment, can't be placed.
+func _on_body_entered(body: Node2D) -> void:
+	bodies_clear = false
+	print("bodies taken")
+
+## All Bodies clear, can be placed now.
+func _on_body_exited(body: Node2D) -> void:
+	bodies_clear = true
+	print("bodies clear")
