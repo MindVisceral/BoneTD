@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ixusat1leq8h"]
+[gd_scene load_steps=3 format=3 uid="uid://ixusat1leq8h"]
 
 [ext_resource type="Script" path="res://Levels/TowerHandler.gd" id="1_bnhgg"]
+[ext_resource type="PackedScene" uid="uid://dheaw4xfjifiv" path="res://Entities/Towers/TempTower.tscn" id="2_omsf6"]
 
 [node name="TowerHandler" type="Node2D" node_paths=PackedStringArray("towers_node_reference")]
 script = ExtResource("1_bnhgg")
+temp_tower = ExtResource("2_omsf6")
 towers_node_reference = NodePath("Towers")
 
 [node name="Towers" type="Node2D" parent="."]

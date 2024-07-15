@@ -441,7 +441,6 @@ number_of_rounds = 3
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
-tower_scenes = Array[PackedScene]([ExtResource("5_0yo07")])
 
 [node name="StickGuy" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
 position = Vector2(72, 119)
@@ -507,20 +506,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BaseSelectButton" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+tower_handler = NodePath("../../../../TowerHandler")
 
-[node name="BaseSelectButton2" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton2" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+tower_handler = NodePath("../../../../TowerHandler")
 
-[node name="BaseSelectButton3" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton3" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+tower_handler = NodePath("../../../../TowerHandler")
 
-[node name="BaseSelectButton4" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton4" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+tower_handler = NodePath("../../../../TowerHandler")
 
-[node name="BaseSelectButton5" parent="TemporaryGUI/Panel2/VFlowContainer" instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton5" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+tower_handler = NodePath("../../../../TowerHandler")
 
 [node name="Button" type="Button" parent="TemporaryGUI"]
 layout_mode = 1
