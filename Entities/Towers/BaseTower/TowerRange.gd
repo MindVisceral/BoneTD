@@ -1,9 +1,14 @@
-class_name TowerDetectionArea
+class_name TowerRange
 extends Area2D
 
 
 ## A reference to the Tower
 @export var Tower: BaseTower
+
+## Reference to this Area's Collider.
+## Necessary to be known by the Tower to show the Tower's range with a Sprite
+@export var collider: CollisionShape2D
+
 
 ## When an Enemy (specifically the Enemy's EnemyDetectedArea) enters this Area's range...
 func _on_entered(area: EnemyDetectedArea) -> void:

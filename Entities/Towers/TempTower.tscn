@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://dheaw4xfjifiv"]
+[gd_scene load_steps=5 format=3 uid="uid://dheaw4xfjifiv"]
 
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_bc8k8"]
 [ext_resource type="Script" path="res://Entities/Towers/TempTower.gd" id="1_xdyis"]
+[ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="2_2c8o6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j6hnj"]
 radius = 15.0
 
-[node name="TempTower" type="Area2D"]
+[node name="TempTower" type="Area2D" node_paths=PackedStringArray("tower_range_visuals")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_xdyis")
+tower_range_visuals = NodePath("TowerRangeVisuals")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TowerRangeVisuals" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.27451)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_2c8o6")
+
+[node name="TowerSprite" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_bc8k8")
 

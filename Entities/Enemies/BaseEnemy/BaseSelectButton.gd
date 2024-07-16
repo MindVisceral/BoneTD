@@ -8,9 +8,6 @@ extends Button
 @export var tower_handler: TowerHandler
 
 
-func _ready() -> void:
-	pass
-
 ## This button has been pressed, the Player wants to place this button's Tower.
 ## The TowerHandler will handle that.
 func _on_pressed() -> void:

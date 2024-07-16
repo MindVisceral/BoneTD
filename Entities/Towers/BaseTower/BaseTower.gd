@@ -7,8 +7,15 @@ extends StaticBody2D
 
 @export_group("References")
 
+## Collider of the Area which makes the Tower detect Enemies.
+## Used by TowerRangeVisuals to show the Tower's range
+@export var tower_range_collider: CollisionShape2D
+
+## Point from which the Bullet will spawn.
 @export var bullet_spawn_point: Marker2D
 
+## Sprite, which shows the Tower's range to the Player. Scaled to the right size on _ready()
+@export var tower_range_visuals: Sprite2D
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -71,6 +78,10 @@ extends StaticBody2D
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 
+## 1 pixel of TowerRange is worth '0.0625' in TowerRangeVisuals scale
+## When TowerRange is 20px, TowerRangeVisuals scale is et to 1.25
+const range_to_range_visuals_rate: float = 0.0625
+
 ## All Enemies in range of this tower. The first entry in this Array is the first tower added.
 var EnemiesInRangeArray: Array = []
 
@@ -82,6 +93,12 @@ var angle_to_current_target: float
 
 
 func _ready() -> void:
+	## 
+	tower_range_visuals.scale = Vector2( \
+		tower_range_collider.shape.radius * range_to_range_visuals_rate, 
+		tower_range_collider.shape.radius * range_to_range_visuals_rate)
+	
+	
 	## Set ShotDelayTimer's wait_time and start it up
 	ShotDelayTimer.wait_time = shot_delay
 	ShotDelayTimer.start()
@@ -153,7 +170,7 @@ func instantiate_bullet() -> void:
 ##### Targetting functions
 ###-------------------------------------------------------------------------###
 
-## When TowerDetectionArea sees a new Enemy in range...
+## When TowerRange sees a new Enemy in range...
 func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.append(Enemy)
 	
@@ -162,7 +179,7 @@ func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 	## A new Enemy has entered the Tower's range. Check if it should become the new current_target
 	change_current_target()
 
-## When TowerDetectionArea sees an Enemy is out of range...
+## When TowerRange sees an Enemy is out of range...
 func new_enemy_out_of_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.erase(Enemy)
 	

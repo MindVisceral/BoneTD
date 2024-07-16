@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=18 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="PackedScene" uid="uid://cqmttjx0vrf5k" path="res://Entities/Towers/StickGuy/StickGuy.tscn" id="5_0yo07"]
 [ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
+[ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="6_6l325"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -444,6 +445,9 @@ number_of_rounds = 3
 
 [node name="StickGuy" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
 position = Vector2(72, 119)
+target_priority = 0
+tower_rotates_to_enemy = true
+bullet_sprite = ExtResource("6_6l325")
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://u1qyk1m1yco0"]
+[gd_scene load_steps=5 format=3 uid="uid://u1qyk1m1yco0"]
 
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
-[ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerDetectionArea.tscn" id="2_12v22"]
+[ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
+[ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
 
 [node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("bullet_spawn_point")]
 collision_layer = 2
@@ -10,8 +11,12 @@ collision_mask = 3
 script = ExtResource("1_qn6n7")
 bullet_spawn_point = NodePath("BulletSpawnPoint")
 
-[node name="TowerDetectionArea" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_12v22")]
+[node name="TowerRange" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_fac3i")]
 Tower = NodePath("..")
+
+[node name="TowerRangeVisuals" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.27451)
+texture = ExtResource("3_33okv")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
@@ -24,4 +29,4 @@ one_shot = true
 
 [node name="BulletSpawnPoint" type="Marker2D" parent="."]
 
-[editable path="TowerDetectionArea"]
+[editable path="TowerRange"]
