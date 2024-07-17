@@ -1,3 +1,5 @@
+## TowerRangeVisuals scale dynamically in Editor to fit tower_range_collider
+@tool
 class_name BaseTower
 extends StaticBody2D
 
@@ -114,13 +116,20 @@ func _ready() -> void:
 ###-------------------------------------------------------------------------###
 
 func _physics_process(delta: float) -> void:
-	## If there is a current_target...
-	if current_target:
+	## If not in Editor...
+	if !Engine.is_editor_hint():
 		
-		## Shot at the current_target if possible.
-		if ShotDelayTimer.is_stopped():
-			shoot_at_target()
+		## If there is a current_target...
+		if current_target:
+			
+			## Shot at the current_target if possible.
+			if ShotDelayTimer.is_stopped():
+				shoot_at_target()
 
+func _process(delta: float) -> void:
+	## Update visuals when in Editor
+	if Engine.is_editor_hint():
+		update_tower_visuals()
 
 func shoot_at_target() -> void:
 	

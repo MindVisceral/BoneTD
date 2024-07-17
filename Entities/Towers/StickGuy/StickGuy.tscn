@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c6033qphpoajv" path="res://Entities/Towers/StickGuy/StickBullet.tscn" id="2_ddlig"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ixhf"]
-radius = 75.0
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bok23"]
 radius = 9.0
@@ -22,9 +22,12 @@ bullet_piercing_amount = 4
 shape = SubResource("CircleShape2D_2ixhf")
 
 [node name="TowerRangeVisuals" parent="." index="1"]
-scale = Vector2(1.563, 1.563)
+scale = Vector2(1.875, 1.875)
 
 [node name="Collider" parent="." index="3"]
 shape = SubResource("CircleShape2D_bok23")
+
+[node name="ShotDelayTimer" parent="." index="4"]
+wait_time = 0.5
 
 [editable path="TowerRange"]
