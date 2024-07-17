@@ -8,14 +8,23 @@ extends StaticBody2D
 @export_group("References")
 
 ## Collider of the Area which makes the Tower detect Enemies.
-## Used by TowerRangeVisuals to show the Tower's range
+## Used to scale the TowerRangeVisuals on setup() to show the Tower's range to the Player
 @export var tower_range_collider: CollisionShape2D
+
+## Sprite, which shows the Tower's range to the Player. Scaled to the right size on setup()
+@export var tower_range_visuals: Sprite2D
+
+## Sprite of this Tower.
+@export var tower_sprite: Sprite2D
+
+## The Collider of this Tower.
+@export var tower_collider: CollisionShape2D
 
 ## Point from which the Bullet will spawn.
 @export var bullet_spawn_point: Marker2D
 
-## Sprite, which shows the Tower's range to the Player. Scaled to the right size on _ready()
-@export var tower_range_visuals: Sprite2D
+## Node which rotates to face the Enemy. This way, TowerRange and TowerRangeVisuals don't rotate
+@export var rotation_pivot: Node2D
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -93,16 +102,16 @@ var angle_to_current_target: float
 
 
 func _ready() -> void:
-	## 
-	tower_range_visuals.scale = Vector2( \
-		tower_range_collider.shape.radius * range_to_range_visuals_rate, 
-		tower_range_collider.shape.radius * range_to_range_visuals_rate)
-	
+	update_tower_visuals()
 	
 	## Set ShotDelayTimer's wait_time and start it up
 	ShotDelayTimer.wait_time = shot_delay
 	ShotDelayTimer.start()
 
+
+###-------------------------------------------------------------------------###
+##### Shooting functions
+###-------------------------------------------------------------------------###
 
 func _physics_process(delta: float) -> void:
 	## If there is a current_target...
@@ -154,7 +163,7 @@ func instantiate_bullet() -> void:
 	
 	## If this tower is meant to rotate towards the Enemy, do that.
 	if tower_rotates_to_enemy == true:
-		self.rotation = angle_to_current_target
+		rotation_pivot.rotation = angle_to_current_target
 		bullet.rotation = angle_to_current_target
 	## Otherwise, make only the Bullet itself rotate to face the Enemy.
 	else:
@@ -162,7 +171,6 @@ func instantiate_bullet() -> void:
 	
 	## And add the Bullet to the Tree
 	get_tree().get_root().add_child(bullet)
-
 
 
 
@@ -207,3 +215,23 @@ func change_current_target() -> void:
 				## Set the current target to the first Enemy within this Tower's range
 				## (The Enemy that was added to the EnemiesInRangeArray latest)
 				current_target = EnemiesInRangeArray.back()
+
+
+
+###-------------------------------------------------------------------------###
+##### Visuals functions
+###-------------------------------------------------------------------------###
+
+## When the Tower is upgraded or otherwise changed, its visuals must be updated.
+func update_tower_visuals() -> void:
+	## TowerRangeVisuals must match TowerRange collider's radius.
+	## To this end, we scale TowerRangeVisuals Sprite2D by the right amount, which I determinted to
+	## be range_to_range_visuals_rate. This value depends on the the actual
+	## TowerRangeVisuals Texture's resolution.
+	## If that is changed, so must be range_to_range_visuals_rate.
+	tower_range_visuals.scale = Vector2( \
+		tower_range_collider.shape.radius * range_to_range_visuals_rate, 
+		tower_range_collider.shape.radius * range_to_range_visuals_rate)
+	
+	## presumably, bullet sprite should be included here too,
+	## among other stuff. WIP

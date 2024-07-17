@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://c6033qphpoajv" path="res://Entities/Towers/StickGuy/StickBullet.tscn" id="2_ddlig"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ixhf"]
-radius = 80.0
+radius = 75.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bok23"]
 radius = 9.0
 
-[node name="StickGuy" node_paths=PackedStringArray("tower_range_collider", "tower_range_visuals") instance=ExtResource("1_s74lq")]
-tower_range_collider = NodePath("TowerRange/Collider")
-tower_range_visuals = NodePath("TowerRangeVisuals")
+[node name="StickGuy" node_paths=PackedStringArray("tower_sprite", "tower_collider") instance=ExtResource("1_s74lq")]
+tower_sprite = NodePath("RotationPivot/Sprite")
+tower_collider = NodePath("Collider")
 bullet_scene = ExtResource("2_ddlig")
 shot_delay = 0.5
 bullet_speed = 3
@@ -22,12 +22,9 @@ bullet_piercing_amount = 4
 shape = SubResource("CircleShape2D_2ixhf")
 
 [node name="TowerRangeVisuals" parent="." index="1"]
-scale = Vector2(6.25, 6.25)
+scale = Vector2(1.563, 1.563)
 
 [node name="Collider" parent="." index="3"]
 shape = SubResource("CircleShape2D_bok23")
-
-[node name="BulletSpawnPoint" parent="." index="5"]
-position = Vector2(25, 0)
 
 [editable path="TowerRange"]
