@@ -104,6 +104,10 @@ var angle_to_current_target: float
 
 
 func _ready() -> void:
+	## The update_tower_visuals function is called whenever the Globals Autoload
+	## fires the new_tower_selected signal - which is when a new Tower is selected.
+	Globals.new_tower_selected.connect(update_tower_visuals)
+	
 	update_tower_visuals()
 	
 	## Set ShotDelayTimer's wait_time and start it up
@@ -238,9 +242,43 @@ func update_tower_visuals() -> void:
 	## be range_to_range_visuals_rate. This value depends on the the actual
 	## TowerRangeVisuals Texture's resolution.
 	## If that is changed, so must be range_to_range_visuals_rate.
-	tower_range_visuals.scale = Vector2( \
-		tower_range_collider.shape.radius * range_to_range_visuals_rate, 
-		tower_range_collider.shape.radius * range_to_range_visuals_rate)
+	if tower_range_collider.shape: ## This is here to avoid constant errors in Editor
+		tower_range_visuals.scale = Vector2( \
+			tower_range_collider.shape.radius * range_to_range_visuals_rate, 
+			tower_range_collider.shape.radius * range_to_range_visuals_rate)
+			
+		
+	## Everything that follows only matters when not in Editor
+	if !Engine.is_editor_hint():
+		
+		## Toggle TowerRangeVisuals visibility;
+		## If a Tower is selected...
+		if Globals.player_selected_tower == true:
+			## And the selected Tower is this Tower...
+			if Globals.selected_tower_ref == self:
+				## Make this Tower's TowerRangeVisuals visible
+				tower_range_visuals.visible = true
+			## Otherwise, make TowerRangeVisuals invisible
+			else:
+				tower_range_visuals.visible = false
+				
+			
+		
+		## presumably, bullet sprite should be included here too,
+		## among other stuff. WIP
+
+
+
+func _on_tower_selection_pressed() -> void:
+	print("PRESSED")
 	
-	## presumably, bullet sprite should be included here too,
-	## among other stuff. WIP
+	## We only care about the Player selecting this Tower if they're not currently placing a Tower
+	if Globals.player_placing_tower == false:
+		## Make it known that a Tower is currently selected and that it is this Tower
+		Globals.player_selected_tower = true
+		Globals.selected_tower_ref = self
+		
+	## Other Tower must be know that they are not selected!
+	Globals.new_tower_selected.emit()
+	
+	update_tower_visuals()

@@ -11,4 +11,7 @@ extends Button
 ## This button has been pressed, the Player wants to place this button's Tower.
 ## The TowerHandler will handle that.
 func _on_pressed() -> void:
-	tower_handler.prepare_new_tower(tower_reference)
+	## Only allow the Player to pick and place one Tower at a time.
+	## TempTower Node also checks for this.
+	if Globals.player_placing_tower == false:
+		tower_handler.prepare_new_tower(tower_reference)

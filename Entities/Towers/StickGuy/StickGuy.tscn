@@ -13,21 +13,33 @@ radius = 9.0
 tower_sprite = NodePath("RotationPivot/Sprite")
 tower_collider = NodePath("Collider")
 bullet_scene = ExtResource("2_ddlig")
-shot_delay = 0.5
-bullet_speed = 3
-bullet_damage = 0
-bullet_piercing_amount = 4
+shot_delay = 0.7
+bullet_speed = 0
+bullet_piercing_amount = 9999
 
 [node name="Collider" parent="TowerRange" index="0"]
 shape = SubResource("CircleShape2D_2ixhf")
 
 [node name="TowerRangeVisuals" parent="." index="1"]
+visible = false
 scale = Vector2(1.875, 1.875)
+
+[node name="BulletSpawnPoint" parent="RotationPivot" index="1"]
+position = Vector2(25, 0)
 
 [node name="Collider" parent="." index="3"]
 shape = SubResource("CircleShape2D_bok23")
 
 [node name="ShotDelayTimer" parent="." index="4"]
-wait_time = 0.5
+wait_time = 0.7
+
+[node name="TowerSelection" parent="." index="5"]
+anchors_preset = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [editable path="TowerRange"]

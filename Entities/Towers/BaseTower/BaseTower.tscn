@@ -18,6 +18,7 @@ rotation_pivot = NodePath("RotationPivot")
 Tower = NodePath("..")
 
 [node name="TowerRangeVisuals" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.27451)
 texture = ExtResource("3_33okv")
 
@@ -33,5 +34,25 @@ texture = ExtResource("1_vx0cn")
 
 [node name="ShotDelayTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TowerSelection" type="Button" parent="."]
+clip_contents = true
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+auto_translate = false
+localize_numeral_system = false
+mouse_default_cursor_shape = 2
+action_mode = 0
+shortcut_feedback = false
+shortcut_in_tooltip = false
+clip_text = true
+
+[connection signal="pressed" from="TowerSelection" to="." method="_on_tower_selection_pressed"]
 
 [editable path="TowerRange"]

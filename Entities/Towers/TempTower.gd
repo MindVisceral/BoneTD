@@ -42,6 +42,9 @@ var bodies_clear: bool = true
 var new_tower: BaseTower
 
 func _ready() -> void:
+	## Register that the Player is currently holding and trying to place a Tower
+	Globals.player_placing_tower = true
+	
 	call_deferred("setup")
 
 ## Make this Node follow the mouse until it's queue_free()-d
@@ -60,10 +63,12 @@ func _input(event: InputEvent) -> void:
 			new_tower.global_position = self.global_position
 			towers_node_reference.add_child(new_tower)
 			
+			Globals.player_placing_tower = false
 			self.queue_free()
 	
 	## Cancel placing the Tower.
 	elif Input.is_action_just_pressed("RMB"):
+		Globals.player_placing_tower = false
 		self.queue_free()
 
 
