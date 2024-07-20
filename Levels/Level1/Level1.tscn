@@ -442,8 +442,9 @@ number_of_rounds = 3
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="StickGuy" parent="TowerHandler/Towers" index="0" instance=ExtResource("5_0yo07")]
-position = Vector2(72, 119)
+[node name="StickGuy" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("5_0yo07")]
+position = Vector2(71, 80)
+tower_handler = NodePath("..")
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1

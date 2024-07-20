@@ -4,6 +4,22 @@ class_name BaseTower
 extends StaticBody2D
 
 ###-------------------------------------------------------------------------###
+##### Editor-only stuff
+###-------------------------------------------------------------------------###
+
+@export_group("Editor-only")
+
+## Reference to the level's TowerHandler, the parent of this child Tower.
+## This is an @export-ed variable (for when a Tower is placed by the level author),
+## but it is overwritten by this Tower's TempTower when this Tower is placed and added as a child.
+@export var tower_handler: TowerHandler = null:
+	set(p_handler):
+		if p_handler != tower_handler:
+			tower_handler = p_handler
+			update_configuration_warnings()
+
+
+###-------------------------------------------------------------------------###
 ##### References
 ###-------------------------------------------------------------------------###
 
@@ -27,6 +43,7 @@ extends StaticBody2D
 
 ## Node which rotates to face the Enemy. This way, TowerRange and TowerRangeVisuals don't rotate
 @export var rotation_pivot: Node2D
+
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -103,16 +120,44 @@ var current_target: BaseEnemy
 var angle_to_current_target: float
 
 
-func _ready() -> void:
-	## The update_tower_visuals function is called whenever the Globals Autoload
-	## fires the new_tower_selected signal - which is when a new Tower is selected.
-	Globals.new_tower_selected.connect(update_tower_visuals)
+###-------------------------------------------------------------------------###
+##### Editor-only stuff
+###-------------------------------------------------------------------------###
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings = []
 	
-	update_tower_visuals()
+	if tower_handler == null:
+		warnings.append("TowerHandler must be selected as an @export-ed variable
+			when a Tower is placed in Editor!")
+	
+	return warnings
+
+
+###-------------------------------------------------------------------------###
+##### Functions
+###-------------------------------------------------------------------------###
+
+func _ready() -> void:
+	
+	call_deferred("setup")
 	
 	## Set ShotDelayTimer's wait_time and start it up
 	ShotDelayTimer.wait_time = shot_delay
 	ShotDelayTimer.start()
+
+
+###-------------------------------------------------------------------------###
+##### Setup functions
+###-------------------------------------------------------------------------###
+
+## Setup this Tower
+func setup() -> void:
+	## The update_tower_visuals function is called whenever the TowerHandler
+	## fires the new_tower_selected signal - which is when a new Tower is selected.
+	tower_handler.new_tower_selected.connect(update_tower_visuals)
+	
+	update_tower_visuals()
 
 
 ###-------------------------------------------------------------------------###
@@ -248,14 +293,13 @@ func update_tower_visuals() -> void:
 			tower_range_collider.shape.radius * range_to_range_visuals_rate)
 			
 		
-	## Everything that follows only matters when not in Editor
-	if !Engine.is_editor_hint():
-		
+	## Everything that follows only matters when not in the Editor
+	if not Engine.is_editor_hint():
 		## Toggle TowerRangeVisuals visibility;
 		## If a Tower is selected...
-		if Globals.player_selected_tower == true:
+		if tower_handler.player_selected_tower == true:
 			## And the selected Tower is this Tower...
-			if Globals.selected_tower_ref == self:
+			if tower_handler.selected_tower_ref == self:
 				## Make this Tower's TowerRangeVisuals visible
 				tower_range_visuals.visible = true
 			## Otherwise, make TowerRangeVisuals invisible
@@ -273,12 +317,12 @@ func _on_tower_selection_pressed() -> void:
 	print("PRESSED")
 	
 	## We only care about the Player selecting this Tower if they're not currently placing a Tower
-	if Globals.player_placing_tower == false:
+	if tower_handler.player_placing_tower == false:
 		## Make it known that a Tower is currently selected and that it is this Tower
-		Globals.player_selected_tower = true
-		Globals.selected_tower_ref = self
+		tower_handler.player_selected_tower = true
+		tower_handler.selected_tower_ref = self
 		
 	## Other Tower must be know that they are not selected!
-	Globals.new_tower_selected.emit()
+	tower_handler.new_tower_selected.emit()
 	
 	update_tower_visuals()

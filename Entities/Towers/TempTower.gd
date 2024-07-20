@@ -23,8 +23,8 @@ extends Area2D
 ## This is passed by the TowerHandler
 var tower_to_be_placed: PackedScene
 
-## New Towers will be added as children of the 'Towers' Node. The TowerHandler passes this.
-var towers_node_reference: Node2D
+## New Towers will be added as children of the TowerHandler Node
+var tower_handler: TowerHandler
 
 
 ###-------------------------------------------------------------------------###
@@ -43,7 +43,7 @@ var new_tower: BaseTower
 
 func _ready() -> void:
 	## Register that the Player is currently holding and trying to place a Tower
-	Globals.player_placing_tower = true
+	tower_handler.player_placing_tower = true
 	
 	call_deferred("setup")
 
@@ -61,14 +61,17 @@ func _input(event: InputEvent) -> void:
 			
 			## Place the Tower [it was already instantiated on _setup()]
 			new_tower.global_position = self.global_position
-			towers_node_reference.add_child(new_tower)
+			new_tower.tower_handler = self.tower_handler
+			tower_handler.add_child(new_tower)
+			tower_handler.all_placed_towers.append(new_tower)
 			
-			Globals.player_placing_tower = false
+			tower_handler.player_placing_tower = false
 			self.queue_free()
+		
 	
 	## Cancel placing the Tower.
 	elif Input.is_action_just_pressed("RMB"):
-		Globals.player_placing_tower = false
+		tower_handler.player_placing_tower = false
 		self.queue_free()
 
 
@@ -107,6 +110,9 @@ func setup() -> void:
 	## Now we can edit this TempTower's children nodes to be the same as the new_tower's.
 	## NOTE: This new_tower is global in this script and it will be used when placing the Tower
 	new_tower = tower_to_be_placed.instantiate()
+	
+	## This new_tower requires tower_handler to function
+	new_tower.tower_handler = self.tower_handler
 	
 	## We manually make the new_tower update it's visuals.
 	## Await-ing for that to be done on _ready() doesn't seem to work.
