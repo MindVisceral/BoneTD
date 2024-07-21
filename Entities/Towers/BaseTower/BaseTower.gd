@@ -18,6 +18,8 @@ extends StaticBody2D
 			tower_handler = p_handler
 			update_configuration_warnings()
 
+## This Button is visible in-editor, but invisible in-game (we remove its Normal texture)
+@export var tower_selection_button: TextureButton
 
 ###-------------------------------------------------------------------------###
 ##### References
@@ -106,9 +108,9 @@ extends StaticBody2D
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 
-## 1 pixel of TowerRange is worth '0.0625' in TowerRangeVisuals scale
-## When TowerRange is 20px, TowerRangeVisuals scale is et to 1.25
-const range_to_range_visuals_rate: float = 0.0625
+## 1 pixel of TowerRange is worth '0.015625' in TowerRangeVisuals scale
+## When TowerRange is 20px, TowerRangeVisuals scale is set to 0.3125
+const range_to_range_visuals_rate: float = 0.015625
 
 ## All Enemies in range of this tower. The first entry in this Array is the first tower added.
 var EnemiesInRangeArray: Array = []
@@ -156,6 +158,9 @@ func setup() -> void:
 	## The update_tower_visuals function is called whenever the TowerHandler
 	## fires the new_tower_selected signal - which is when a new Tower is selected.
 	tower_handler.new_tower_selected.connect(update_tower_visuals)
+	
+	## Remove this button's texture_normal on _ready to make it invisible in-game
+	tower_selection_button.texture_normal = null
 	
 	update_tower_visuals()
 

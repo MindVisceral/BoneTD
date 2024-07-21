@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cijo1rj4mrd13"
+path="res://.godot/imported/placeholder_6.png-d5198302520d9139130775b4b5467141.res"
+
+[deps]
+
+source_file="res://placeholder_6.png"
+dest_files=["res://.godot/imported/placeholder_6.png-d5198302520d9139130775b4b5467141.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
