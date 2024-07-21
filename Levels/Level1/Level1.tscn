@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=18 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
@@ -423,6 +423,16 @@ _data = {
 }
 point_count = 16
 
+[sub_resource type="GDScript" id="GDScript_kc65i"]
+resource_name = "GUI"
+script/source = "extends CanvasLayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	get_viewport().size = DisplayServer.screen_get_size()
+"
+
 [node name="Level1" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -435,7 +445,7 @@ layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506,
 
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
-nextRound_button = NodePath("../TemporaryGUI/Button")
+nextRound_button = NodePath("../GUI/TemporaryGUI/Button")
 number_of_rounds = 3
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
@@ -451,97 +461,88 @@ z_index = 1
 curve = SubResource("Curve2D_ja27w")
 
 [node name="LevelCamera" type="Camera2D" parent="."]
-offset = Vector2(240, 135)
+anchor_mode = 0
+zoom = Vector2(4, 4)
 
-[node name="TemporaryGUI" type="Control" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
+script = SubResource("GDScript_kc65i")
+
+[node name="TemporaryGUI" type="Control" parent="GUI"]
 custom_minimum_size = Vector2(470, 270)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 470.0
-offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="TemporaryGUI"]
+[node name="Panel" type="Panel" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -236.0
-offset_top = -136.0
-offset_right = -128.0
-offset_bottom = -111.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 108.0
+offset_bottom = 25.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="TemporaryGUI/Panel"]
+[node name="Label" type="Label" parent="GUI/TemporaryGUI/Panel"]
 layout_mode = 1
 offset_right = 68.0
 offset_bottom = 23.0
 text = "ROUND: "
 
-[node name="Panel2" type="Panel" parent="TemporaryGUI"]
+[node name="Panel2" type="Panel" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -101.0
-offset_top = -126.0
-offset_bottom = 85.0
+anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="VFlowContainer" type="HFlowContainer" parent="TemporaryGUI/Panel2"]
+[node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/Panel2"]
+custom_minimum_size = Vector2(100, 150)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -100.0
+offset_bottom = 150.0
+grow_horizontal = 0
 mouse_filter = 2
 
-[node name="BaseSelectButton" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-tower_handler = NodePath("../../../../TowerHandler")
+tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton2" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton2" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-tower_handler = NodePath("../../../../TowerHandler")
+tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton3" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton3" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-tower_handler = NodePath("../../../../TowerHandler")
+tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton4" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton4" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-tower_handler = NodePath("../../../../TowerHandler")
+tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton5" parent="TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton5" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
-tower_handler = NodePath("../../../../TowerHandler")
+tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="Button" type="Button" parent="TemporaryGUI"]
+[node name="Button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 366.0
-offset_top = 236.0
-offset_right = 8.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -112.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
 action_mode = 0
 text = "NEXT ROUND
 "
