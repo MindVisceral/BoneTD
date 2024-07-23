@@ -162,6 +162,9 @@ func setup() -> void:
 	## Remove this button's texture_normal on _ready to make it invisible in-game
 	tower_selection_button.texture_normal = null
 	
+	## Make sure the TowerRangeVisuals Sprite is invisible
+	tower_range_visuals.visible = false
+	
 	update_tower_visuals()
 
 
@@ -310,8 +313,9 @@ func update_tower_visuals() -> void:
 			## Otherwise, make TowerRangeVisuals invisible
 			else:
 				tower_range_visuals.visible = false
-				
 			
+		
+		
 		
 		## presumably, bullet sprite should be included here too,
 		## among other stuff. WIP

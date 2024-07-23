@@ -53,8 +53,10 @@ func _physics_process(delta: float) -> void:
 	self.global_position = get_global_mouse_position()
 
 
-## Wait for Input
-func _input(event: InputEvent) -> void:
+## This Node relies on Player Input
+## This is under _unhandled_input, because we don't want the Tower to be placed
+## under UI elements.
+func _unhandled_input(event: InputEvent) -> void:
 	## Placing button pressed; instantiate the right Tower and kill this Node
 	if Input.is_action_just_pressed("LMB"):
 		if areas_clear == true and bodies_clear == true:

@@ -13,5 +13,5 @@ extends Button
 func _on_pressed() -> void:
 	## Only allow the Player to pick and place one Tower at a time.
 	## TempTower Node also checks for this.
-	#if Globals.player_placing_tower == false:
-	tower_handler.prepare_new_tower(tower_reference)
+	if tower_handler.player_placing_tower == false:
+		tower_handler.prepare_new_tower(tower_reference)

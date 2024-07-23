@@ -492,14 +492,18 @@ offset_bottom = 23.0
 text = "ROUND: "
 
 [node name="Panel2" type="Panel" parent="GUI/TemporaryGUI"]
+custom_minimum_size = Vector2(100, 200)
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -110.0
+offset_bottom = -795.0
 grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
+auto_translate = false
+localize_numeral_system = false
 
 [node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/Panel2"]
 custom_minimum_size = Vector2(100, 150)
