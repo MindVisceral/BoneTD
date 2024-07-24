@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=19 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
+[ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
@@ -435,6 +436,8 @@ func _ready() -> void:
 
 [node name="Level1" type="Node2D"]
 
+[node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_iglv1")
 format = 2
@@ -445,7 +448,7 @@ layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506,
 
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
-nextRound_button = NodePath("../GUI/TemporaryGUI/Button")
+nextRound_button = NodePath("../GUI/TemporaryGUI/next_round")
 number_of_rounds = 3
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
@@ -453,7 +456,7 @@ number_of_rounds = 3
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
 [node name="StickGuy" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("5_0yo07")]
-position = Vector2(71, 80)
+position = Vector2(6, 112)
 tower_handler = NodePath("..")
 
 [node name="MovementPath" type="Path2D" parent="."]
@@ -462,7 +465,7 @@ curve = SubResource("Curve2D_ja27w")
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(4, 4)
+zoom = Vector2(2, 2)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_kc65i")
@@ -536,7 +539,7 @@ tower_handler = NodePath("../../../../../TowerHandler")
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="Button" type="Button" parent="GUI/TemporaryGUI"]
+[node name="next_round" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0

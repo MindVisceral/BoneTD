@@ -9,7 +9,7 @@ size = Vector2(15, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_36j8m"]
 size = Vector2(13, 13)
 
-[node name="BaseEnemy" instance=ExtResource("1_rsqw5")]
+[node name="CarpalsEnemy" instance=ExtResource("1_rsqw5")]
 
 [node name="Collider" parent="EnemyDetectedArea" index="0"]
 shape = SubResource("RectangleShape2D_lmcj8")

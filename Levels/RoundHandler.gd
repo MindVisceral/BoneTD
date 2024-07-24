@@ -1,7 +1,12 @@
 class_name RoundHandler
 extends Node2D
 
+###-------------------------------------------------------------------------###
+##### References
+###-------------------------------------------------------------------------###
+
 @export_group("References")
+
 
 ## New Enemies must be added as children of the Path to work properly.
 ## Waves handle that, so this must be passed to each new Wave
@@ -14,7 +19,12 @@ extends Node2D
 @export var nextRound_button: Button
 
 
+###-------------------------------------------------------------------------###
+##### Round variables
+###-------------------------------------------------------------------------###
+
 @export_group("Rounds")
+
 
 ## Number of Rounds in this level
 @export_range(1, 999, 1) var number_of_rounds: int = 0
@@ -35,6 +45,8 @@ extends Node2D
 @export_range(1, 999, 1) var ending_round: int = 0
 ## If not 999, this round will end after this wave. Typically rounds just end with the last wave
 @export_range(0, 999, 1) var ending_wave: int = 0
+
+
 
 func _ready() -> void:
 	call_deferred("initialize")

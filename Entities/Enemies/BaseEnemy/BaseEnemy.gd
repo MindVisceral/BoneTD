@@ -17,6 +17,11 @@ extends PathFollow2D
 @export_range(1, 9999, 1) var max_health: int = 1
 
 
+@export_group("Damage")
+
+@export_range(1, 9999, 1) var damage: int = 1
+
+
 ###-------------------------------------------------------------------------###
 ##### Actual stats
 ###-------------------------------------------------------------------------###
@@ -45,6 +50,14 @@ func apply_stats() -> void:
 func _physics_process(delta: float) -> void:
 	## Move the Enemy along the Level's path
 	progress += speed * delta
+	
+	## When the Enemy reaches the end of the Path...
+	if is_equal_approx(progress_ratio, 1):
+		## Player loses health equal to this Enemy's damage value.
+		Globals.lose_health(damage)
+		
+		## And the Enemy "dies".
+		death()
 
 
 ## This Enemy has been hit, time to take some Damage

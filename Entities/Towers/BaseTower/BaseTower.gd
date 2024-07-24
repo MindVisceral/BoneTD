@@ -46,6 +46,8 @@ extends StaticBody2D
 ## Node which rotates to face the Enemy. This way, TowerRange and TowerRangeVisuals don't rotate
 @export var rotation_pivot: Node2D
 
+## This Tower's specific UI. Used for Tower actions like upgrading and selling
+@export var tower_UI: Control
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -164,6 +166,8 @@ func setup() -> void:
 	
 	## Make sure the TowerRangeVisuals Sprite is invisible
 	tower_range_visuals.visible = false
+	
+	## And make all the UI invisible too
 	
 	update_tower_visuals()
 
