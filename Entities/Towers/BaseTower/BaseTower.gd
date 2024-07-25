@@ -49,6 +49,16 @@ extends StaticBody2D
 ## This Tower's specific UI. Used for Tower actions like upgrading and selling
 @export var tower_UI: Control
 
+
+###-------------------------------------------------------------------------###
+##### Tower cost
+###-------------------------------------------------------------------------###
+
+@export_group("Cost")
+
+## How much does this Tower cost to place?
+@export_range(1, 99999, 1) var tower_base_cost: int = 1
+
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
 ###-------------------------------------------------------------------------###
@@ -110,6 +120,12 @@ extends StaticBody2D
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 
+## Total amount of Money this Tower cost to place and upgrade.
+var current_cost: int = 0
+
+## Total amount of Money this Tower will give back when Sold
+var sell_value: int = 0
+
 ## 1 pixel of TowerRange is worth '0.015625' in TowerRangeVisuals scale
 ## When TowerRange is 20px, TowerRangeVisuals scale is set to 0.3125
 const range_to_range_visuals_rate: float = 0.015625
@@ -157,6 +173,10 @@ func _ready() -> void:
 
 ## Setup this Tower
 func setup() -> void:
+	
+	## Make sure this Tower's total cost is correct
+	update_tower_cost()
+	
 	## The update_tower_visuals function is called whenever the TowerHandler
 	## fires the new_tower_selected signal - which is when a new Tower is selected.
 	tower_handler.new_tower_selected.connect(update_tower_visuals)
@@ -168,7 +188,6 @@ func setup() -> void:
 	tower_range_visuals.visible = false
 	
 	## And make all the UI invisible too
-	
 	update_tower_visuals()
 
 
@@ -325,17 +344,55 @@ func update_tower_visuals() -> void:
 		## among other stuff. WIP
 
 
-
+## When this Tower's TowerSelectionButton is pressed...
 func _on_tower_selection_pressed() -> void:
-	print("PRESSED")
 	
-	## We only care about the Player selecting this Tower if they're not currently placing a Tower
+	## A Tower can only be selected if the Palyer isn't already trying to place a Tower.
 	if tower_handler.player_placing_tower == false:
 		## Make it known that a Tower is currently selected and that it is this Tower
 		tower_handler.player_selected_tower = true
 		tower_handler.selected_tower_ref = self
 		
-	## Other Tower must be know that they are not selected!
+	## Other Towers must know that they are not selected!
 	tower_handler.new_tower_selected.emit()
 	
+	## And finally, update this Tower's visuals
 	update_tower_visuals()
+
+
+###-------------------------------------------------------------------------###
+##### Cost functions
+###-------------------------------------------------------------------------###
+
+## Recalculate how much this Tower costs at the moment
+func update_tower_cost() -> void:
+	## First, reset current_cost value
+	current_cost = 0
+	
+	## Add the Tower's base_cost
+	current_cost += tower_base_cost
+	
+	## Add up the cost of all individual upgrades
+	current_cost
+	
+	
+	update_tower_sell_value()
+
+## Recalculate how much Money this Tower will give back when Sold
+func update_tower_sell_value() -> void:
+	sell_value = current_cost
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

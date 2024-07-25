@@ -40,7 +40,8 @@ var selected_tower_ref: BaseTower = null
 ##### Spawned Tower stuff
 ###-------------------------------------------------------------------------###
 
-## All the Tower currently placed (children of the towers_node_reference "Towers" Node)
+## All the Tower currently placed (children of the towers_node_reference "Towers" Node).
+## Appended by TempTower (I think?)
 var all_placed_towers: Array
 
 
@@ -56,3 +57,27 @@ func prepare_new_tower(tower_reference) -> void:
 	new_TempTower.tower_handler = self
 	
 	self.add_child(new_TempTower)
+
+
+###-------------------------------------------------------------------------###
+##### Tower functions
+###-------------------------------------------------------------------------###
+
+## When the "Sell" button is pressed, sell the Tower and get some money back.
+func _on_sell_pressed() -> void:
+	## First, check if a Tower is selected in the first place.
+	if player_selected_tower == true:
+		## Kill the selected Tower and add some money back,
+		## depending on the Tower's base value and upgrades
+		selected_tower_ref
+
+
+
+
+
+
+
+
+
+
+

@@ -448,7 +448,7 @@ layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506,
 
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
-nextRound_button = NodePath("../GUI/TemporaryGUI/next_round")
+nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
 number_of_rounds = 3
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
@@ -465,7 +465,7 @@ curve = SubResource("Curve2D_ja27w")
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 anchor_mode = 0
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 script = SubResource("GDScript_kc65i")
@@ -482,19 +482,19 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="GUI/TemporaryGUI"]
+[node name="InfoPanel" type="Panel" parent="GUI/TemporaryGUI"]
 layout_mode = 1
 offset_right = 108.0
 offset_bottom = 25.0
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="GUI/TemporaryGUI/Panel"]
+[node name="Label" type="Label" parent="GUI/TemporaryGUI/InfoPanel"]
 layout_mode = 1
 offset_right = 68.0
 offset_bottom = 23.0
 text = "ROUND: "
 
-[node name="Panel2" type="Panel" parent="GUI/TemporaryGUI"]
+[node name="TowerPlacementUI" type="Panel" parent="GUI/TemporaryGUI"]
 custom_minimum_size = Vector2(100, 200)
 layout_mode = 1
 anchors_preset = 11
@@ -508,7 +508,7 @@ grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
 
-[node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/Panel2"]
+[node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/TowerPlacementUI"]
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 1
 anchors_preset = 1
@@ -519,27 +519,27 @@ offset_bottom = 150.0
 grow_horizontal = 0
 mouse_filter = 2
 
-[node name="BaseSelectButton" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton2" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton2" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton3" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton3" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton4" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton4" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="BaseSelectButton5" parent="GUI/TemporaryGUI/Panel2/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="BaseSelectButton5" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="next_round" type="Button" parent="GUI/TemporaryGUI"]
+[node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
