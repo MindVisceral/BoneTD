@@ -4,13 +4,15 @@
 [ext_resource type="BitMap" uid="uid://cijo1rj4mrd13" path="res://placeholder_6.png" id="2_044ng"]
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/RadialTowerMenu.gd" id="3_5ill8"]
 
-[node name="RadialTowerMenu" type="TextureButton"]
+[node name="RadialTowerMenu" type="TextureButton" node_paths=PackedStringArray("buttons_node")]
 offset_right = 128.0
 offset_bottom = 128.0
+mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_riy6t")
 texture_click_mask = ExtResource("2_044ng")
 script = ExtResource("3_5ill8")
+buttons_node = NodePath("Buttons")
 
 [node name="Buttons" type="Control" parent="."]
 layout_mode = 1
@@ -19,52 +21,34 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button1" type="TextureButton" parent="Buttons"]
+self_modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_riy6t")
 texture_click_mask = ExtResource("2_044ng")
 
 [node name="Button2" type="TextureButton" parent="Buttons"]
+self_modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_riy6t")
 texture_click_mask = ExtResource("2_044ng")
 
 [node name="Button3" type="TextureButton" parent="Buttons"]
+self_modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_riy6t")
 texture_click_mask = ExtResource("2_044ng")
