@@ -52,9 +52,9 @@ func _ready() -> void:
 		radial_buttons.append(button)
 	
 	
-	## Put every Button in the same position as the main RadialTowerMenu Button.
-	## Make every Button's scale is 0
-	## to make sure the show_menu() animation looks the same every time.
+	## Put every Button in the same position as the main RadialTowerMenu Button,
+	## and make sure it's the middle of that Button by adding its pivot_offset.
+	## Make every Button's scale 0 to make sure the show_menu() animation looks the same every time
 	for button: TextureButton in radial_buttons:
 		button.position = self.position + self.pivot_offset
 		button.scale = Vector2.ZERO
@@ -126,6 +126,7 @@ func hide_menu() -> void:
 		## Create a Tween, which will animate the Button
 		var tween = get_tree().create_tween()
 		## The Button will travel from its position to the center at set speed.
+		## NOTE: Main Button's pivot_offset is added so that Button's center is its actual center
 		tween.parallel().tween_property(button, "position", self.position + self.pivot_offset, speed)
 		## And the Button is scaled so it doesn't visibly pop out of existance, also at speed.
 		tween.parallel().tween_property(button, "scale", Vector2.ZERO, speed)

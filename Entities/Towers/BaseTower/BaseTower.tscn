@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
-[ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://Entities/Towers/BaseTower/RadialTowerMenu.tscn" id="2_hr0f1"]
+[ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://Entities/Towers/BaseTower/RadialMenu.tscn" id="2_kc5so"]
 [ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
 
 [node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "tower_sprite", "tower_collider", "bullet_spawn_point", "rotation_pivot")]
@@ -18,7 +18,7 @@ tower_collider = NodePath("Collider")
 bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
 
-[node name="RadialTowerSelection" parent="." instance=ExtResource("2_hr0f1")]
+[node name="RadialTowerSelection" parent="." instance=ExtResource("2_kc5so")]
 
 [node name="TowerRange" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_fac3i")]
 Tower = NodePath("..")
