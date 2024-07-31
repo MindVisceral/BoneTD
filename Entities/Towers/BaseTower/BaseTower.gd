@@ -382,17 +382,3 @@ func update_tower_cost() -> void:
 func update_tower_sell_value() -> void:
 	sell_value = current_cost
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,9 +9,7 @@ radius = 30.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bok23"]
 radius = 9.0
 
-[node name="StickGuy" node_paths=PackedStringArray("tower_sprite", "tower_collider") instance=ExtResource("1_s74lq")]
-tower_sprite = NodePath("RotationPivot/Sprite")
-tower_collider = NodePath("Collider")
+[node name="StickGuy" instance=ExtResource("1_s74lq")]
 bullet_scene = ExtResource("2_ddlig")
 shot_delay = 0.7
 bullet_speed = 0
@@ -33,4 +31,5 @@ shape = SubResource("CircleShape2D_bok23")
 [node name="ShotDelayTimer" parent="." index="5"]
 wait_time = 0.7
 
+[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

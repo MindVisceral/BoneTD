@@ -3,31 +3,22 @@
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
+[ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://Entities/Towers/BaseTower/RadialTowerMenu.tscn" id="2_hr0f1"]
 [ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
-[ext_resource type="BitMap" uid="uid://cijo1rj4mrd13" path="res://placeholder_6.png" id="5_di8l0"]
 
-[node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "bullet_spawn_point", "rotation_pivot")]
+[node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "tower_sprite", "tower_collider", "bullet_spawn_point", "rotation_pivot")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qn6n7")
-tower_selection_button = NodePath("TowerSelectionButton")
+tower_selection_button = NodePath("RadialTowerSelection")
 tower_range_collider = NodePath("TowerRange/Collider")
 tower_range_visuals = NodePath("TowerRangeVisuals")
+tower_sprite = NodePath("RotationPivot/Sprite")
+tower_collider = NodePath("Collider")
 bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
 
-[node name="TowerSelectionButton" type="TextureButton" parent="."]
-offset_left = -13.0
-offset_top = -13.0
-offset_right = 115.0
-offset_bottom = 115.0
-scale = Vector2(0.2, 0.2)
-mouse_default_cursor_shape = 2
-action_mode = 0
-shortcut_feedback = false
-shortcut_in_tooltip = false
-texture_normal = ExtResource("3_33okv")
-texture_click_mask = ExtResource("5_di8l0")
+[node name="RadialTowerSelection" parent="." instance=ExtResource("2_hr0f1")]
 
 [node name="TowerRange" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_fac3i")]
 Tower = NodePath("..")
@@ -50,6 +41,7 @@ texture = ExtResource("1_vx0cn")
 [node name="ShotDelayTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="pressed" from="TowerSelectionButton" to="." method="_on_tower_selection_pressed"]
+[connection signal="pressed" from="RadialTowerSelection" to="." method="_on_tower_selection_pressed"]
 
+[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

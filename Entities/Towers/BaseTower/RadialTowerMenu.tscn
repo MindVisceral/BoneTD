@@ -5,8 +5,11 @@
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/RadialTowerMenu.gd" id="3_5ill8"]
 
 [node name="RadialTowerMenu" type="TextureButton" node_paths=PackedStringArray("buttons_node")]
-offset_right = 128.0
-offset_bottom = 128.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(64, 64)
 mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_riy6t")
