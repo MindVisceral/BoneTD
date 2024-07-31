@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bx4r7imynksua"]
 
-[ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="1_vbv3o"]
-[ext_resource type="BitMap" uid="uid://cijo1rj4mrd13" path="res://placeholder_6.png" id="2_jsigj"]
-[ext_resource type="Script" path="res://Entities/Towers/BaseTower/RadialMenu.gd" id="3_6vo4x"]
+[ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="1_d4sds"]
+[ext_resource type="BitMap" uid="uid://cijo1rj4mrd13" path="res://placeholder_6.png" id="2_3pvai"]
+[ext_resource type="Script" path="res://UI/RadialMenu/RadialMenu.gd" id="3_ivie5"]
 
 [node name="RadialMenu" type="TextureButton" node_paths=PackedStringArray("buttons_node")]
 offset_left = -64.0
@@ -12,9 +12,9 @@ offset_bottom = 64.0
 pivot_offset = Vector2(64, 64)
 mouse_default_cursor_shape = 2
 action_mode = 0
-texture_normal = ExtResource("1_vbv3o")
-texture_click_mask = ExtResource("2_jsigj")
-script = ExtResource("3_6vo4x")
+texture_normal = ExtResource("1_d4sds")
+texture_click_mask = ExtResource("2_3pvai")
+script = ExtResource("3_ivie5")
 buttons_node = NodePath("Buttons")
 
 [node name="Buttons" type="Control" parent="."]
@@ -31,8 +31,8 @@ offset_bottom = 128.0
 pivot_offset = Vector2(64, 64)
 mouse_default_cursor_shape = 2
 action_mode = 0
-texture_normal = ExtResource("1_vbv3o")
-texture_click_mask = ExtResource("2_jsigj")
+texture_normal = ExtResource("1_d4sds")
+texture_click_mask = ExtResource("2_3pvai")
 
 [node name="Button2" type="TextureButton" parent="Buttons"]
 self_modulate = Color(1, 1, 1, 0.392157)
@@ -42,8 +42,8 @@ offset_bottom = 128.0
 pivot_offset = Vector2(64, 64)
 mouse_default_cursor_shape = 2
 action_mode = 0
-texture_normal = ExtResource("1_vbv3o")
-texture_click_mask = ExtResource("2_jsigj")
+texture_normal = ExtResource("1_d4sds")
+texture_click_mask = ExtResource("2_3pvai")
 
 [node name="Button3" type="TextureButton" parent="Buttons"]
 self_modulate = Color(1, 1, 1, 0.392157)
@@ -53,7 +53,7 @@ offset_bottom = 128.0
 pivot_offset = Vector2(64, 64)
 mouse_default_cursor_shape = 2
 action_mode = 0
-texture_normal = ExtResource("1_vbv3o")
-texture_click_mask = ExtResource("2_jsigj")
+texture_normal = ExtResource("1_d4sds")
+texture_click_mask = ExtResource("2_3pvai")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
