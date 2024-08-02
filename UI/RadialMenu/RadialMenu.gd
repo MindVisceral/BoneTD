@@ -10,8 +10,15 @@ extends TextureButton
 ## Reference to the Buttons Control Node, which all the radial Buttons are children of.
 @export var buttons_node: Control
 
+## Reference to the Radial Buttons around the Main Button.
+## 
+@export var radial_button_reference: PackedScene
+
 
 @export_group("Button settings")
+
+## How many Buttons there are around the Main Button
+@export var number_of_radial_buttons: int = 3
 
 ## Radius of the Menu;
 ## how far away the centers of Radius Buttons will be away from the center of the Main Button
@@ -65,9 +72,14 @@ func _ready() -> void:
 ##### Enable/Disable this Radial Menu
 ###-------------------------------------------------------------------------###
 
-## When main Button is pressed
+## When main Button is pressed...
 func _on_pressed() -> void:
-	
+	#toggle_main_button()
+	pass
+
+
+## Toggle the Main Button, animate the Radial buttons
+func toggle_main_button() -> void:
 	## Disable the Button so that it can't be pressed when it's in a middle of the animation
 	## hide_menu() and show_menu() functions enable it again.
 	self.disabled = true
@@ -79,6 +91,20 @@ func _on_pressed() -> void:
 		show_menu()
 		
 	
+
+## Instead of toggling, enable the button.
+func enable() -> void:
+	self.disabled = true
+	#self.active = true
+	show_menu()
+
+## Instead of toggling, disable the button.
+func disable() -> void:
+	self.disabled = true
+	#self.active = false
+	hide_menu()
+
+
 
 ## Clicking the Button when the Radial Menu is inactive will activate it
 func show_menu() -> void:
@@ -134,7 +160,10 @@ func hide_menu() -> void:
 	
 	## Now we wait until the animation is done. Since each Button has a separate Tween made for it,
 	## we can't wait for a Tween's 'finished' signal. So we just use the 'speed' variable.
-	await get_tree().create_timer(speed).timeout
+	## NOTE: We ask the Globals Autoload to get_tree(), because TempTower calls a Tower's
+	## NOTE: update_tower_visuals() function before that Tower is added to the Tree, which calls
+	## NOTE: this hide_menu function, which crashes the game, because it can't get_tree(). Annoying.
+	await Globals.get_tree().create_timer(speed).timeout
 	
 	## Everything is done animating, we can hide the Buttons now
 	buttons_node.hide()

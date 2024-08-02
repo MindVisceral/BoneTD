@@ -19,7 +19,7 @@ extends StaticBody2D
 			update_configuration_warnings()
 
 ## This Button is visible in-editor, but invisible in-game (we remove its Normal texture)
-@export var tower_selection_button: TextureButton
+@export var tower_selection_button: RadialTowerMenu
 
 ###-------------------------------------------------------------------------###
 ##### References
@@ -324,6 +324,7 @@ func update_tower_visuals() -> void:
 			tower_range_collider.shape.radius * range_to_range_visuals_rate)
 			
 		
+	
 	## Everything that follows only matters when not in the Editor
 	if not Engine.is_editor_hint():
 		## Toggle TowerRangeVisuals visibility;
@@ -333,9 +334,18 @@ func update_tower_visuals() -> void:
 			if tower_handler.selected_tower_ref == self:
 				## Make this Tower's TowerRangeVisuals visible
 				tower_range_visuals.visible = true
-			## Otherwise, make TowerRangeVisuals invisible
+				## And enable the Tower's Radial Menu, if it's not enabled (active) already.
+				## NOTE: Without this, the Radial buttons just get further and further away from
+				## NOTE: the Main Button, because they're animated with Tweens. Could be useful?
+				if tower_selection_button.active == false:
+					tower_selection_button.enable()
+			
+			## Otherwise, when this Tower is not selected...
 			else:
+				## Make this Tower's TowerRangeVisuals invisible
 				tower_range_visuals.visible = false
+				## And disable this Tower's Radial Menu
+				tower_selection_button.disable()
 			
 		
 		
@@ -347,12 +357,13 @@ func update_tower_visuals() -> void:
 ## When this Tower's TowerSelectionButton is pressed...
 func _on_tower_selection_pressed() -> void:
 	
-	## A Tower can only be selected if the Palyer isn't already trying to place a Tower.
+	## A Tower can only be selected if the Player isn't already trying to place a Tower.
 	if tower_handler.player_placing_tower == false:
 		## Make it known that a Tower is currently selected and that it is this Tower
 		tower_handler.player_selected_tower = true
 		tower_handler.selected_tower_ref = self
 		
+	
 	## Other Towers must know that they are not selected!
 	tower_handler.new_tower_selected.emit()
 	
