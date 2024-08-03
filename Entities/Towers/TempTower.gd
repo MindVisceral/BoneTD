@@ -41,68 +41,15 @@ var bodies_clear: bool = true
 ## Also used to change this TempTower's Sprite, TowerRangeVisuals scale, and Collider size
 var new_tower: BaseTower
 
+###-------------------------------------------------------------------------###
+##### Setup functions
+###-------------------------------------------------------------------------###
+
 func _ready() -> void:
 	## Register that the Player is currently holding and trying to place a Tower
 	tower_handler.player_placing_tower = true
 	
 	call_deferred("setup")
-
-## Make this Node follow the mouse until it's queue_free()-d
-func _physics_process(delta: float) -> void:
-	## Keep this TempTower at the mouse's global position at all times.
-	self.global_position = get_global_mouse_position()
-
-
-## This Node relies on Player Input
-## This is under _unhandled_input, because we don't want the Tower to be placed
-## under UI elements.
-func _unhandled_input(event: InputEvent) -> void:
-	## Placing button pressed; instantiate the right Tower and kill this Node
-	if Input.is_action_just_pressed("LMB"):
-		if areas_clear == true and bodies_clear == true:
-			
-			## Place the Tower [it was already instantiated on _setup()]
-			new_tower.global_position = self.global_position
-			new_tower.tower_handler = self.tower_handler
-			tower_handler.add_child(new_tower)
-			tower_handler.all_placed_towers.append(new_tower)
-			
-			tower_handler.player_placing_tower = false
-			self.queue_free()
-		
-	
-	## Cancel placing the Tower.
-	elif Input.is_action_just_pressed("RMB"):
-		tower_handler.player_placing_tower = false
-		self.queue_free()
-
-
-
-###-------------------------------------------------------------------------###
-##### Stuff-in-the-way functions
-###-------------------------------------------------------------------------###
-
-## Touches a Menu, can't be placed.
-func _on_area_entered(area: Area2D) -> void:
-	areas_clear = false
-#
-## All Areas clear, can be placed now.
-func _on_area_exited(area: Area2D) -> void:
-	areas_clear = true
-
-## Touches another Tower or the Environment, can't be placed.
-func _on_body_entered(body: Node2D) -> void:
-	bodies_clear = false
-#
-## All Bodies clear, can be placed now.
-func _on_body_exited(body: Node2D) -> void:
-	bodies_clear = true
-
-
-
-###-------------------------------------------------------------------------###
-##### Setup functions
-###-------------------------------------------------------------------------###
 
 ## - and
 ## make sure all the Visuals match the Tower's visuals
@@ -128,3 +75,63 @@ func setup() -> void:
 	tower_sprite = new_tower.tower_sprite
 	## Set the Collider shape to be the same as the Tower's
 	tower_collider.shape = new_tower.tower_collider.shape
+
+
+###-------------------------------------------------------------------------###
+##### TempTower core functions
+###-------------------------------------------------------------------------###
+
+## Make this Node follow the mouse until it's queue_free()-d
+func _physics_process(delta: float) -> void:
+	## Keep this TempTower at the mouse's global position at all times.
+	self.global_position = get_global_mouse_position()
+
+## This Node relies on Player Input
+## This is under _unhandled_input, because we don't want the Tower to be placed
+## under UI elements.
+func _unhandled_input(event: InputEvent) -> void:
+	## Placing button pressed; instantiate the right Tower and kill this Node
+	if Input.is_action_just_pressed("LMB"):
+		if areas_clear == true and bodies_clear == true:
+			
+			## Place the Tower [it was already instantiated on _setup()]
+			new_tower.global_position = self.global_position
+			new_tower.tower_handler = self.tower_handler
+			tower_handler.add_child(new_tower)
+			tower_handler.all_placed_towers.append(new_tower)
+			
+			## Placing a Tower costs Money.
+			Globals.lose_money(new_tower.tower_base_cost)
+			
+			## Get things back to status quo
+			tower_handler.player_placing_tower = false
+			self.queue_free()
+		
+	
+	## Cancel placing the Tower.
+	elif Input.is_action_just_pressed("RMB"):
+		tower_handler.player_placing_tower = false
+		self.queue_free()
+
+
+###-------------------------------------------------------------------------###
+##### Stuff-in-the-way functions
+###-------------------------------------------------------------------------###
+
+## Touches a Menu, can't be placed.
+func _on_area_entered(area: Area2D) -> void:
+	areas_clear = false
+#
+## All Areas clear, can be placed now.
+func _on_area_exited(area: Area2D) -> void:
+	areas_clear = true
+
+## Touches another Tower or the Environment, can't be placed.
+func _on_body_entered(body: Node2D) -> void:
+	bodies_clear = false
+#
+## All Bodies clear, can be placed now.
+func _on_body_exited(body: Node2D) -> void:
+	bodies_clear = true
+
+

@@ -10,15 +10,8 @@ extends TextureButton
 ## Reference to the Buttons Control Node, which all the radial Buttons are children of.
 @export var buttons_node: Control
 
-## Reference to the Radial Buttons around the Main Button.
-## 
-@export var radial_button_reference: PackedScene
-
 
 @export_group("Button settings")
-
-## How many Buttons there are around the Main Button
-@export var number_of_radial_buttons: int = 3
 
 ## Radius of the Menu;
 ## how far away the centers of Radius Buttons will be away from the center of the Main Button
@@ -52,6 +45,9 @@ func _ready() -> void:
 	
 	## Hide the radial Buttons
 	buttons_node.hide()
+	
+	
+	
 	## Calculate how many buttons there are.
 	number_of_buttons = buttons_node.get_child_count()
 	## Store all the Radial Buttons (children of exported buttons_node) in the radial_buttons Array

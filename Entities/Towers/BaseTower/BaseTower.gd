@@ -155,7 +155,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 ###-------------------------------------------------------------------------###
-##### Functions
+##### Setup functions
 ###-------------------------------------------------------------------------###
 
 func _ready() -> void:
@@ -165,11 +165,6 @@ func _ready() -> void:
 	## Set ShotDelayTimer's wait_time and start it up
 	ShotDelayTimer.wait_time = shot_delay
 	ShotDelayTimer.start()
-
-
-###-------------------------------------------------------------------------###
-##### Setup functions
-###-------------------------------------------------------------------------###
 
 ## Setup this Tower
 func setup() -> void:
@@ -308,7 +303,7 @@ func change_current_target() -> void:
 
 
 ###-------------------------------------------------------------------------###
-##### Visuals functions
+##### Visuals and selection functions
 ###-------------------------------------------------------------------------###
 
 ## When the Tower is upgraded or otherwise changed, its visuals must be updated.
@@ -372,24 +367,60 @@ func _on_tower_selection_pressed() -> void:
 
 
 ###-------------------------------------------------------------------------###
-##### Cost functions
+##### Upgrade functions
 ###-------------------------------------------------------------------------###
+
+## Upgrade this Tower by one level.
+## The UpgradeButton is manually signal connected to this function.
+func upgrade_tower() -> void:
+	pass
+
+
+###-------------------------------------------------------------------------###
+##### Move functions
+###-------------------------------------------------------------------------###
+
+## Move this Tower around the play zone.
+## The MoveButton is manually signal connected to this function.
+func move_tower() -> void:
+	pass
+
+
+###-------------------------------------------------------------------------###
+##### Sell functions
+###-------------------------------------------------------------------------###
+
+## Sell this Tower.
+## The SellButton is manually signal connected to this function.
+func sell_tower() -> void:
+	## Calculate how much this Tower cost and how much it will sell for
+	update_tower_cost()
+	
+	## Give the Player the rigth amount of Money, equivalent to this Tower's sell_value
+	Globals.gain_money(sell_value)
+	## Now we may delete this Tower.
+	destroy_tower()
+
 
 ## Recalculate how much this Tower costs at the moment
 func update_tower_cost() -> void:
 	## First, reset current_cost value
 	current_cost = 0
-	
 	## Add the Tower's base_cost
 	current_cost += tower_base_cost
-	
 	## Add up the cost of all individual upgrades
 	current_cost
 	
 	
-	update_tower_sell_value()
+	## Recalculate how much Money this Tower will give back when Sold,
+	## rounded up to a full integer.
+	sell_value = snappedi(current_cost * Globals.level_sell_multiplier, 1.0)
 
-## Recalculate how much Money this Tower will give back when Sold
-func update_tower_sell_value() -> void:
-	sell_value = current_cost
 
+###-------------------------------------------------------------------------###
+##### Destroy Tower
+###-------------------------------------------------------------------------###
+
+## For whatever reason, this Tower must be queue_free()-d. Typically if it's sold.
+func destroy_tower() -> void:
+	queue_free()

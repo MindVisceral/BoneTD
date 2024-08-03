@@ -1,8 +1,8 @@
 class_name LevelStats
 extends Node
 
-### Holds the Player's default Health and Money.
-## This is passed to the Globals variable for easier access.
+## Holds the Player's default Health and Money.
+## This is unique to each level, but it's also passed to the Globals variable for easier access.
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables
@@ -23,22 +23,19 @@ extends Node
 @export_range(1, 999999999) var max_money: int = 999999999
 #
 ## Amount of money the Player stars the Level with
-@export_range(0, 999999999) var default_money: int = 1000
+@export_range(0, 999999999) var default_money: int = 100
 
 
 @export_group("Cost")
 
 ## Tower Cost multiplier. Depending on the Level difficulty,
-## Towers cost proportionally less or more.
+## Towers and their upgrades cost proportionally less or more.
 @export_range(0.1, 100, 0.1) var cost_multiplier: float = 1.0
 
 ## The percentage of Money the Player will get back from selling a Tower;
 ## If a Tower and it's upgrades costed 100 Money total and base_sell_multiplier is 0.5,
 ## the Player will get 50 Money back.
 @export_range(0.05, 1.0, 0.05) var sell_multiplier: float = 0.85
-
-
-
 
 
 
@@ -52,4 +49,8 @@ func _ready() -> void:
 	clampi(default_health, 1, max_health)
 	## And make Player's amount of health left the same as default_health
 	Globals.current_health = default_health
-
+	
+	## Pass the cost_multiplier and the sell_multiplier to the Globals,
+	## so it's accessible by any Node.
+	Globals.level_cost_multiplier = self.cost_multiplier
+	Globals.level_sell_multiplier = self.sell_multiplier

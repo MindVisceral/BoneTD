@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://u1qyk1m1yco0"]
+[gd_scene load_steps=10 format=3 uid="uid://u1qyk1m1yco0"]
 
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
 [ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://UI/RadialMenu/RadialMenu.tscn" id="2_mfmwb"]
 [ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
+[ext_resource type="PackedScene" uid="uid://c74ibtjrrt3rr" path="res://UI/CommonTextButton/CommonTextureButton.tscn" id="3_wv075"]
+[ext_resource type="Texture2D" uid="uid://bgqv14cw5ev2a" path="res://placeholder_upgrade.png" id="4_635xw"]
+[ext_resource type="Texture2D" uid="uid://jwsl1eho4f86" path="res://placeholder_sell.png" id="5_axau1"]
+[ext_resource type="Texture2D" uid="uid://dbilakspecylw" path="res://placeholder_move.png" id="6_b47ls"]
 
 [node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "tower_sprite", "tower_collider", "bullet_spawn_point", "rotation_pivot")]
 collision_layer = 2
@@ -19,6 +23,18 @@ bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
 
 [node name="RadialTowerSelection" parent="." instance=ExtResource("2_mfmwb")]
+
+[node name="UpgradeButton" parent="RadialTowerSelection/Buttons" index="0" instance=ExtResource("3_wv075")]
+layout_mode = 0
+texture_normal = ExtResource("4_635xw")
+
+[node name="MoveButton" parent="RadialTowerSelection/Buttons" index="1" instance=ExtResource("3_wv075")]
+layout_mode = 0
+texture_normal = ExtResource("6_b47ls")
+
+[node name="SellButton" parent="RadialTowerSelection/Buttons" index="2" instance=ExtResource("3_wv075")]
+layout_mode = 0
+texture_normal = ExtResource("5_axau1")
 
 [node name="TowerRange" parent="." node_paths=PackedStringArray("Tower") instance=ExtResource("2_fac3i")]
 Tower = NodePath("..")
@@ -42,6 +58,9 @@ texture = ExtResource("1_vx0cn")
 one_shot = true
 
 [connection signal="pressed" from="RadialTowerSelection" to="." method="_on_tower_selection_pressed"]
+[connection signal="pressed" from="RadialTowerSelection/Buttons/UpgradeButton" to="." method="upgrade_tower"]
+[connection signal="pressed" from="RadialTowerSelection/Buttons/MoveButton" to="." method="move_tower"]
+[connection signal="pressed" from="RadialTowerSelection/Buttons/SellButton" to="." method="sell_tower"]
 
 [editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

@@ -25,37 +25,4 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Button1" type="TextureButton" parent="Buttons"]
-self_modulate = Color(1, 1, 1, 0.392157)
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-pivot_offset = Vector2(64, 64)
-mouse_default_cursor_shape = 2
-action_mode = 0
-texture_normal = ExtResource("1_uiksi")
-texture_click_mask = ExtResource("2_4fatf")
-
-[node name="Button2" type="TextureButton" parent="Buttons"]
-self_modulate = Color(1, 1, 1, 0.392157)
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-pivot_offset = Vector2(64, 64)
-mouse_default_cursor_shape = 2
-action_mode = 0
-texture_normal = ExtResource("1_uiksi")
-texture_click_mask = ExtResource("2_4fatf")
-
-[node name="Button3" type="TextureButton" parent="Buttons"]
-self_modulate = Color(1, 1, 1, 0.392157)
-layout_mode = 1
-offset_right = 128.0
-offset_bottom = 128.0
-pivot_offset = Vector2(64, 64)
-mouse_default_cursor_shape = 2
-action_mode = 0
-texture_normal = ExtResource("1_uiksi")
-texture_click_mask = ExtResource("2_4fatf")
-
 [connection signal="pressed" from="." to="." method="_on_pressed"]

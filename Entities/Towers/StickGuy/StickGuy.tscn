@@ -10,6 +10,7 @@ radius = 30.0
 radius = 9.0
 
 [node name="StickGuy" instance=ExtResource("1_s74lq")]
+tower_base_cost = 10
 bullet_scene = ExtResource("2_ddlig")
 shot_delay = 0.7
 bullet_speed = 0
