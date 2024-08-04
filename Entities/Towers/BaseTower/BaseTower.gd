@@ -56,8 +56,9 @@ extends StaticBody2D
 
 @export_group("Cost")
 
-## How much does this Tower cost to place?
-@export_range(1, 99999, 1) var tower_base_cost: int = 1
+## How much did this Tower cost to place?
+## This is passed down from this Tower's SelectButton, which instantiates it in the first place.
+var tower_base_cost: int = 1
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -404,16 +405,14 @@ func sell_tower() -> void:
 
 ## Recalculate how much this Tower costs at the moment
 func update_tower_cost() -> void:
-	## First, reset current_cost value
-	current_cost = 0
-	## Add the Tower's base_cost
-	current_cost += tower_base_cost
+	## First, reset current_cost back to this Tower's base cost
+	current_cost = tower_base_cost
 	## Add up the cost of all individual upgrades
 	current_cost
 	
 	
 	## Recalculate how much Money this Tower will give back when Sold,
-	## rounded up to a full integer.
+	## rounded to the nearest(?) full integer.
 	sell_value = snappedi(current_cost * Globals.level_sell_multiplier, 1.0)
 
 

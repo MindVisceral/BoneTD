@@ -46,7 +46,7 @@ var all_placed_towers: Array
 
 
 ## Prepare a Tower to be placed, as dictated by a Tower's SelectButton
-func prepare_new_tower(tower_reference) -> void:
+func prepare_new_tower(tower_reference, tower_base_cost) -> void:
 	
 	## Instantiate a TempTower
 	var new_TempTower = temp_tower.instantiate()
@@ -55,6 +55,8 @@ func prepare_new_tower(tower_reference) -> void:
 	## It will add the actual Tower as a child of this TowerHandler Node
 	new_TempTower.tower_to_be_placed = tower_reference
 	new_TempTower.tower_handler = self
+	## Pass the Tower's base cost from its SelectButton. This is used when selling the Tower.
+	new_TempTower.tower_base_cost = tower_base_cost
 	
 	self.add_child(new_TempTower)
 

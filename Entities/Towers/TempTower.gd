@@ -26,6 +26,8 @@ var tower_to_be_placed: PackedScene
 ## New Towers will be added as children of the TowerHandler Node
 var tower_handler: TowerHandler
 
+## The Tower's base cost. Passed down from SelectButton, used when selling the Tower.
+var tower_base_cost: int
 
 ###-------------------------------------------------------------------------###
 ##### Variable storage
@@ -62,6 +64,9 @@ func setup() -> void:
 	
 	## This new_tower requires tower_handler to function
 	new_tower.tower_handler = self.tower_handler
+	
+	## And it needs to know its base cost.
+	new_tower.tower_base_cost = tower_base_cost
 	
 	## We manually make the new_tower update it's visuals.
 	## Await-ing for that to be done on _ready() doesn't seem to work.

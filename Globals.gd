@@ -32,10 +32,8 @@ func lose_health(health_lost: int) -> void:
 	print("health remaining: ", current_health)
 	
 	if current_health <= 0:
-		print("GAME OVER")
 		print("Player lost all healh")
-
-
+		print("GAME OVER")
 
 
 ## Money is gained when Enemies are killed, a Round is over, a Towers is sold
