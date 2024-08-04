@@ -21,6 +21,16 @@ var level_cost_multiplier: float
 ## Tower sell multiplier in this level.
 var level_sell_multiplier: float
 
+
+###-------------------------------------------------------------------------###
+##### Global signals
+###-------------------------------------------------------------------------###
+
+## Fired whener the Player's amount of Money is changed.
+## Used for buying Towers - can't buy without enough money.
+signal money_amount_changed
+
+
 ###-------------------------------------------------------------------------###
 ##### Global level functions
 ###-------------------------------------------------------------------------###
@@ -39,11 +49,13 @@ func lose_health(health_lost: int) -> void:
 ## Money is gained when Enemies are killed, a Round is over, a Towers is sold
 func gain_money(money_gained: int) -> void:
 	current_money += money_gained
+	money_amount_changed.emit()
 	print("MONEY LEFT: ", current_money)
 
 ## Money is lost as Towers and Upgrades are bought
 func lose_money(money_lost: int) -> void:
 	current_money -= money_lost
+	money_amount_changed.emit()
 	print("MONEY LEFT: ", current_money)
 
 

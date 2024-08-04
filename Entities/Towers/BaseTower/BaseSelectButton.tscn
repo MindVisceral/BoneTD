@@ -13,7 +13,6 @@ action_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("1_li7ri")
-tower_base_cost = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(20, 20)

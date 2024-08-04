@@ -33,6 +33,29 @@ var active: bool = true
 func _ready() -> void:
 	## If active is true, disable this button and vice versa.
 	self.disabled = !active
+	
+	## Connect the Globals money_amount_changed signal to this Node's money_check function.
+	Globals.money_amount_changed.connect(money_check)
+
+
+## Check if the Player has enough Money to buy a Tower every time the Money amount changes .
+func money_check() -> void:
+	## Not enough Money, disable button
+	if Globals.current_money < tower_base_cost:
+		disable_button()
+	## Enough Money to buy Tower, enable button
+	else:
+		enable_button()
+
+
+## Enable this Button.
+func enable_button() -> void:
+	self.disabled = false
+
+
+## Disable this Button.
+func disable_button() -> void:
+	self.disabled = true
 
 
 ## This button has been pressed, the Player wants to place this button's Tower.
