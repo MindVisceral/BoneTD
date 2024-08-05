@@ -14,12 +14,20 @@ extends PathFollow2D
 
 @export_group("Health")
 
+## This Enemy's maximum health
 @export_range(1, 9999, 1) var max_health: int = 1
 
 
 @export_group("Damage")
 
+## Amount of damage this Enemy deals to the Player
 @export_range(1, 9999, 1) var damage: int = 1
+
+
+@export_group("Money")
+
+## Amount of Money the Player gains from killing this Enemy
+@export_range(0, 999999999, 1) var default_money: int = 5
 
 
 ###-------------------------------------------------------------------------###
@@ -75,4 +83,8 @@ func death() -> void:
 	## We must tell the Wave (that this Enemy is a part of) that it has died
 	enemy_wave.enemy_is_dead(self)
 	print("ENEMY ", self, " IS DEAD")
+	## This Enemy is dead, the Player should receive some Money for kiling it
+	Globals.gain_money(default_money)
+	
+	## And now delete this Enemy
 	queue_free()
