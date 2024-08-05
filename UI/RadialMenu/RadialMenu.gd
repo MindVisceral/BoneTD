@@ -16,6 +16,12 @@ extends TextureButton
 ## Radius of the Menu;
 ## how far away the centers of Radius Buttons will be away from the center of the Main Button
 @export var menu_radius: int = 120
+
+## How much all the Radial Buttons are rotated around the Main Button (in degrees).
+## Default is -90 degrees - the first Button is right above the Main Button.
+## Positive numbers go in clockwise direction, negative go counter-clockwise
+@export_range(-360.0, 360.0, 1) var buttons_rotation: float = -90.0
+
 ## How fast the Buttons animate in seconds. '0' is instant
 @export_range(0, 10, 0.05) var speed: float = 0.25
 
@@ -115,9 +121,9 @@ func show_menu() -> void:
 		## We find this Button's rotation in the circle.
 		## We take the spacing between the Buttons,
 		## and multiply it as the Button's order among its siblings increases.
-		## Then we subtract that by 90 degrees,
-		## so the first Button's position is above the Main RadialTowerMenu Button
-		var rotation_in_circle = spacing * button.get_index() - PI/2
+		## Then we add buttons_rotation value to that. If it's 0 degrees, the first button is
+		## to the right of Main Button. If it's 90, the first Button is below the Main Button.
+		var rotation_in_circle = spacing * button.get_index() + deg_to_rad(buttons_rotation)
 		## Now that we have the Button's rotation in the circle, we must put it in its position.
 		## We take the Button's position [which is the same as the Main Button's - check _ready()],
 		## we add our target radius to that. Then we rotate it by rotation_in_circle we just got.

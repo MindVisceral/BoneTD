@@ -373,17 +373,12 @@ func _on_tower_selection_pressed() -> void:
 
 ## Upgrade this Tower by one level.
 ## The UpgradeButton is manually signal connected to this function.
-func upgrade_tower() -> void:
+func upgrade_1_tower() -> void:
 	pass
 
-
-###-------------------------------------------------------------------------###
-##### Move functions
-###-------------------------------------------------------------------------###
-
-## Move this Tower around the play zone.
-## The MoveButton is manually signal connected to this function.
-func move_tower() -> void:
+## Upgrade this Tower by one level.
+## The UpgradeButton is manually signal connected to this function.
+func upgrade_2_tower() -> void:
 	pass
 
 

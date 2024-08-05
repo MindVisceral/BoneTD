@@ -521,22 +521,27 @@ mouse_filter = 2
 
 [node name="BaseSelectButton" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+temptowerdata_resource = null
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="BaseSelectButton2" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+temptowerdata_resource = null
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="BaseSelectButton3" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+temptowerdata_resource = null
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="BaseSelectButton4" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+temptowerdata_resource = null
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="BaseSelectButton5" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
 layout_mode = 2
+temptowerdata_resource = null
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
