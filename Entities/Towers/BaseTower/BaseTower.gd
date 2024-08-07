@@ -1,5 +1,5 @@
 ## TowerRangeVisuals scale dynamically in Editor to fit tower_range_collider
-@tool
+#@tool
 class_name BaseTower
 extends StaticBody2D
 
@@ -46,19 +46,19 @@ extends StaticBody2D
 ## Node which rotates to face the Enemy. This way, TowerRange and TowerRangeVisuals don't rotate
 @export var rotation_pivot: Node2D
 
-## This Tower's specific UI. Used for Tower actions like upgrading and selling
-@export var tower_UI: Control
-
 
 ###-------------------------------------------------------------------------###
-##### Tower cost
+##### Upgrades
 ###-------------------------------------------------------------------------###
 
-@export_group("Cost")
+@export_group("Upgrades")
 
-## How much did this Tower cost to place?
-## This is passed down from this Tower's SelectButton, which instantiates it in the first place.
-var tower_base_cost: int = 1
+## When this Tower is upgraded, it will be replaced by this "upgrade_1" Tower
+@export var upgrade_1: PackedScene
+
+## When this Tower is upgraded, it will be replaced by this "upgrade_2" Tower
+@export var upgrade_2: PackedScene
+
 
 ###-------------------------------------------------------------------------###
 ##### Enemy-related Variables
@@ -120,6 +120,10 @@ var tower_base_cost: int = 1
 ###-------------------------------------------------------------------------###
 ##### Variable storage
 ###-------------------------------------------------------------------------###
+
+## How much did this Tower cost to place?
+## This is passed down from this Tower's SelectButton, which instantiates it in the first place.
+var tower_base_cost: int = 1
 
 ## Total amount of Money this Tower cost to place and upgrade.
 var current_cost: int = 0
@@ -371,15 +375,30 @@ func _on_tower_selection_pressed() -> void:
 ##### Upgrade functions
 ###-------------------------------------------------------------------------###
 
-## Upgrade this Tower by one level.
-## The UpgradeButton is manually signal connected to this function.
+## Both of these functions upgrade this Tower by one level, but each option offers a different path.
+## Practically, this just instantiates a new, better Tower and deletes this Tower.
+## The right UpgradeButton is manually signal-connected to its respective function.
 func upgrade_1_tower() -> void:
-	pass
-
-## Upgrade this Tower by one level.
-## The UpgradeButton is manually signal connected to this function.
+	var replacement_upgrade_tower: BaseTower = upgrade_1.instantiate()
+	
+	replacement_upgrade_tower.global_position = self.global_position
+	replacement_upgrade_tower.tower_handler = self.tower_handler
+	
+	## And finally create this new "upgraded" Tower
+	tower_handler.add_child(replacement_upgrade_tower)
+	## And now we can get rid of this Tower.
+	destroy_tower()
+#
 func upgrade_2_tower() -> void:
-	pass
+	var replacement_upgrade_tower: BaseTower = upgrade_2.instantiate()
+	
+	replacement_upgrade_tower.global_position = self.global_position
+	replacement_upgrade_tower.tower_handler = self.tower_handler
+	
+	## And finally create this new "upgraded" Tower
+	tower_handler.add_child(replacement_upgrade_tower)
+	## And now we can get rid of this Tower.
+	destroy_tower()
 
 
 ###-------------------------------------------------------------------------###
@@ -415,6 +434,6 @@ func update_tower_cost() -> void:
 ##### Destroy Tower
 ###-------------------------------------------------------------------------###
 
-## For whatever reason, this Tower must be queue_free()-d. Typically if it's sold.
+## For whatever reason, this Tower must be queue_free()-d. Typically it's because it was sold.
 func destroy_tower() -> void:
 	queue_free()

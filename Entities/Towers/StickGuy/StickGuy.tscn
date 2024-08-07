@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqmttjx0vrf5k"]
+[gd_scene load_steps=6 format=3 uid="uid://cqmttjx0vrf5k"]
 
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_s74lq"]
+[ext_resource type="PackedScene" uid="uid://cg6easuyq53ts" path="res://Entities/Towers/StickGuy/Upgrades/BatGuy/BatGuy.tscn" id="2_2jbvk"]
 [ext_resource type="PackedScene" uid="uid://c6033qphpoajv" path="res://Entities/Towers/StickGuy/StickBullet.tscn" id="2_ddlig"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2ixhf"]
@@ -10,20 +11,19 @@ radius = 30.0
 radius = 9.0
 
 [node name="StickGuy" instance=ExtResource("1_s74lq")]
+upgrade_1 = ExtResource("2_2jbvk")
+upgrade_2 = ExtResource("2_2jbvk")
 bullet_scene = ExtResource("2_ddlig")
 shot_delay = 0.7
 bullet_speed = 0
 bullet_piercing_amount = 9999
 
-[node name="RadialTowerSelection" parent="." index="0"]
-scale = Vector2(0.15, 0.15)
+[node name="TowerRangeVisuals" parent="." index="0"]
+visible = true
+scale = Vector2(0.46875, 0.46875)
 
 [node name="Collider" parent="TowerRange" index="0"]
 shape = SubResource("CircleShape2D_2ixhf")
-
-[node name="TowerRangeVisuals" parent="." index="2"]
-visible = true
-scale = Vector2(0.46875, 0.46875)
 
 [node name="BulletSpawnPoint" parent="RotationPivot" index="1"]
 position = Vector2(25, 0)

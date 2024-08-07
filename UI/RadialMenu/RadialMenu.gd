@@ -19,7 +19,7 @@ extends TextureButton
 
 ## How much all the Radial Buttons are rotated around the Main Button (in degrees).
 ## Default is -90 degrees - the first Button is right above the Main Button.
-## Positive numbers go in clockwise direction, negative go counter-clockwise
+## Positive numbers go in clockwise direction, negative go counter-clockwise.
 @export_range(-360.0, 360.0, 1) var buttons_rotation: float = -90.0
 
 ## How fast the Buttons animate in seconds. '0' is instant

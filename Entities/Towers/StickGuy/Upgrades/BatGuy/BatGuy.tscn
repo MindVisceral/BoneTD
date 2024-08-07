@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg6easuyq53ts"]
+
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_43gls"]
+
+[node name="BatGuy" instance=ExtResource("1_43gls")]
+bullet_speed = 1
+bullet_damage = 5
+bullet_piercing_amount = 9999
+
+[node name="Sprite" parent="RotationPivot" index="0"]
+scale = Vector2(0.2, 0.2)
+
+[editable path="RadialTowerSelection"]
+[editable path="TowerRange"]

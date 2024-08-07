@@ -27,6 +27,12 @@ modulate = Color(1, 1, 1, 0.27451)
 texture = ExtResource("3_33okv")
 
 [node name="RadialTowerSelection" parent="." instance=ExtResource("2_mfmwb")]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.15, 0.15)
+buttons_rotation = 30.0
 
 [node name="Upgrade1Button" parent="RadialTowerSelection/Buttons" index="0" instance=ExtResource("3_wv075")]
 layout_mode = 0

@@ -1,23 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://nmkmb7typgrs"]
+[gd_scene load_steps=2 format=3 uid="uid://nmkmb7typgrs"]
 
 [ext_resource type="Script" path="res://Entities/Enemies/BaseEnemy/BaseSelectButton.gd" id="1_li7ri"]
-
-[sub_resource type="GDScript" id="GDScript_116au"]
-script/source = "class_name TempTowerData
-extends Resource
-
-###-------------------------------------------------------------------------###
-##### Exported variables
-###-------------------------------------------------------------------------###
-
-## Reference to the Tower which will be spawned
-@export var tower_reference: PackedScene
-
-## How much does this Tower (tower_reference) cost to place? If the Player doesn't have
-## at least this amount of Money, they can't place this Tower.
-## This is passed down to the Tower, because the base cost is taken into account when selling.
-@export_range(1, 99999, 1) var tower_base_cost: int = 1
-"
 
 [node name="BaseSelectButton" type="Button"]
 custom_minimum_size = Vector2(40, 40)
@@ -30,7 +13,6 @@ action_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 script = ExtResource("1_li7ri")
-temptowerdata_resource = SubResource("GDScript_116au")
 tower_base_cost = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
