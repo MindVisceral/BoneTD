@@ -251,7 +251,6 @@ func shoot_at_target() -> void:
 
 ## Instantiate a bullet...
 func instantiate_bullet() -> void:
-	
 	var bullet: BaseBullet = bullet_scene.instantiate()
 	
 	## Before we do anything with the Bullet...

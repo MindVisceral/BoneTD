@@ -53,10 +53,6 @@ texture = ExtResource("1_vx0cn")
 
 [node name="BulletSpawnPoint" type="Marker2D" parent="RotationPivot"]
 
-[node name="Sprite2D" type="Sprite2D" parent="RotationPivot/BulletSpawnPoint"]
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_vx0cn")
-
 [node name="Collider" type="CollisionShape2D" parent="."]
 
 [node name="ShotDelayTimer" type="Timer" parent="."]

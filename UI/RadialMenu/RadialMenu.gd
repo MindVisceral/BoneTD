@@ -1,6 +1,12 @@
 class_name RadialTowerMenu
 extends TextureButton
 
+
+## Based on (https://kidscancode.org/godot_recipes/3.x/ui/radial_menu/index.html)
+## Edited to work for Godot 4, cleaned up, heavily commented, rewritten further for my use case.
+
+
+
 ###-------------------------------------------------------------------------###
 ##### Exported variables
 ###-------------------------------------------------------------------------###
