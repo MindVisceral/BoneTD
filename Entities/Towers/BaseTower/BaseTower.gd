@@ -1,5 +1,5 @@
 ## TowerRangeVisuals scale dynamically in Editor to fit tower_range_collider
-#@tool
+@tool
 class_name BaseTower
 extends StaticBody2D
 
@@ -155,8 +155,18 @@ func _get_configuration_warnings() -> PackedStringArray:
 	if tower_handler == null:
 		warnings.append("TowerHandler must be selected as an @export-ed variable
 			when a Tower is placed in Editor!")
+			
+		
 	
 	return warnings
+
+
+func _process(delta: float) -> void:
+	## Update visuals when in Editor
+	if Engine.is_editor_hint():
+		update_tower_visuals()
+		
+	
 
 
 ###-------------------------------------------------------------------------###
@@ -202,16 +212,19 @@ func _physics_process(delta: float) -> void:
 		## If there is a current_target...
 		if current_target:
 			
-			## Shot at the current_target if possible.
+			## Shot at the current_target, if possible.
 			if ShotDelayTimer.is_stopped():
 				shoot_at_target()
-
-func _process(delta: float) -> void:
-	## Update visuals when in Editor
-	if Engine.is_editor_hint():
-		update_tower_visuals()
+				
+			
+		
+	
 
 func shoot_at_target() -> void:
+	
+	
+	## NOTE: I'm not sure what point this 'tower_rotates_to_enemy' variable serves.
+	
 	
 	## If this Tower is set to rotate to look at the Enemy,
 	## get the angle between the Tower and its Target (in radians).
@@ -219,37 +232,29 @@ func shoot_at_target() -> void:
 	if tower_rotates_to_enemy == true:
 		angle_to_current_target = \
 			self.global_position.angle_to_point(current_target.global_position)
+			
+		
 	## Otherwise get the angle between the Tower's BulletSpawnPoint and its Target (in radians).
 	## The bullet will be fired at this angle.
 	else:
 		angle_to_current_target = \
 			bullet_spawn_point.global_position.angle_to_point(current_target.global_position)
+			
+		
 	
-	
+	## Fire a Bullet
 	instantiate_bullet()
 	
 	## Start the Timer again
 	ShotDelayTimer.start()
 
 
-## Instantiates a bullet...
+## Instantiate a bullet...
 func instantiate_bullet() -> void:
+	
 	var bullet: BaseBullet = bullet_scene.instantiate()
 	
-	## Pass on the bullet variables
-	## NOTE: This is done this way so I don't have to create a thousand different bullets
-	## NOTE: for each Tower upgrade. The Tower handles it all.
-	bullet.speed = bullet_speed
-	bullet.damage = bullet_damage
-	bullet.piercings_left = bullet_piercing_amount
-	
-	## Bullet visuals
-	bullet.sprite_texture = bullet_sprite
-	
-	## Put it at this BulletSpawnPoint's global_position...
-	bullet.global_position = bullet_spawn_point.global_position
-	
-	
+	## Before we do anything with the Bullet...
 	## If this tower is meant to rotate towards the Enemy, do that.
 	if tower_rotates_to_enemy == true:
 		rotation_pivot.rotation = angle_to_current_target
@@ -257,6 +262,22 @@ func instantiate_bullet() -> void:
 	## Otherwise, make only the Bullet itself rotate to face the Enemy.
 	else:
 		bullet.rotation = angle_to_current_target
+	
+	
+	## Pass on the bullet variables
+	## NOTE: This is done this way so I don't have to create a thousand bullets for each Tower upgrade
+	## NOTE: that only differ in stats. The Tower handles most of it
+	## NOTE: (but not unique Bullet behaviour like homing!)
+	bullet.speed = bullet_speed
+	bullet.damage = bullet_damage
+	bullet.piercings_left = bullet_piercing_amount
+	
+	## Update Bullet visuals, just in case.
+	## HERE: This should be changed; either the Bullet OR the Tower/upgrade should know the visuals
+	bullet.sprite_texture = bullet_sprite
+	
+	## Put it at this BulletSpawnPoint's global_position...
+	bullet.global_position = bullet_spawn_point.global_position
 	
 	## And add the Bullet to the Tree
 	get_tree().get_root().add_child(bullet)
