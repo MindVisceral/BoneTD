@@ -17,6 +17,10 @@ extends Node
 ##### References
 ###-------------------------------------------------------------------------###
 
+## This Node holds all the DraggableMenus as its children
+@export var menus: Control
+
+
 @export_group("Menus")
 
 ## Reference to the Main Menu.
@@ -38,8 +42,13 @@ extends Node
 ## Which Menu is visible and shown/open right now?
 @export var current_menu: DraggableMenu
 
+
+###-------------------------------------------------------------------------###
+##### Regular variables
+###-------------------------------------------------------------------------###
+
 ## Array that holds all the Menus
-@export var all_menus: Array[DraggableMenu]
+var all_menus: Array[DraggableMenu]
 
 
 ###-------------------------------------------------------------------------###
@@ -47,9 +56,13 @@ extends Node
 ###-------------------------------------------------------------------------###
 
 func _ready() -> void:
-	
-	## Turn off every single Menu
-	disable_all_menus()
+	## Loop through all the DraggableMenus under the Menus Node and add them to the all_menus Array
+	## While we're at it, disable all of them - just to make sure they're all invisible.
+	for menu: DraggableMenu in menus.get_children():
+		all_menus.append(menu)
+		
+		menu.visible = false
+		
 	
 	## And switch to the current_menu.
 	change_menu(current_menu)
@@ -65,13 +78,6 @@ func change_menu(new_menu: DraggableMenu) -> void:
 	
 	current_menu = new_menu
 	current_menu.visible = true
-	
-
-## Disable all Menus. Used on _ready() and as a debugging function
-func disable_all_menus() -> void:
-	for menu in all_menus:
-		menu.visible = false
-		
 	
 
 
