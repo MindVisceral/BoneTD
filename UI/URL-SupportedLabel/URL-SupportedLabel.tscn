@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://b30h5xy3mybrn"]
+
+[ext_resource type="Script" path="res://UI/URL-SupportedLabel/URL-SupportedLabel.gd" id="1_kl2cc"]
+
+[node name="URL-SupportedLabel" type="RichTextLabel"]
+offset_right = 40.0
+offset_bottom = 40.0
+auto_translate = false
+localize_numeral_system = false
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+shortcut_keys_enabled = false
+threaded = true
+selection_enabled = true
+script = ExtResource("1_kl2cc")
+
+[connection signal="meta_clicked" from="." to="." method="_on_meta_clicked"]

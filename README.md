@@ -10,7 +10,7 @@ Aseprite 1.3.7
 [Optimized Grayscale 4 Palette](https://lospec.com/palette-list/optimized-grayscale-4) by [Yousurname](https://lospec.com/yousurname) - Used mostly in Menus  
 
 ## Font
-[Titillium Web](https://fonts.google.com/specimen/Titillium+Web) Regular from/by [Google](https://fonts.adobe.com/foundries/google)  
+[Titillium Web](https://fonts.google.com/specimen/Titillium+Web) Regular by Accademia di Belle Arti di Urbino
 
 ## Inspirations/References
-Main Menu - heavily based on [Factorio](https://factorio.com/) Main Menu  
+Main Menu - heavily based on [Factorio](https://factorio.com/) Main Menu and website  
