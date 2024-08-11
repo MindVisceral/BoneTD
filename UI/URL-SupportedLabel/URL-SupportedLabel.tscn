@@ -7,6 +7,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 auto_translate = false
 localize_numeral_system = false
+focus_mode = 2
 mouse_default_cursor_shape = 1
 bbcode_enabled = true
 shortcut_keys_enabled = false
