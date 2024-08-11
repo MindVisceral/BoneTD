@@ -1,0 +1,13 @@
+## Credits
+
+## Tools used
+Godot Engine 4.2.2
+Krita 5.2.3
+Aseprite 1.3.7
+
+## Color Palettes
+[Everglow Diamond](https://lospec.com/palette-list/everglow-diamond) by [Patchouli](https://lospec.com/patchoulitei) - Modified to also feature complementary colors (on a color wheel)
+
+
+## Fonts
+

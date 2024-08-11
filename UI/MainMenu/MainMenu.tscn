@@ -10,18 +10,134 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.533037, 0.533037, 0.533037, 1)
+color = Color(0.415686, 0.34902, 0.376471, 1)
 
-[node name="DraggableMenu" parent="." instance=ExtResource("1_genn2")]
+[node name="Title" type="RichTextLabel" parent="."]
 layout_mode = 1
-offset_left = 936.0
-offset_top = 478.0
-offset_right = 936.16
-offset_bottom = 477.56
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.046
+anchor_right = 0.75
+anchor_bottom = 0.231
+offset_top = 0.319996
+offset_right = -0.00012207
+offset_bottom = 0.519989
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+theme_override_font_sizes/normal_font_size = 100
+bbcode_enabled = true
+text = "[center]TITLE TEXT GOES HERE"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="DraggableMainMenu" parent="." instance=ExtResource("1_genn2")]
+custom_minimum_size = Vector2(300, 450)
+layout_mode = 1
+anchor_left = 0.422
+anchor_top = 0.292
+anchor_right = 0.578
+anchor_bottom = 0.708
+offset_left = -0.23999
+offset_top = -0.359985
+offset_right = 0.23999
+offset_bottom = 0.359985
+grow_vertical = 2
+pivot_offset = Vector2(0, 0)
+
+[node name="DragButtonTop" parent="DraggableMainMenu" index="1"]
+anchor_bottom = 0.067
+offset_bottom = -0.150002
+
+[node name="DragButtonBottom" parent="DraggableMainMenu" index="2"]
+anchor_top = 0.933
+offset_top = 0.149994
+
+[node name="VSubPanelContainer" type="VBoxContainer" parent="DraggableMainMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 33.0
+offset_right = -8.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="PlayDarkSubPanel" type="Panel" parent="DraggableMainMenu/VSubPanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.23
+theme_type_variation = &"DarkPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DraggableMainMenu/VSubPanelContainer/PlayDarkSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 2
+
+[node name="PlayButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/PlayDarkSubPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"RedButton"
+action_mode = 0
+text = "PLAY"
+
+[node name="OtherDarkSubPanel" type="Panel" parent="DraggableMainMenu/VSubPanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"DarkPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="OptionsButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+action_mode = 0
+text = "Options
+"
+
+[node name="CreditsButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+action_mode = 0
+text = "Credits
+"
+
+[editable path="DraggableMainMenu"]
