@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c42ltbeu2cdpe"]
+[gd_scene load_steps=3 format=3 uid="uid://c42ltbeu2cdpe"]
 
 [ext_resource type="PackedScene" uid="uid://b5dp0gcijhisy" path="res://UI/DraggableMenu/DraggableMenu.tscn" id="1_genn2"]
+[ext_resource type="Script" path="res://UI/MainMenu/MainMenuManager.gd" id="1_ypm3j"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,6 +10,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MainMenuManager" type="Node" parent="." node_paths=PackedStringArray("main_menu", "settings_menu", "current_menu", "all_menus")]
+script = ExtResource("1_ypm3j")
+main_menu = NodePath("../DraggableMainMenu")
+settings_menu = NodePath("../DraggableSettingsMenu")
+current_menu = NodePath("../DraggableMainMenu")
+all_menus = [NodePath("../DraggableMainMenu"), NodePath("../DraggableSettingsMenu")]
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -57,13 +65,14 @@ offset_top = -0.359985
 offset_right = 0.23999
 offset_bottom = 0.359985
 grow_vertical = 2
-pivot_offset = Vector2(0, 0)
 
 [node name="DragButtonTop" parent="DraggableMainMenu" index="1"]
+anchors_preset = -1
 anchor_bottom = 0.067
 offset_bottom = -0.150002
 
 [node name="DragButtonBottom" parent="DraggableMainMenu" index="2"]
+anchors_preset = -1
 anchor_top = 0.933
 offset_top = 0.149994
 
@@ -126,12 +135,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
 
-[node name="OptionsButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 action_mode = 0
-text = "Options
-"
+text = "Settings"
 
 [node name="CreditsButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
 layout_mode = 2
@@ -140,4 +148,49 @@ action_mode = 0
 text = "Credits
 "
 
+[node name="ExitButton" type="Button" parent="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"RedButton"
+action_mode = 0
+text = "Exit
+"
+
+[node name="DraggableSettingsMenu" parent="." instance=ExtResource("1_genn2")]
+custom_minimum_size = Vector2(300, 450)
+layout_mode = 1
+anchor_right = 0.156
+anchor_bottom = 0.417
+offset_right = 0.47998
+offset_bottom = -0.360016
+
+[node name="DragButtonTop" parent="DraggableSettingsMenu" index="1"]
+anchors_preset = -1
+anchor_bottom = 0.067
+offset_bottom = -0.150002
+
+[node name="DragButtonBottom" parent="DraggableSettingsMenu" index="2"]
+anchors_preset = -1
+anchor_top = 0.933
+offset_top = 28.15
+
+[node name="ReturnButton" type="Button" parent="DraggableSettingsMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.193
+anchor_top = 0.231
+anchor_right = 0.757
+anchor_bottom = 0.631
+offset_left = 0.0999985
+offset_top = 0.0499954
+offset_right = -0.100006
+offset_bottom = 0.0499878
+
+[connection signal="pressed" from="DraggableMainMenu/VSubPanelContainer/PlayDarkSubPanel/VBoxContainer/PlayButton" to="MainMenuManager" method="_play_pressed"]
+[connection signal="pressed" from="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer/SettingsButton" to="MainMenuManager" method="_settings_pressed"]
+[connection signal="pressed" from="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer/CreditsButton" to="MainMenuManager" method="_credits_pressed"]
+[connection signal="pressed" from="DraggableMainMenu/VSubPanelContainer/OtherDarkSubPanel/VBoxContainer/ExitButton" to="MainMenuManager" method="_exit_pressed"]
+[connection signal="pressed" from="DraggableSettingsMenu/ReturnButton" to="MainMenuManager" method="_return_pressed"]
+
 [editable path="DraggableMainMenu"]
+[editable path="DraggableSettingsMenu"]
