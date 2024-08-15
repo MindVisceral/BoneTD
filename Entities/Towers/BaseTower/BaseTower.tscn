@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://u1qyk1m1yco0"]
+[gd_scene load_steps=10 format=3 uid="uid://u1qyk1m1yco0"]
 
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
+[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/BaseTower/BaseBullet.tscn" id="2_jj5po"]
 [ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://UI/RadialMenu/RadialMenu.tscn" id="2_mfmwb"]
 [ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
 [ext_resource type="PackedScene" uid="uid://c74ibtjrrt3rr" path="res://UI/CommonTextButton/CommonTextureButton.tscn" id="3_wv075"]
@@ -20,6 +21,9 @@ tower_sprite = NodePath("RotationPivot/Sprite")
 tower_collider = NodePath("Collider")
 bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
+bullet_scene = ExtResource("2_jj5po")
+bullet_sprite = ExtResource("1_vx0cn")
+bullet_speed = 80
 
 [node name="TowerRangeVisuals" type="Sprite2D" parent="."]
 visible = false

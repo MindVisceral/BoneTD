@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cavd1oiqjhyqd"]
+
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_478ed"]
+[ext_resource type="Script" path="res://Entities/Towers/ProjectileTower/ProjectileTower.gd" id="2_nispy"]
+
+[node name="ProjectileTower" instance=ExtResource("1_478ed")]
+script = ExtResource("2_nispy")
+
+[editable path="RadialTowerSelection"]
+[editable path="TowerRange"]
