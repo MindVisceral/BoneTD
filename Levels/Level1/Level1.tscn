@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=23 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
+[ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="5_y4jfb"]
 [ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
 [ext_resource type="PackedScene" uid="uid://3ob5n3fq12o6" path="res://Entities/Enemies/CarpalsEnemy/CarpalsEnemy.tscn" id="7_pr6bl"]
-[ext_resource type="PackedScene" uid="uid://sgh3hg5h60t7" path="res://Entities/Towers/GunTurret/GunTurret.tscn" id="7_yjany"]
 [ext_resource type="PackedScene" uid="uid://cavd1oiqjhyqd" path="res://Entities/Towers/ProjectileTower/ProjectileTower.tscn" id="7_ylebg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
@@ -420,8 +420,11 @@ terrain_set_0/terrain_0/color = Color(0, 0.742363, 0.169568, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_yxxhc")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4td0d"]
+size = Vector2(15, 67)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_n0r05"]
-radius = 33.2415
+radius = 48.0416
 
 [sub_resource type="Curve2D" id="Curve2D_ja27w"]
 _data = {
@@ -441,6 +444,14 @@ func _ready() -> void:
 
 [node name="Level1" type="Node2D"]
 
+[node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
+path_reference = NodePath("../MovementPath")
+nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
+number_of_rounds = 3
+
+[node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+waves_in_order = Array[int]([0])
+
 [node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -451,33 +462,29 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 1, 65536, 65536, 1, 131072, 65536
 layer_1/name = "walk layer"
 layer_1/tile_data = PackedInt32Array(917504, 65536, 0, 917505, 65536, 0, 917506, 65536, 0, 917507, 131072, 2, 851971, 131072, 1, 786435, 131072, 1, 720899, 0, 1, 655363, 0, 1, 589827, 0, 1, 524291, 131072, 1, 458755, 131072, 1, 393219, 0, 1, 327683, 0, 1, 262147, 131072, 1, 196611, 131072, 1, 131075, 0, 0, 131076, 65536, 0, 131077, 65536, 0, 131078, 65536, 0, 131079, 131072, 0, 196615, 131072, 1, 262151, 131072, 1, 327687, 0, 1, 393223, 131072, 1, 458759, 131072, 1, 524295, 131072, 1, 589831, 131072, 1, 655367, 0, 1, 720903, 0, 1, 786439, 131072, 1, 851975, 131072, 1, 917511, 0, 2, 917512, 65536, 0, 917513, 65536, 0, 917514, 65536, 0, 917515, 131072, 2, 851979, 131072, 1, 786443, 131072, 1, 720907, 131072, 1, 655371, 131072, 1, 589835, 131072, 1, 524299, 131072, 1, 458763, 131072, 1, 393227, 131072, 1, 327691, 0, 1, 262155, 131072, 1, 196619, 0, 1, 131083, 0, 0, 131084, 65536, 2, 131085, 65536, 2, 131086, 65536, 2, 131087, 131072, 0, 196623, 131072, 1, 262159, 0, 1, 327695, 0, 1, 393231, 131072, 1, 458767, 0, 1, 524303, 0, 1, 589839, 0, 1, 655375, 0, 1, 720911, 131072, 1, 786447, 131072, 1, 851983, 0, 1, 917519, 0, 2, 917520, 65536, 2, 917521, 65536, 0, 917522, 65536, 0, 917523, 131072, 2, 851987, 131072, 1, 786451, 131072, 1, 720915, 131072, 1, 655379, 0, 1, 589843, 0, 1, 524307, 131072, 1, 458771, 0, 1, 393235, 131072, 1, 327699, 0, 1, 262163, 0, 1, 196627, 0, 1, 131091, 0, 0, 131092, 65536, 0, 131093, 65536, 2, 131094, 65536, 0, 131095, 131072, 0, 196631, 0, 1, 262167, 131072, 1, 393239, 131072, 1, 458775, 131072, 1, 524311, 131072, 1, 589847, 131072, 1, 655383, 0, 1, 720919, 131072, 1, 786455, 131072, 1, 851991, 131072, 1, 917527, 0, 2, 327703, 0, 1, 917528, 65536, 2, 917529, 65536, 0, 917530, 65536, 0, 917531, 131072, 2, 851995, 131072, 1, 786459, 131072, 1, 720923, 131072, 1, 655387, 131072, 1, 589851, 0, 1, 524315, 0, 1, 458779, 131072, 1, 393243, 0, 1, 327707, 0, 1, 262171, 0, 1, 196635, 131072, 1, 131099, 0, 0, 131100, 65536, 2, 131101, 65536, 0, 131102, 65536, 4, 983039, 0, 4)
 
-[node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
-path_reference = NodePath("../MovementPath")
-nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
-number_of_rounds = 3
+[node name="EnvironmentObstacles" type="Node2D" parent="."]
 
-[node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-waves_in_order = Array[int]([0])
+[node name="THE_OBSTACLE" type="StaticBody2D" parent="EnvironmentObstacles"]
+position = Vector2(72, 176)
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="EnvironmentObstacles/THE_OBSTACLE"]
+position = Vector2(-0.500006, -0.499998)
+scale = Vector2(0.117187, 0.523438)
+texture = ExtResource("5_y4jfb")
+
+[node name="Collider" type="CollisionShape2D" parent="EnvironmentObstacles/THE_OBSTACLE"]
+shape = SubResource("RectangleShape2D_4td0d")
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="BaseTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_yjany")]
-position = Vector2(84, 78)
-tower_handler = NodePath("..")
-shot_delay = 1.5
-
-[node name="TowerRangeVisuals" parent="TowerHandler/BaseTower" index="0"]
-visible = false
-
-[node name="ShotDelayTimer" parent="TowerHandler/BaseTower" index="6"]
-wait_time = 1.5
-
 [node name="ProjectileTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_ylebg")]
-position = Vector2(73, 200)
+position = Vector2(91, 139)
 tower_handler = NodePath("..")
+environment_layer = 1
 
 [node name="TowerRangeVisuals" parent="TowerHandler/ProjectileTower" index="0"]
-scale = Vector2(0.519399, 0.519399)
+scale = Vector2(0.750651, 0.750651)
 
 [node name="Collider" parent="TowerHandler/ProjectileTower/TowerRange" index="0"]
 shape = SubResource("CircleShape2D_n0r05")
@@ -584,9 +591,6 @@ text = "NEXT ROUND
 "
 
 [editable path="TowerHandler"]
-[editable path="TowerHandler/BaseTower"]
-[editable path="TowerHandler/BaseTower/RadialTowerSelection"]
-[editable path="TowerHandler/BaseTower/TowerRange"]
 [editable path="TowerHandler/ProjectileTower"]
 [editable path="TowerHandler/ProjectileTower/RadialTowerSelection"]
 [editable path="TowerHandler/ProjectileTower/TowerRange"]

@@ -1,5 +1,5 @@
 class_name RoundHandler
-extends Node2D
+extends Node
 
 ###-------------------------------------------------------------------------###
 ##### References

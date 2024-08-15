@@ -7,6 +7,7 @@
 [node name="ProjectileTower" instance=ExtResource("1_478ed")]
 script = ExtResource("2_nispy")
 bullet_scene = ExtResource("3_4qeq7")
+environment_layer = null
 
 [editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

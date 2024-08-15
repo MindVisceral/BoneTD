@@ -51,6 +51,8 @@ extends StaticBody2D
 ## Timer that keeps time until next shot
 @export var ShotDelayTimer: Timer
 
+## The mask/layer on which all 'Environment' Nodes are on.
+@export_flags_2d_physics var environment_layer: int
 
 ###-------------------------------------------------------------------------###
 ##### Upgrades
@@ -173,14 +175,53 @@ func _physics_process(delta: float) -> void:
 		
 		## If there is a current_target...
 		if current_target:
-			
-			## Shot at the current_target, if possible.
+			## And the shooting cooldown is over...
 			if ShotDelayTimer.is_stopped():
-				shoot_at_target()
+				## Check if the Target can be seen from the Tower's position with a Ray.
+				## The Tower cannot see from behind obstacles.
+				if can_see_target() == true:
+					shoot_at_target()
 				
 			
 		
 	
+
+## A simple RayCast which checks for any Environmental Obstacles
+## between the Tower and the current_target.
+func can_see_target() -> bool:
+	var can_tower_see_target: bool = true
+	
+	## Get the world's space_state. We need this to cast a Ray
+	var space_state = get_world_2d().direct_space_state
+	
+	## The position from which the Ray will be cast.
+	var start_pos: Vector2 = self.global_position
+	#
+	## The position at which the Ray will end.
+	var end_pos: Vector2 = current_target.global_position
+	#
+	## The mask on which the Environment lies.
+	## We don't care about anything else in the way, not even other Enemies.
+	var mask: int = environment_layer
+	
+	## Put together all of those variables above.
+	## NOTE: All the other default settings are fine. No need for changing body and area booleans.
+	var parameters: PhysicsRayQueryParameters2D = \
+		PhysicsRayQueryParameters2D.create(start_pos, end_pos, mask)
+	
+	
+	## Cast a Ray with the 'parameters' variable as its parameters
+	var result = space_state.intersect_ray(parameters)
+	
+	## If the RayCast detects any obstacles (that are on the Environment layer),
+	## then the Tower cannot see its Target.
+	if result:
+		can_tower_see_target = false
+	
+	
+	## Return a boolean - can the Tower see its Target?
+	return can_tower_see_target
+
 
 ## This function makes the Tower shoot its Target.
 func shoot_at_target() -> void:

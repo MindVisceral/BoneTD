@@ -1,5 +1,5 @@
 class_name BaseRound
-extends Node2D
+extends Node
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables

@@ -21,6 +21,7 @@ tower_collider = NodePath("Collider")
 bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
 ShotDelayTimer = NodePath("ShotDelayTimer")
+environment_layer = 1
 
 [node name="TowerRangeVisuals" type="Sprite2D" parent="."]
 visible = false

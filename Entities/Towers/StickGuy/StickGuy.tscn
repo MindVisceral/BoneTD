@@ -10,6 +10,7 @@ radius = 30.0
 radius = 9.0
 
 [node name="StickGuy" instance=ExtResource("1_s74lq")]
+environment_layer = null
 upgrade_1 = ExtResource("2_2jbvk")
 upgrade_2 = ExtResource("2_2jbvk")
 shot_delay = 0.7

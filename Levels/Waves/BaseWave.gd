@@ -1,5 +1,5 @@
 class_name BaseWave
-extends Node2D
+extends Node
 
 ###-------------------------------------------------------------------------###
 ##### Exported variables

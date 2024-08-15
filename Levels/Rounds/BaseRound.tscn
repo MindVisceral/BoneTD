@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Levels/Rounds/BaseRound.gd" id="1_uus8k"]
 [ext_resource type="PackedScene" uid="uid://nu84eda5rr2d" path="res://Levels/Waves/BaseWave.tscn" id="2_5b1hq"]
 
-[node name="BaseRound" type="Node2D"]
+[node name="BaseRound" type="Node"]
 script = ExtResource("1_uus8k")
 wave_scenes = Array[PackedScene]([ExtResource("2_5b1hq")])
 waves_in_order = Array[int]([0, 0, 0])
