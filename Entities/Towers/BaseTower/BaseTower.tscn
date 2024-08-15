@@ -1,29 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://u1qyk1m1yco0"]
+[gd_scene load_steps=9 format=3 uid="uid://u1qyk1m1yco0"]
 
 [ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseTower.gd" id="1_qn6n7"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_vx0cn"]
 [ext_resource type="PackedScene" uid="uid://cs8y67w2tt7sd" path="res://Entities/Towers/BaseTower/TowerRange.tscn" id="2_fac3i"]
-[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/BaseTower/BaseBullet.tscn" id="2_jj5po"]
 [ext_resource type="PackedScene" uid="uid://bx4r7imynksua" path="res://UI/RadialMenu/RadialMenu.tscn" id="2_mfmwb"]
 [ext_resource type="Texture2D" uid="uid://ctnhv3wt1ocbd" path="res://placeholder_5.png" id="3_33okv"]
 [ext_resource type="PackedScene" uid="uid://c74ibtjrrt3rr" path="res://UI/CommonTextButton/CommonTextureButton.tscn" id="3_wv075"]
 [ext_resource type="Texture2D" uid="uid://bgqv14cw5ev2a" path="res://placeholder_upgrade.png" id="4_635xw"]
 [ext_resource type="Texture2D" uid="uid://jwsl1eho4f86" path="res://placeholder_sell.png" id="5_axau1"]
 
-[node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "tower_sprite", "tower_collider", "bullet_spawn_point", "rotation_pivot")]
+[node name="BaseTower" type="StaticBody2D" node_paths=PackedStringArray("tower_selection_button", "tower_range_collider", "tower_range_visuals", "tower_sprite", "tower_collider", "bullet_spawn_point", "rotation_pivot", "ShotDelayTimer")]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_qn6n7")
 tower_selection_button = NodePath("RadialTowerSelection")
 tower_range_collider = NodePath("TowerRange/Collider")
 tower_range_visuals = NodePath("TowerRangeVisuals")
-tower_sprite = NodePath("RotationPivot/Sprite")
+tower_sprite = NodePath("Sprite")
 tower_collider = NodePath("Collider")
 bullet_spawn_point = NodePath("RotationPivot/BulletSpawnPoint")
 rotation_pivot = NodePath("RotationPivot")
-bullet_scene = ExtResource("2_jj5po")
-bullet_sprite = ExtResource("1_vx0cn")
-bullet_speed = 80
+ShotDelayTimer = NodePath("ShotDelayTimer")
 
 [node name="TowerRangeVisuals" type="Sprite2D" parent="."]
 visible = false
@@ -51,11 +48,11 @@ Tower = NodePath("..")
 
 [node name="RotationPivot" type="Node2D" parent="."]
 
-[node name="Sprite" type="Sprite2D" parent="RotationPivot"]
+[node name="BulletSpawnPoint" type="Marker2D" parent="RotationPivot"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("1_vx0cn")
-
-[node name="BulletSpawnPoint" type="Marker2D" parent="RotationPivot"]
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 

@@ -15,7 +15,7 @@ scale = Vector2(0.625, 0.625)
 [node name="Collider" parent="TowerRange" index="0"]
 shape = SubResource("CircleShape2D_jcc3p")
 
-[node name="ShotDelayTimer" parent="." index="5"]
+[node name="ShotDelayTimer" parent="." index="6"]
 wait_time = 2.5
 
 [editable path="RadialTowerSelection"]

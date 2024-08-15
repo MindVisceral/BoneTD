@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cavd1oiqjhyqd"]
+[gd_scene load_steps=5 format=3 uid="uid://cavd1oiqjhyqd"]
 
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_478ed"]
 [ext_resource type="Script" path="res://Entities/Towers/ProjectileTower/ProjectileTower.gd" id="2_nispy"]
+[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/BaseTower/BaseBullet.tscn" id="3_ffmj8"]
+[ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="4_gk2my"]
 
 [node name="ProjectileTower" instance=ExtResource("1_478ed")]
 script = ExtResource("2_nispy")
+bullet_scene = ExtResource("3_ffmj8")
+bullet_sprite = ExtResource("4_gk2my")
+bullet_speed = 80
 
 [editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

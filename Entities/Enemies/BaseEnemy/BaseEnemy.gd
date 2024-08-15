@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 	## NOTE: That part in parentheses must be the same as the Enemy's 'progress' line above.
 	#velocity = direction * (speed * delta)
 	velocity = direction * speed
-	print("Enemy velocity: ", velocity)
+	#print("Enemy velocity: ", velocity)
 	
 	
 	## NOTE, HERE: This is checked every frame, so performance may take a hit.

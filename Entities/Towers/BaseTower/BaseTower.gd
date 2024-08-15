@@ -1,10 +1,11 @@
 ## TowerRangeVisuals scale dynamically in Editor to fit tower_range_collider
 @tool
+## Keep in mind that this 'Tower' is just a base building block - it can't do anything when placed.
 class_name BaseTower
 extends StaticBody2D
 
 ###-------------------------------------------------------------------------###
-##### Editor-only stuff
+##### Editor-only variables
 ###-------------------------------------------------------------------------###
 
 @export_group("Editor-only")
@@ -43,8 +44,12 @@ extends StaticBody2D
 ## Point from which the Bullet will spawn.
 @export var bullet_spawn_point: Marker2D
 
-## Node which rotates to face the Enemy. This way, TowerRange and TowerRangeVisuals don't rotate
+## Node which rotates to face the Enemy.
+## NOTE: HERE: This way, TowerRange and TowerRangeVisuals don't rotate - this is vestigial
 @export var rotation_pivot: Node2D
+
+## Timer that keeps time until next shot
+@export var ShotDelayTimer: Timer
 
 
 ###-------------------------------------------------------------------------###
@@ -64,7 +69,7 @@ extends StaticBody2D
 ##### Enemy-related Variables
 ###-------------------------------------------------------------------------###
 
-@export_group("Enemies")
+@export_group("Enemy-related")
 
 ## Which Enemy in range should this Tower target?
 ## "First" means the Enemy that is furthest along the track
@@ -75,13 +80,9 @@ extends StaticBody2D
 ##### Shooting Variables
 ###-------------------------------------------------------------------------###
 
-@export_group("Shooting")
+@export_group("Base Shooting")
 
-### Reference to the Bullet scene, which this Tower will 'shoot' (instantiate)
-#@export var bullet_scene: PackedScene = \
-	#preload("res://Entities/Towers/BaseTower/BaseBullet.tscn")
-
-## Time until the next shot can be fired
+## Time until the next singular shot can be fired
 @export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
 
 
@@ -91,13 +92,6 @@ extends StaticBody2D
 
 @export_group("Bullet stuff")
 
-### The Tower holds the Bullet's sprite
-#@export var bullet_sprite: Texture = \
-	#preload("res://icon.svg")
-
-### Bullet's base speed
-#@export_range(0, 9999, 1) var bullet_speed: int = 80
-
 ## Default damage dealt by the bullet
 @export_range(0, 9999, 1) var bullet_damage: int = 1
 
@@ -105,14 +99,6 @@ extends StaticBody2D
 ## "0" means that this Bullet does not pierce - it deals damage once and is destroyed,
 ## "1" means that this Bullet can deal damage up to two times and it's destroyed on the second hit
 @export_range(0, 9999, 1) var bullet_piercing_amount: int = 0
-
-
-###-------------------------------------------------------------------------###
-##### Onready Variables
-###-------------------------------------------------------------------------###
-
-## Timer that keeps time until next shot
-@onready var ShotDelayTimer: Timer = $ShotDelayTimer
 
 
 ###-------------------------------------------------------------------------###
@@ -144,11 +130,12 @@ var angle_to_current_target: float
 
 
 ###-------------------------------------------------------------------------###
-##### Editor-only stuff
+##### Editor-only functions
 ###-------------------------------------------------------------------------###
 
+## Show a warning when the Tower is not set up properly in the Editor.
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings = []
+	var warnings: PackedStringArray = []
 	
 	if tower_handler == null:
 		warnings.append("TowerHandler must be selected as an @export-ed variable
@@ -204,63 +191,31 @@ func _physics_process(delta: float) -> void:
 			
 			## Shot at the current_target, if possible.
 			if ShotDelayTimer.is_stopped():
-				#shoot_at_target()
-				pass
+				shoot_at_target()
 				
 			
 		
 	
 
-#func shoot_at_target() -> void:
-	#
-	### HERE: TEMPORARY - a prototype for shootng where the Enemy will be, not where they are.
-	### We need the distance between this Tower and the Target for better predictions
-	#var distance_to_target: float = \
-		#self.global_position.distance_to(current_target.global_position)
-		#
-	#
-	#
-	#angle_to_current_target = \
-		##self.global_position.angle_to_point(current_target.global_position) - original code
-		#
-		#
-		### HERE: TEMPORARY - a prototype for shootng where the Enemy will be, not where they are
-		#self.global_position.angle_to_point(current_target.global_position + \
-			#current_target.velocity * (distance_to_target / bullet_speed))
-		#
-	#
-	### Fire a Bullet
-	#instantiate_bullet()
-	#
-	### Start the Timer again
-	#ShotDelayTimer.start()
+## This function makes the Tower shoot its Target.
+func shoot_at_target() -> void:
+	
+	## First, we must determine variables that all types of Towers need to shoot at Targets.
+	
+	angle_to_current_target = self.global_position.angle_to_point(current_target.global_position)
+	
+	## Fire a Bullet - this function is a dummy! Read its NOTE down below.
+	## We use a dummy function, because it must be called here, before the ShotDelayTimer starts.
+	fire()
+	
+	## Start the Timer again
+	ShotDelayTimer.start()
 
 
-### Instantiate and fire a bullet...
-#func instantiate_bullet() -> void:
-	#var bullet: BaseBullet = bullet_scene.instantiate()
-	#
-	### Rotate the Bullet so it will hit the Enemy
-	#bullet.rotation = angle_to_current_target
-	#
-	### Pass on the bullet variables
-	### NOTE: This is done this way so I don't have to create a thousand bullets for each Tower upgrade
-	### NOTE: that only differ in stats. The Tower handles most of it
-	### NOTE: (but not unique Bullet behaviour like homing!)
-	#bullet.speed = bullet_speed
-	#bullet.damage = bullet_damage
-	#bullet.piercings_left = bullet_piercing_amount
-	#
-	### Update Bullet visuals, just in case.
-	### HERE: This should be changed; either the Bullet OR the Tower/upgrade should know the visuals
-	#bullet.sprite_texture = bullet_sprite
-	#
-	### The Bullet should be fired 'from' this Tower's bullet_spawn_point
-	#bullet.global_position = bullet_spawn_point.global_position
-	#
-	### And add the Bullet to the Tree
-	#get_tree().get_root().add_child(bullet)
-
+## NOTE: This is a dummy function! The actual firing function is located in the inheriting
+## NOTE: Towers, and this functions code depends on that Tower's code.
+func fire() -> void:
+	pass
 
 
 ###-------------------------------------------------------------------------###
