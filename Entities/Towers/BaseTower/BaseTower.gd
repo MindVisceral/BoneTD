@@ -225,13 +225,26 @@ func shoot_at_target() -> void:
 	
 	## NOTE: I'm not sure what point this 'tower_rotates_to_enemy' variable serves.
 	
+	## NOTE: All of this should be rewritten so Towers are always pointing at the nearest Enemy
+	
 	
 	## If this Tower is set to rotate to look at the Enemy,
 	## get the angle between the Tower and its Target (in radians).
 	## The Bullet will inherit the Tower's rotation.
 	if tower_rotates_to_enemy == true:
+		## HERE: TEMPORARY - a prototype for shootng where the Enemy will be, not where they are
+		## We need the distance between this Tower and the Target for better predictions
+		var distance_to_target: float = \
+			self.global_position.distance_to(current_target.global_position)
+		
+		
 		angle_to_current_target = \
-			self.global_position.angle_to_point(current_target.global_position)
+			#self.global_position.angle_to_point(current_target.global_position)
+			
+			
+			## HERE: TEMPORARY - a prototype for shootng where the Enemy will be, not where they are
+			self.global_position.angle_to_point(current_target.global_position + \
+				current_target.velocity * (distance_to_target / bullet_speed))
 			
 		
 	## Otherwise get the angle between the Tower's BulletSpawnPoint and its Target (in radians).

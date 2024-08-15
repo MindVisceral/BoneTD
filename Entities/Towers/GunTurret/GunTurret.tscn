@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://sgh3hg5h60t7"]
+
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_spxrn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jcc3p"]
+radius = 40.0
+
+[node name="GunTurret" instance=ExtResource("1_spxrn")]
+shot_delay = 2.5
+
+[node name="TowerRangeVisuals" parent="." index="0"]
+visible = true
+scale = Vector2(0.625, 0.625)
+
+[node name="Collider" parent="TowerRange" index="0"]
+shape = SubResource("CircleShape2D_jcc3p")
+
+[node name="ShotDelayTimer" parent="." index="5"]
+wait_time = 2.5
+
+[editable path="RadialTowerSelection"]
+[editable path="TowerRange"]

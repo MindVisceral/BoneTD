@@ -1,12 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=20 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
-[ext_resource type="PackedScene" uid="uid://cqmttjx0vrf5k" path="res://Entities/Towers/StickGuy/StickGuy.tscn" id="5_0yo07"]
 [ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
+[ext_resource type="PackedScene" uid="uid://3ob5n3fq12o6" path="res://Entities/Enemies/CarpalsEnemy/CarpalsEnemy.tscn" id="7_pr6bl"]
+[ext_resource type="PackedScene" uid="uid://sgh3hg5h60t7" path="res://Entities/Towers/GunTurret/GunTurret.tscn" id="7_yjany"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -452,16 +453,23 @@ nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
 number_of_rounds = 3
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+waves_in_order = Array[int]([0])
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="StickGuy" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("5_0yo07")]
-position = Vector2(101, 120)
+[node name="BaseTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_yjany")]
+position = Vector2(84, 78)
 tower_handler = NodePath("..")
+shot_delay = 1.5
+bullet_speed = 100
+bullet_damage = 0
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1
 curve = SubResource("Curve2D_ja27w")
+
+[node name="CarpalsEnemy" parent="MovementPath" instance=ExtResource("7_pr6bl")]
+position = Vector2(-26, 232)
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -490,8 +498,11 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="GUI/TemporaryGUI/InfoPanel"]
 layout_mode = 1
-offset_right = 68.0
-offset_bottom = 23.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "ROUND: "
 
 [node name="TowerPlacementUI" type="Panel" parent="GUI/TemporaryGUI"]
