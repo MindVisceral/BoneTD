@@ -484,7 +484,7 @@ tower_handler = NodePath("..")
 environment_layer = 1
 
 [node name="TowerRangeVisuals" parent="TowerHandler/ProjectileTower" index="0"]
-scale = Vector2(0.750651, 0.750651)
+scale = Vector2(0.75065, 0.75065)
 
 [node name="Collider" parent="TowerHandler/ProjectileTower/TowerRange" index="0"]
 shape = SubResource("CircleShape2D_n0r05")
@@ -531,6 +531,7 @@ grow_vertical = 2
 text = "ROUND: "
 
 [node name="TowerPlacementUI" type="Panel" parent="GUI/TemporaryGUI"]
+auto_translate_mode = 2
 custom_minimum_size = Vector2(100, 200)
 layout_mode = 1
 anchors_preset = 11
@@ -541,7 +542,6 @@ offset_left = -110.0
 offset_bottom = -795.0
 grow_horizontal = 0
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 
 [node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/TowerPlacementUI"]

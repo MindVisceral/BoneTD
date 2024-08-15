@@ -31,13 +31,13 @@ offset_bottom = 32.0
 text = "MENU TEXT"
 
 [node name="DragButtonTop" type="Button" parent="."]
+auto_translate_mode = 2
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 2.0
 grow_horizontal = 2
-auto_translate = false
 localize_numeral_system = false
 focus_mode = 0
 mouse_default_cursor_shape = 6
@@ -48,6 +48,7 @@ flat = true
 icon_alignment = 1
 
 [node name="DragButtonBottom" type="Button" parent="."]
+auto_translate_mode = 2
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 1
 anchors_preset = 12
@@ -57,7 +58,6 @@ anchor_bottom = 1.0
 offset_top = -2.0
 grow_horizontal = 2
 grow_vertical = 0
-auto_translate = false
 localize_numeral_system = false
 focus_mode = 0
 mouse_default_cursor_shape = 6

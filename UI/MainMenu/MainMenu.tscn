@@ -30,6 +30,7 @@ grow_vertical = 2
 color = Color(0.415686, 0.34902, 0.376471, 1)
 
 [node name="Title" type="RichTextLabel" parent="."]
+auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.25
@@ -41,7 +42,6 @@ offset_right = -0.00012207
 offset_bottom = 0.519989
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 mouse_filter = 2
 mouse_force_pass_scroll_events = false
@@ -80,11 +80,13 @@ theme_type_variation = &"LightLabel"
 text = "Credits"
 
 [node name="DragButtonTop" parent="Menus/DraggableCreditsMenu" index="2"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_bottom = 0.067
 offset_bottom = -0.150002
 
 [node name="DragButtonBottom" parent="Menus/DraggableCreditsMenu" index="3"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_top = 0.933
 offset_top = 28.15
@@ -115,6 +117,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="URL-SupportedLabel" parent="Menus/DraggableCreditsMenu/DefaultSubPanel" instance=ExtResource("3_67btx")]
+auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -158,11 +161,13 @@ grow_vertical = 2
 text = "Main Menu"
 
 [node name="DragButtonTop" parent="Menus/DraggableMainMenu" index="2"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_bottom = 0.067
 offset_bottom = -0.150002
 
 [node name="DragButtonBottom" parent="Menus/DraggableMainMenu" index="3"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_top = 0.933
 offset_top = 0.149994
@@ -187,6 +192,7 @@ size_flags_stretch_ratio = 0.22
 theme_type_variation = &"DarkPanel"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/DraggableMainMenu/VSubPanelContainer/PlayDarkSubPanel"]
+auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -197,7 +203,6 @@ offset_right = -8.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 mouse_filter = 2
 
@@ -279,11 +284,13 @@ offset_bottom = 433.32
 text = "Settings"
 
 [node name="DragButtonTop" parent="Menus/DraggableSettingsMenu" index="2"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_bottom = 0.067
 offset_bottom = -0.150002
 
 [node name="DragButtonBottom" parent="Menus/DraggableSettingsMenu" index="3"]
+auto_translate_mode = 2
 anchors_preset = -1
 anchor_top = 0.933
 offset_top = 28.15

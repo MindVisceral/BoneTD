@@ -72,14 +72,3 @@ func _on_sell_pressed() -> void:
 		## Kill the selected Tower and add some money back,
 		## depending on the Tower's base value and upgrades
 		selected_tower_ref
-
-
-
-
-
-
-
-
-
-
-

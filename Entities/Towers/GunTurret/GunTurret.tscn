@@ -6,7 +6,6 @@
 radius = 40.0
 
 [node name="GunTurret" instance=ExtResource("1_spxrn")]
-environment_layer = null
 shot_delay = 2.5
 
 [node name="TowerRangeVisuals" parent="." index="0"]

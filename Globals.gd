@@ -57,21 +57,3 @@ func lose_money(money_lost: int) -> void:
 	current_money -= money_lost
 	money_amount_changed.emit()
 	print("MONEY LEFT: ", current_money)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
