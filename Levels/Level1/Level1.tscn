@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
-[ext_resource type="PackedScene" uid="uid://cavd1oiqjhyqd" path="res://Entities/Towers/ProjectileTower/ProjectileTower.tscn" id="7_7jgn4"]
 [ext_resource type="PackedScene" uid="uid://3ob5n3fq12o6" path="res://Entities/Enemies/CarpalsEnemy/CarpalsEnemy.tscn" id="7_pr6bl"]
 [ext_resource type="PackedScene" uid="uid://sgh3hg5h60t7" path="res://Entities/Towers/GunTurret/GunTurret.tscn" id="7_yjany"]
+[ext_resource type="PackedScene" uid="uid://cavd1oiqjhyqd" path="res://Entities/Towers/ProjectileTower/ProjectileTower.tscn" id="7_ylebg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -420,8 +420,8 @@ terrain_set_0/terrain_0/color = Color(0, 0.742363, 0.169568, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_yxxhc")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lgk2g"]
-radius = 31.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_n0r05"]
+radius = 33.2415
 
 [sub_resource type="Curve2D" id="Curve2D_ja27w"]
 _data = {
@@ -465,7 +465,6 @@ waves_in_order = Array[int]([0])
 position = Vector2(84, 78)
 tower_handler = NodePath("..")
 shot_delay = 1.5
-bullet_damage = 0
 
 [node name="TowerRangeVisuals" parent="TowerHandler/BaseTower" index="0"]
 visible = false
@@ -473,15 +472,15 @@ visible = false
 [node name="ShotDelayTimer" parent="TowerHandler/BaseTower" index="6"]
 wait_time = 1.5
 
-[node name="ProjectileTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_7jgn4")]
-position = Vector2(73, 163)
+[node name="ProjectileTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_ylebg")]
+position = Vector2(73, 200)
 tower_handler = NodePath("..")
 
 [node name="TowerRangeVisuals" parent="TowerHandler/ProjectileTower" index="0"]
-scale = Vector2(0.484375, 0.484375)
+scale = Vector2(0.519399, 0.519399)
 
 [node name="Collider" parent="TowerHandler/ProjectileTower/TowerRange" index="0"]
-shape = SubResource("CircleShape2D_lgk2g")
+shape = SubResource("CircleShape2D_n0r05")
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1

@@ -13,7 +13,6 @@ radius = 9.0
 upgrade_1 = ExtResource("2_2jbvk")
 upgrade_2 = ExtResource("2_2jbvk")
 shot_delay = 0.7
-bullet_piercing_amount = 9999
 
 [node name="TowerRangeVisuals" parent="." index="0"]
 visible = true

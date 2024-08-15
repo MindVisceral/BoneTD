@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdnbb7w3mmwmw"]
+
+[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/ProjectileTower/BaseBullet.tscn" id="1_g57qm"]
+[ext_resource type="Script" path="res://Entities/Towers/ProjectileTower/StraightBullet.gd" id="2_wt74w"]
+
+[node name="StraightBullet" instance=ExtResource("1_g57qm")]
+script = ExtResource("2_wt74w")

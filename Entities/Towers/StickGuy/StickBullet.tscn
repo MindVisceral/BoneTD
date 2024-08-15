@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6033qphpoajv"]
 
-[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/BaseTower/BaseBullet.tscn" id="1_x2sc4"]
+[ext_resource type="PackedScene" uid="uid://dtej8bo36swce" path="res://Entities/Towers/ProjectileTower/BaseBullet.tscn" id="1_x2sc4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ps0fo"]
 radius = 130.0

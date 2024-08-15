@@ -87,21 +87,6 @@ extends StaticBody2D
 
 
 ###-------------------------------------------------------------------------###
-##### Bullet Variables
-###-------------------------------------------------------------------------###
-
-@export_group("Bullet stuff")
-
-## Default damage dealt by the bullet
-@export_range(0, 9999, 1) var bullet_damage: int = 1
-
-## How many times a Bullet created by this Tower can go through an Enemy/Enemies before breaking.
-## "0" means that this Bullet does not pierce - it deals damage once and is destroyed,
-## "1" means that this Bullet can deal damage up to two times and it's destroyed on the second hit
-@export_range(0, 9999, 1) var bullet_piercing_amount: int = 0
-
-
-###-------------------------------------------------------------------------###
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 

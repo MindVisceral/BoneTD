@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtej8bo36swce"]
 
-[ext_resource type="Script" path="res://Entities/Towers/BaseTower/BaseBullet.gd" id="1_7rx70"]
+[ext_resource type="Script" path="res://Entities/Towers/ProjectileTower/BaseBullet.gd" id="1_7rx70"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="1_kohja"]
 
 [node name="BaseBullet" type="Area2D"]
