@@ -1,6 +1,18 @@
 class_name BaseEnemy
 extends PathFollow2D
 
+
+###-------------------------------------------------------------------------###
+##### References
+###-------------------------------------------------------------------------###
+
+@export_group("References")
+
+## The Enemy's HitPoint - a HitEffect will be instantiated at this Marker's position.
+## HERE: Maybe - don't know how this hould work yet.
+@export var hit_point: Marker2D
+
+
 ###-------------------------------------------------------------------------###
 ##### Exported stats
 ###-------------------------------------------------------------------------###
@@ -144,15 +156,24 @@ func receive_DamageData(damageData: DamageData) -> void:
 		death()
 		
 	
+	## If a HitEffect was passed down with damageData,
+	## instantiate that hit effect at this Enemy's HitPoint Marker
+	if damageData.hit_effect:
+		var hit_effect_instance = damageData.hit_effect.instantiate()
+		hit_point.add_child(hit_effect_instance)
 
 ## Make the Enemy die
 func death() -> void:
 	## We must tell the Wave (if this Enemy is a part of one) that it has died
 	if enemy_wave:
 		enemy_wave.enemy_is_dead(self)
+	else:
+		printerr("Enemy: ", self, " - is dead but wasn't assigned to a Wave!")
+		
 	print("ENEMY ", self, " IS DEAD")
+	
 	## This Enemy is dead, the Player should receive some Money for kiling it
 	Globals.gain_money(default_money)
 	
-	## And now delete this Enemy
+	## And now we can safely delete this Enemy
 	queue_free()

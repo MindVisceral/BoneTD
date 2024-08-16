@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=23 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="5_y4jfb"]
 [ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
 [ext_resource type="PackedScene" uid="uid://3ob5n3fq12o6" path="res://Entities/Enemies/CarpalsEnemy/CarpalsEnemy.tscn" id="7_pr6bl"]
-[ext_resource type="PackedScene" uid="uid://cavd1oiqjhyqd" path="res://Entities/Towers/ProjectileTower/ProjectileTower.tscn" id="7_ylebg"]
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="8_ayekn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
@@ -424,9 +423,6 @@ sources/0 = SubResource("TileSetAtlasSource_yxxhc")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4td0d"]
 size = Vector2(15, 67)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_n0r05"]
-radius = 48.0416
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfdg7"]
 radius = 67.082
 
@@ -482,24 +478,14 @@ shape = SubResource("RectangleShape2D_4td0d")
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="ProjectileTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_ylebg")]
-position = Vector2(91, 139)
+[node name="DirectTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_ayekn")]
+position = Vector2(91, 126)
 tower_handler = NodePath("..")
 
-[node name="TowerRangeVisuals" parent="TowerHandler/ProjectileTower" index="0"]
-scale = Vector2(0.75065, 0.75065)
-
-[node name="Collider" parent="TowerHandler/ProjectileTower/TowerRange" index="0"]
-shape = SubResource("CircleShape2D_n0r05")
-
-[node name="RayTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_ayekn")]
-position = Vector2(91, 159)
-tower_handler = NodePath("..")
-
-[node name="TowerRangeVisuals" parent="TowerHandler/RayTower" index="0"]
+[node name="TowerRangeVisuals" parent="TowerHandler/DirectTower" index="0"]
 scale = Vector2(1.04816, 1.04816)
 
-[node name="Collider" parent="TowerHandler/RayTower/TowerRange" index="0"]
+[node name="Collider" parent="TowerHandler/DirectTower/TowerRange" index="0"]
 shape = SubResource("CircleShape2D_rfdg7")
 
 [node name="MovementPath" type="Path2D" parent="."]
@@ -508,6 +494,7 @@ curve = SubResource("Curve2D_ja27w")
 
 [node name="CarpalsEnemy" parent="MovementPath" instance=ExtResource("7_pr6bl")]
 position = Vector2(-26, 232)
+max_health = 7
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -604,9 +591,6 @@ text = "NEXT ROUND
 "
 
 [editable path="TowerHandler"]
-[editable path="TowerHandler/ProjectileTower"]
-[editable path="TowerHandler/ProjectileTower/RadialTowerSelection"]
-[editable path="TowerHandler/ProjectileTower/TowerRange"]
-[editable path="TowerHandler/RayTower"]
-[editable path="TowerHandler/RayTower/RadialTowerSelection"]
-[editable path="TowerHandler/RayTower/TowerRange"]
+[editable path="TowerHandler/DirectTower"]
+[editable path="TowerHandler/DirectTower/RadialTowerSelection"]
+[editable path="TowerHandler/DirectTower/TowerRange"]

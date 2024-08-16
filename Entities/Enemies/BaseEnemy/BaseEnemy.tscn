@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bjsrrnnyn21fc" path="res://Entities/Enemies/BaseEnemy/EnemyDetectedArea.tscn" id="2_68rp6"]
 [ext_resource type="PackedScene" uid="uid://d2nhv2gaegs3h" path="res://Entities/Entity Elements/Hurtbox.tscn" id="2_cegvm"]
 
-[node name="BaseEnemy" type="PathFollow2D"]
+[node name="BaseEnemy" type="PathFollow2D" node_paths=PackedStringArray("hit_point")]
 rotates = false
 loop = false
 script = ExtResource("1_lgemf")
+hit_point = NodePath("HitPoint")
 
 [node name="EnemyDetectedArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_68rp6")]
 Entity = NodePath("..")
@@ -17,6 +18,8 @@ Entity = NodePath("..")
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_cegvm")]
 editor_description = "Hurtbox of the Enemy"
 Entity = NodePath("..")
+
+[node name="HitPoint" type="Marker2D" parent="."]
 
 [editable path="EnemyDetectedArea"]
 [editable path="Hurtbox"]
