@@ -1,6 +1,6 @@
 ## Check superior BaseTower script for @tool use
 @tool
-class_name RayTower
+class_name DirectTower
 extends BaseTower
 
 
@@ -14,6 +14,16 @@ extends BaseTower
 ###-------------------------------------------------------------------------###
 ##### Shooting Variables
 ###-------------------------------------------------------------------------###
+
+
+###-------------------------------------------------------------------------###
+##### Exported variables
+###-------------------------------------------------------------------------###
+
+@export_group("Exported variables")
+
+## Damage this Tower deals directly to the Enemy.
+@export_range(0, 9999, 1) var damage: int = 1
 
 
 ###-------------------------------------------------------------------------###
@@ -48,9 +58,14 @@ func shoot_at_target() -> void:
 	super()
 
 
-## Deal damage to the chosen Target, as long as there is line of sight.
+## Deal damage to the chosen Target directly, without any use of projectiles.
 ## NOTE: This function's code is unique to this Tower type!
 func fire() -> void:
 	#super() ## This might be unnecessary because it's an empty dummy function.
 	
-	pass
+	## Create a new DamageData to send over, give it this Towers damage-related variables,
+	## and send it over directly to the Enemy, bypassing its Hurtbox completely.
+	var damageData = DamageData.new()
+	damageData.damage_value = damage
+	
+	current_target.receive_DamageData(damageData)

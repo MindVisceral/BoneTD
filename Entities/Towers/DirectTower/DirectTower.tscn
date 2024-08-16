@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn0yn7md0iu0y"]
 
 [ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_je144"]
-[ext_resource type="Script" path="res://Entities/Towers/RayTower/RayTower.gd" id="2_vuqpp"]
+[ext_resource type="Script" path="res://Entities/Towers/DirectTower/DirectTower.gd" id="2_vuqpp"]
 
-[node name="RayTower" instance=ExtResource("1_je144")]
+[node name="DirectTower" instance=ExtResource("1_je144")]
 script = ExtResource("2_vuqpp")
+damage = 1
 
 [editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

@@ -147,8 +147,9 @@ func receive_DamageData(damageData: DamageData) -> void:
 
 ## Make the Enemy die
 func death() -> void:
-	## We must tell the Wave (that this Enemy is a part of) that it has died
-	enemy_wave.enemy_is_dead(self)
+	## We must tell the Wave (if this Enemy is a part of one) that it has died
+	if enemy_wave:
+		enemy_wave.enemy_is_dead(self)
 	print("ENEMY ", self, " IS DEAD")
 	## This Enemy is dead, the Player should receive some Money for kiling it
 	Globals.gain_money(default_money)
