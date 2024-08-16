@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=20 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="5_y4jfb"]
-[ext_resource type="PackedScene" uid="uid://cbdr67v8qd072" path="res://Entities/Towers/StickGuy/StickGuySelectButton.tscn" id="6_4qvdn"]
-[ext_resource type="PackedScene" uid="uid://3ob5n3fq12o6" path="res://Entities/Enemies/CarpalsEnemy/CarpalsEnemy.tscn" id="7_pr6bl"]
-[ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="8_ayekn"]
+[ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -423,9 +421,6 @@ sources/0 = SubResource("TileSetAtlasSource_yxxhc")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4td0d"]
 size = Vector2(15, 67)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rfdg7"]
-radius = 67.082
-
 [sub_resource type="Curve2D" id="Curve2D_ja27w"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -26, 232, 0, 0, 0, 0, 55, 232, 0, 0, 0, 0, 58, 41, 0, 0, 0, 0, 120, 41, 0, 0, 0, 0, 121, 231, 0, 0, 0, 0, 183, 233, 0, 0, 0, 0, 185, 40, 0, 0, 0, 0, 249, 40, 0, 0, 0, 0, 248, 233, 0, 0, 0, 0, 309, 230, 0, 0, 0, 0, 312, 42, 0, 0, 0, 0, 373, 42, 0, 0, 0, 0, 376, 231, 0, 0, 0, 0, 439, 232, 0, 0, 0, 0, 440, 42, 0, 0, 0, 0, 513, 41)
@@ -478,23 +473,9 @@ shape = SubResource("RectangleShape2D_4td0d")
 
 [node name="TowerHandler" parent="." instance=ExtResource("4_6772l")]
 
-[node name="DirectTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_ayekn")]
-position = Vector2(91, 126)
-tower_handler = NodePath("..")
-
-[node name="TowerRangeVisuals" parent="TowerHandler/DirectTower" index="0"]
-scale = Vector2(1.04816, 1.04816)
-
-[node name="Collider" parent="TowerHandler/DirectTower/TowerRange" index="0"]
-shape = SubResource("CircleShape2D_rfdg7")
-
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1
 curve = SubResource("Curve2D_ja27w")
-
-[node name="CarpalsEnemy" parent="MovementPath" instance=ExtResource("7_pr6bl")]
-position = Vector2(-26, 232)
-max_health = 7
 
 [node name="LevelCamera" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -555,24 +536,12 @@ offset_bottom = 150.0
 grow_horizontal = 0
 mouse_filter = 2
 
-[node name="BaseSelectButton" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
+[node name="GunTurretSelectButton" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("7_uuix3")]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-tower_handler = NodePath("../../../../../TowerHandler")
-
-[node name="BaseSelectButton2" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
-layout_mode = 2
-tower_handler = NodePath("../../../../../TowerHandler")
-
-[node name="BaseSelectButton3" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
-layout_mode = 2
-tower_handler = NodePath("../../../../../TowerHandler")
-
-[node name="BaseSelectButton4" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
-layout_mode = 2
-tower_handler = NodePath("../../../../../TowerHandler")
-
-[node name="BaseSelectButton5" parent="GUI/TemporaryGUI/TowerPlacementUI/VFlowContainer" node_paths=PackedStringArray("tower_handler") instance=ExtResource("6_4qvdn")]
-layout_mode = 2
+action_mode = 0
+shortcut_feedback = false
+shortcut_in_tooltip = false
 tower_handler = NodePath("../../../../../TowerHandler")
 
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
@@ -591,6 +560,3 @@ text = "NEXT ROUND
 "
 
 [editable path="TowerHandler"]
-[editable path="TowerHandler/DirectTower"]
-[editable path="TowerHandler/DirectTower/RadialTowerSelection"]
-[editable path="TowerHandler/DirectTower/TowerRange"]

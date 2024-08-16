@@ -21,7 +21,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_2c8o6")
 
 [node name="TowerSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_bc8k8")
 
 [node name="Collider" type="CollisionShape2D" parent="."]

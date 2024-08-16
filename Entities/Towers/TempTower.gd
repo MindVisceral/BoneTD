@@ -75,9 +75,14 @@ func setup() -> void:
 	## TowerRangeVisuals must match the Tower's tower_range_visuals
 	tower_range_visuals.scale = new_tower.tower_range_visuals.scale
 	## Scale the Sprite to the right size and set it to the Tower's Sprite
-	## NOTE: Scale first! Doesn't work properly otherwise.
+	## NOTE: Do all the edits first! Doesn't work properly otherwise.
 	tower_sprite.scale = new_tower.tower_sprite.scale
+	tower_sprite.texture = new_tower.tower_sprite.texture
+	
+	## HERE: Don't know if there's any point to this.
 	tower_sprite = new_tower.tower_sprite
+	
+	
 	## Set the Collider shape to be the same as the Tower's
 	tower_collider.shape = new_tower.tower_collider.shape
 

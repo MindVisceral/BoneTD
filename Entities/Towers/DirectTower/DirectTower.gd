@@ -84,7 +84,7 @@ func fire() -> void:
 	var trail_effect_instance: BaseTrail = trail_effect.instantiate()
 	
 	## Tell the Trail where it should start and end
-	trail_effect_instance.trail_start_point = self.global_position
+	trail_effect_instance.trail_start_point = bullet_spawn_point.global_position
 	trail_effect_instance.trail_end_point = current_target.global_position
 	
 	## And add the Enemy to the Tree - independent from this Tower.
