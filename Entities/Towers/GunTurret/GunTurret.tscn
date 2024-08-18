@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://c34u3lp40uq6y"]
+[gd_scene load_steps=6 format=3 uid="uid://c34u3lp40uq6y"]
 
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_5b2p6"]
 [ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_som8n"]
+[ext_resource type="PackedScene" uid="uid://orrfapo7vqan" path="res://Entities/Towers/GunTurret/Upgrades/BurstGunTurret.tscn" id="2_v6uwq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yiqjd"]
 radius = 50.04
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wp3s2"]
+radius = 12.0
 
 [node name="GunTurret" instance=ExtResource("1_5b2p6")]
+upgrade_1 = ExtResource("2_v6uwq")
 
 [node name="TowerRangeVisuals" parent="." index="0"]
 scale = Vector2(0.781875, 0.781875)

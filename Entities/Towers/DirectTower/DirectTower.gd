@@ -85,7 +85,7 @@ func fire() -> void:
 	
 	## Tell the Trail where it should start and end
 	trail_effect_instance.trail_start_point = bullet_spawn_point.global_position
-	trail_effect_instance.trail_end_point = current_target.global_position
+	trail_effect_instance.trail_end_point = current_target.hit_point.global_position
 	
 	## And add the Enemy to the Tree - independent from this Tower.
 	## It will queue_free() itself when it's done.

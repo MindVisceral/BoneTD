@@ -1,11 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://xau7xbcers41"]
+[gd_scene load_steps=2 format=3 uid="uid://xau7xbcers41"]
 
 [ext_resource type="Script" path="res://Levels/RoundHandler.gd" id="1_2k4xo"]
-[ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="2_5n3yc"]
 
-[node name="RoundHandler" type="Node"]
+[node name="RoundHandler" type="Node2D"]
 script = ExtResource("1_2k4xo")
-round_scenes = Array[PackedScene]([ExtResource("2_5n3yc")])
-number_of_rounds = 2
-rounds_in_order = Array[int]([0])
-ending_round = 999

@@ -1,42 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=21 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
-[ext_resource type="Script" path="res://Resources/RoundSingleEnemyData.gd" id="3_33haa"]
+[ext_resource type="PackedScene" uid="uid://wxc3a7eqicl0" path="res://Entities/Enemies/FodderEnemy/FodderEnemy.tscn" id="3_demr4"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
-[ext_resource type="PackedScene" uid="uid://wxc3a7eqicl0" path="res://Entities/Enemies/FodderEnemy/FodderEnemy.tscn" id="4_o55tc"]
 [ext_resource type="Texture2D" uid="uid://c6mdmcmvjs336" path="res://icon.svg" id="5_y4jfb"]
 [ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
-
-[sub_resource type="Resource" id="Resource_0sdhy"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_1byk4"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_2erso"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_i8p8b"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2vxpa"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -472,9 +443,12 @@ func _ready() -> void:
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
 nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
+number_of_rounds = 3
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy"), SubResource("Resource_1byk4"), SubResource("Resource_2erso"), SubResource("Resource_i8p8b")])
+enemy_scenes = Array[PackedScene]([ExtResource("3_demr4")])
+enemy_spawns_in_order = Array[int]([0, 0, 0])
+time_between_enemies_this_wave = Array[float]([1.4, 1.0])
 
 [node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
 

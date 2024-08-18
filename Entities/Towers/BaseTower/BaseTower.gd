@@ -138,12 +138,13 @@ func _get_configuration_warnings() -> PackedStringArray:
 ###-------------------------------------------------------------------------###
 
 func _ready() -> void:
-	
-	call_deferred("setup")
-	
-	## Set ShotDelayTimer's wait_time and start it up
-	ShotDelayTimer.wait_time = shot_delay
-	ShotDelayTimer.start()
+	## Only matters when not in Editor
+	if not Engine.is_editor_hint():
+		call_deferred("setup")
+		
+		## Set ShotDelayTimer's wait_time and start it up
+		ShotDelayTimer.wait_time = shot_delay
+		ShotDelayTimer.start()
 
 ## Setup this Tower
 func setup() -> void:
@@ -252,7 +253,7 @@ func fire() -> void:
 func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.append(Enemy)
 	
-	print("ENTERED")
+	#print("ENTERED")
 	
 	## A new Enemy has entered the Tower's range. Check if it should become the new current_target
 	change_current_target()
@@ -261,7 +262,7 @@ func new_enemy_in_range(Enemy: BaseEnemy) -> void:
 func new_enemy_out_of_range(Enemy: BaseEnemy) -> void:
 	EnemiesInRangeArray.erase(Enemy)
 	
-	print("EXITED")
+	#print("EXITED")
 	
 	## This Enemy which just went out of range may have been the current_target.
 	change_current_target()

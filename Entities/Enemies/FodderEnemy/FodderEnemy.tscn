@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://wxc3a7eqicl0"]
+
+[ext_resource type="PackedScene" uid="uid://biabsi02mwe5m" path="res://Entities/Enemies/BaseEnemy/BaseEnemy.tscn" id="1_w66mn"]
+[ext_resource type="Texture2D" uid="uid://cc4tfjdcn45u" path="res://placeholder_1.png" id="2_rwm0y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1j6m2"]
+radius = 13.3417
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xjulw"]
+height = 32.0
+
+[node name="FodderEnemy" instance=ExtResource("1_w66mn")]
+speed = 10
+max_health = 5
+default_money = 1
+
+[node name="Collider" parent="EnemyDetectedArea" index="0"]
+shape = SubResource("CircleShape2D_1j6m2")
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_rwm0y")
+
+[node name="Collider" parent="Hurtbox" index="0"]
+shape = SubResource("CapsuleShape2D_xjulw")
+
+[node name="HitPoint" parent="." index="3"]
+position = Vector2(0, -5)
+
+[editable path="EnemyDetectedArea"]
+[editable path="Hurtbox"]

@@ -1,5 +1,5 @@
 class_name RoundHandler
-extends Node
+extends Node2D
 
 ###-------------------------------------------------------------------------###
 ##### References
@@ -12,72 +12,47 @@ extends Node
 ## Waves handle that, so this must be passed to each new Wave
 @export var path_reference: Path2D
 
-## Different Rounds that appear in this level
-@export var round_scenes: Array[PackedScene]
-
 ## Button the Player presses to start the next round
 @export var nextRound_button: Button
 
 
 ###-------------------------------------------------------------------------###
-##### Round variables
+##### Regular variables
 ###-------------------------------------------------------------------------###
 
-@export_group("Rounds")
+## Array of all the Rounds that will be "played" on this Level/Map.
+## This Array is filled on _ready() with the RoundHandler's children (whicha are all Rounds)
+var rounds: Array[BaseRound] = []
 
 
-## Number of Rounds in this level
-@export_range(1, 999, 1) var number_of_rounds: int = 0
-
-## Which different Rounds will happen now. Rounds earlier in the Array happen first.
-## This is an Array of numbers. "0" corresponds to the "0" Round in the round_scenes Array
-@export var rounds_in_order: Array[int]
-
-@export_group("Start")
-## This map will start with this round
-@export_range(0, 999, 1) var starting_round: int = 0
-## If not 0, this round will start during this wave. Typically rounds start with Wave 0
-@export_range(0, 999, 1) var starting_wave: int = 0
-
-
-@export_group("End")
-## This map will end with this round
-@export_range(1, 999, 1) var ending_round: int = 0
-## If not 999, this round will end after this wave. Typically rounds just end with the last wave
-@export_range(0, 999, 1) var ending_wave: int = 0
-
-
-
-func _ready() -> void:
-	call_deferred("initialize")
+###-------------------------------------------------------------------------###
+##### Setup
+###-------------------------------------------------------------------------###
 
 ## We use this instead of _ready() to avoid bugs.
-func initialize() -> void:
+func _ready() -> void:
 	
-	## Before anything happens, wait for the Player to start the next round
+	## Loop through all the children of this RoundHandler (they should all be BaseRounds)
+	## and add them to the 'rounds' Array
+	for child in self.get_children():
+		if child is BaseRound:
+			rounds.append(child)
+	
+	
+	## Before anything happens, we listen for the nextRound_button to be pressed
 	await nextRound_button.pressed
 	
-	## Round started!
-	## Loop through all the Waves this round. We will make them happen in order,
-	## as dictated by the waves_in_order Array.
-	for round in rounds_in_order:
+	## Button pressed, Round started!
+	## Loop through all the Rounds
+	## (with breaks between them - we Await until a Round is over before the next one is sent)
+	for round in rounds:
 		
-		## This is complicated;
-		## waves_in_order Array says which Wave will be instantiated now.
-		## For example, let's say that waves_in_order wants to spawn a Wave of kind "1".
-		## We ask the wave_scenes Array what kind of a Wave a "Wave of kind '1'" is
-		## (we get that specific Wave PackedScene), and we instantiate it.
-		var new_round = round_scenes[round].instantiate()
-		new_round.path_reference = path_reference
-		## Tell this Round who made it
-		new_round.round_handler = self
-		self.add_child(new_round)
-		
-		new_round.initialize()
+		## Pass on these two references and start the Round.
+		round.initialize(path_reference, self)
 		
 		## We wait for this Round to be over before we start the next one.
-		await new_round.round_is_over_signal
-		print("ROUND: ", new_round, " IS OVER, queue_free-d")
+		await round.round_is_over_signal
+		print("ROUND: ", round, " IS OVER, queue_free-d")
 		## This round is over, now we can (and will) wait for the Player to start the next round
 		await nextRound_button.pressed
 		print("NEXT ROUND started")

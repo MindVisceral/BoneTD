@@ -69,9 +69,9 @@ var velocity: Vector2 = Vector2.ZERO
 ##### Misc. variables
 ###-------------------------------------------------------------------------###
 
-## This Enemy was spawned by this specific Wave.
-## This Wave wants to know when this Enemy dies, so we will call it to tell it that.
-var enemy_wave: BaseWave
+## This Enemy was spawned by this specific Round, and it wants to know when this Enemy dies
+## so that it can be queue_free()-d whan all its spawned Enemies are dead.
+var enemy_round: BaseRound
 
 
 ###-------------------------------------------------------------------------###
@@ -112,7 +112,6 @@ func _physics_process(delta: float) -> void:
 	## NOTE: That part in parentheses must be the same as the Enemy's 'progress' line above.
 	#velocity = direction * (speed * delta)
 	velocity = direction * speed
-	#print("Enemy velocity: ", velocity)
 	
 	
 	## NOTE, HERE: This is checked every frame, so performance may take a hit.
@@ -164,15 +163,15 @@ func receive_DamageData(damageData: DamageData) -> void:
 
 ## Make the Enemy die
 func death() -> void:
-	## We must tell the Wave (if this Enemy is a part of one) that it has died
-	if enemy_wave:
-		enemy_wave.enemy_is_dead(self)
-	else:
-		printerr("Enemy: ", self, " - is dead but wasn't assigned to a Wave!")
-		
 	print("ENEMY ", self, " IS DEAD")
+	## We must tell the Wave (if this Enemy is a part of one) that it has died
+	if enemy_round:
+		enemy_round.enemy_is_dead(self)
+	else:
+		printerr("Enemy: ", self, " is dead but wasn't assigned to a Wave!")
+		
 	
-	## This Enemy is dead, the Player should receive some Money for kiling it
+	## This Enemy is dead, the Player should receive some Money for killing it
 	Globals.gain_money(default_money)
 	
 	## And now we can safely delete this Enemy
