@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Levels/RoundHandler.gd" id="1_2k4xo"]
 
-[node name="RoundHandler" type="Node2D"]
+[node name="RoundHandler" type="Node"]
 script = ExtResource("1_2k4xo")

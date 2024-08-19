@@ -10,10 +10,10 @@ extends BaseTower
 
 @export_group("References")
 
-## This HitEffect PackedScene Node of class BaseHitEffect
-## is passed onto the Enemy through DamageData,
-## and instantiated at that Enemy's hit point.
-@export var hit_effect: PackedScene
+## This DamageData Resource holds all the information this Tower's Target needs when it's been hit.
+## This includes the Tower's damage dealth and the hit effect.
+## NOTE: Read the DamageData script for more info.
+@export var damage_data: DamageData
 
 ## This TrailEffect PackedScene Node of class BaseTrail
 ## is instantiated to create the effect of a Bullet between this Tower and the Enemy
@@ -28,11 +28,6 @@ extends BaseTower
 ###-------------------------------------------------------------------------###
 ##### Exported variables
 ###-------------------------------------------------------------------------###
-
-@export_group("Exported variables")
-
-## Damage this Tower deals directly to the Enemy.
-@export_range(0, 9999, 1) var damage: int = 1
 
 
 ###-------------------------------------------------------------------------###
@@ -72,21 +67,21 @@ func shoot_at_target() -> void:
 func fire() -> void:
 	#super() ## This might be unnecessary because it's an empty dummy function.
 	
-	## Create a new DamageData to send over, give it this Towers damage-related variables,
-	## and send it over directly to the Enemy, bypassing its Hurtbox completely.
-	var damageData = DamageData.new()
-	damageData.damage_value = damage
-	damageData.hit_effect = hit_effect
-	
-	current_target.receive_DamageData(damageData)
+	## Send over an exported DamageData Resource to the Target
+	if damage_data:
+		current_target.receive_DamageData(damage_data)
+		
+	## This error print is useful; it's easy to forget to set up the DamageData for each Tower.
+	else:
+		printerr("DamageData Resource has not been set for ", self, "!")
 	
 	## And create a Trail between this Tower and the Target
 	var trail_effect_instance: BaseTrail = trail_effect.instantiate()
-	
 	## Tell the Trail where it should start and end
 	trail_effect_instance.trail_start_point = bullet_spawn_point.global_position
 	trail_effect_instance.trail_end_point = current_target.hit_point.global_position
 	
-	## And add the Enemy to the Tree - independent from this Tower.
+	
+	## And add the Trail to the Tree - independent from this Tower.
 	## It will queue_free() itself when it's done.
 	get_tree().get_root().add_child(trail_effect_instance)

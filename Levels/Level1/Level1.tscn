@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=23 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="Texture2D" uid="uid://il6gwq8g1ja1" path="res://Levels/Level1/level1_tileset.png" id="1_4wrf1"]
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
@@ -11,27 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
 
 [sub_resource type="Resource" id="Resource_0sdhy"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_1byk4"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_2erso"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 5
-enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
-
-[sub_resource type="Resource" id="Resource_i8p8b"]
 script = ExtResource("3_33haa")
 enemy_scene = ExtResource("4_o55tc")
 number_of_enemies = 5
@@ -474,7 +453,7 @@ path_reference = NodePath("../MovementPath")
 nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
 
 [node name="BaseRound" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy"), SubResource("Resource_1byk4"), SubResource("Resource_2erso"), SubResource("Resource_i8p8b")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 
 [node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
 
