@@ -24,6 +24,10 @@ extends Node
 ## This Array is filled on _ready() with the RoundHandler's children (whicha are all Rounds)
 var rounds: Array[BaseRound] = []
 
+## Keeps track of which Round the level is in right now. Nothing by default to avoid confusion.
+## NOTE: Value of "1" corresponds to Round of index "0" in the 'rounds' Array
+## NOTE: In short, >current_round = rounds + 1<
+var current_round: int
 
 ###-------------------------------------------------------------------------###
 ##### Setup
@@ -39,6 +43,11 @@ func _ready() -> void:
 			rounds.append(child)
 	
 	
+	## Update the UI before we do anything.
+	update_round_tracker()
+	
+	
+	
 	## Before anything happens, we listen for the nextRound_button to be pressed
 	await nextRound_button.pressed
 	
@@ -46,6 +55,13 @@ func _ready() -> void:
 	## Loop through all the Rounds
 	## (with breaks between them - we Await until a Round is over before the next one is sent)
 	for round in rounds:
+		
+		## The value of current_round variable is equivilent to the index of the current Round in
+		## the "rounds" Array, plus 1 - because Arrays start from 0, but we can't have "Round 0"
+		current_round = rounds.find(round) + 1
+		
+		## And update the UI to show that change.
+		update_round_tracker()
 		
 		## Pass on these two references and start the Round.
 		round.initialize(path_reference, self)
@@ -56,3 +72,17 @@ func _ready() -> void:
 		## This round is over, now we can (and will) wait for the Player to start the next round
 		await nextRound_button.pressed
 		print("NEXT ROUND started")
+		
+	
+
+
+###-------------------------------------------------------------------------###
+##### UI Connections
+###-------------------------------------------------------------------------###
+
+## HERE: Temporary arrangement; the UI is not finalized!
+
+## Update the UI element that shows which Round the level is on.
+func update_round_tracker() -> void:
+	if current_round > 0:
+		%RoundTracker.text = "ROUND: " + str(current_round)
