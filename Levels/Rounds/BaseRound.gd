@@ -109,3 +109,5 @@ func enemy_is_dead(enemy: BaseEnemy) -> void:
 	if enemies_left_this_round.is_empty():
 		print("ALL ENEMIES IN ROUND ", self, " ARE DEAD")
 		round_is_over_signal.emit()
+		
+		queue_free()

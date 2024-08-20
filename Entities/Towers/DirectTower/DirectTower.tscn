@@ -20,5 +20,4 @@ shot_delay = 0.2
 [node name="ShotDelayTimer" parent="." index="6"]
 wait_time = 0.2
 
-[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

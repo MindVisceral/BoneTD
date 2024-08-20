@@ -28,11 +28,8 @@ var player_placing_tower: bool = false
 ## they are not selected to make sure that only one Tower may be selected at a time.
 signal new_tower_selected
 
-## Does the Player have a Tower selected right now?
-## This allows for a Tower's upgrade menu to show up. Only one Tower may be selected at a time.
-var player_selected_tower: bool = false
-#
-## Which Tower specifically is selected at the moment?
+## Does the Player have a Tower selected right now? Which Tower specifically?
+## This allows for the Tower Upgrade Menu to show up. Only one Tower may be selected at a time.
 var selected_tower_ref: BaseTower = null
 
 
@@ -65,10 +62,31 @@ func prepare_new_tower(tower_reference, tower_base_cost) -> void:
 ##### Tower functions
 ###-------------------------------------------------------------------------###
 
-## When the "Sell" button is pressed, sell the Tower and get some money back.
+## When the "Sell" button is pressed, sell the current Tower and get some money back.
 func _on_sell_pressed() -> void:
-	## First, check if a Tower is selected in the first place.
-	if player_selected_tower == true:
-		## Kill the selected Tower and add some money back,
-		## depending on the Tower's base value and upgrades
-		selected_tower_ref
+	## First, check if the Player has a Tower selected at the moment.
+	## The menu should disappear without a Tower, but do this just in case.
+	if selected_tower_ref != null:
+		## The Tower handles selling itself. We just call that function in this script.
+		selected_tower_ref.sell_tower()
+		
+	
+
+## All Towers share Upgrade buttons, both of them located in the UpgradeDraggableMenu.
+## These two buttons are connected to these functions, and these functions simply
+## upgrade the currently selected Tower.
+func _on_upgrade1_pressed() -> void:
+	## First, check if the Player has a Tower selected at the moment.
+	## The menu should disappear without a Tower, but do this just in case.
+	if selected_tower_ref != null:
+		selected_tower_ref.upgrade_1_tower()
+		
+	
+#
+func _on_upgrade2_pressed() -> void:
+	## First, check if the Player has a Tower selected at the moment.
+	## The menu should disappear without a Tower, but do this just in case.
+	if selected_tower_ref != null:
+		selected_tower_ref.upgrade_2_tower()
+		
+	

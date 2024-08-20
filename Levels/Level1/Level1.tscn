@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=12 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="PackedScene" uid="uid://wxc3a7eqicl0" path="res://Entities/Enemies/FodderEnemy/FodderEnemy.tscn" id="4_o55tc"]
 [ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
+[ext_resource type="PackedScene" uid="uid://b5dp0gcijhisy" path="res://UI/DraggableMenu/DraggableMenu.tscn" id="8_gw4ds"]
 
 [sub_resource type="Resource" id="Resource_0sdhy"]
 script = ExtResource("3_33haa")
@@ -126,21 +127,6 @@ shortcut_feedback = false
 shortcut_in_tooltip = false
 tower_handler = NodePath("../../../../../TowerHandler")
 
-[node name="RoundVisualizator" type="Panel" parent="GUI/TemporaryGUI"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.918
-anchor_top = 0.356
-anchor_right = 0.993
-anchor_bottom = 0.911
-offset_left = 0.439941
-offset_top = -0.480011
-offset_right = -0.560059
-offset_bottom = 0.119934
-grow_horizontal = 0
-grow_vertical = 2
-
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1
 anchors_preset = 3
@@ -156,4 +142,119 @@ action_mode = 0
 text = "NEXT ROUND
 "
 
+[node name="UpgradeDraggableMenu" parent="GUI/TemporaryGUI" instance=ExtResource("8_gw4ds")]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 1
+offset_left = 660.0
+offset_top = 340.0
+offset_right = 1160.16
+offset_bottom = 639.56
+pivot_offset = Vector2(300, 200)
+
+[node name="BackgroundPanel" parent="GUI/TemporaryGUI/UpgradeDraggableMenu" index="0"]
+theme_type_variation = &"DarkPanel"
+
+[node name="Label" parent="GUI/TemporaryGUI/UpgradeDraggableMenu" index="1"]
+theme_type_variation = &"LightLabel"
+text = "<Tower name goes here>
+"
+
+[node name="TowerPicture" type="Panel" parent="GUI/TemporaryGUI/UpgradeDraggableMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.122
+anchor_right = 0.372
+anchor_bottom = 0.663
+offset_left = 0.200027
+offset_top = 0.199982
+offset_right = 0.0480042
+offset_bottom = -0.100037
+
+[node name="SellPanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/UpgradeDraggableMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082
+anchor_top = 0.727
+anchor_right = 0.348
+anchor_bottom = 0.94
+offset_left = -0.200001
+offset_top = 0.199982
+offset_right = 0.199982
+offset_bottom = -3.05176e-05
+
+[node name="SellBackgroundPanel" type="Panel" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/SellPanelContainer"]
+layout_mode = 2
+
+[node name="SellButton" type="Button" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/SellPanelContainer/SellBackgroundPanel"]
+layout_mode = 2
+anchor_left = 0.075
+anchor_top = 0.188
+anchor_right = 0.912
+anchor_bottom = 0.882
+offset_top = 0.0199995
+offset_right = 0.0799866
+offset_bottom = 0.0299988
+theme_type_variation = &"RedButton"
+text = "SELL"
+
+[node name="Upgrade1PanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/UpgradeDraggableMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.408
+anchor_top = 0.154
+anchor_right = 0.682
+anchor_bottom = 0.846
+offset_left = 0.143982
+offset_top = 0.00999451
+offset_right = -0.0240173
+offset_bottom = -0.0100098
+
+[node name="Upgrade1BackgroundPanel" type="Panel" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade1PanelContainer"]
+layout_mode = 2
+
+[node name="Upgrade1Button" type="Button" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel"]
+layout_mode = 2
+anchor_left = 0.058
+anchor_top = 0.04
+anchor_right = 0.954
+anchor_bottom = 0.385
+offset_left = -0.0340004
+offset_top = -0.0400009
+offset_right = -0.0420074
+offset_bottom = 0.11499
+text = "UPGRADE"
+
+[node name="Upgrade2PanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/UpgradeDraggableMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.698
+anchor_top = 0.154
+anchor_right = 0.972
+anchor_bottom = 0.846
+offset_left = -0.136017
+offset_top = 0.00999451
+offset_right = -0.304016
+offset_bottom = -0.0100098
+
+[node name="Upgrade2BackgroundPanel" type="Panel" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade2PanelContainer"]
+layout_mode = 2
+
+[node name="Upgrade2Button" type="Button" parent="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade2PanelContainer/Upgrade2BackgroundPanel"]
+layout_mode = 2
+anchor_left = 0.058
+anchor_top = 0.04
+anchor_right = 0.954
+anchor_bottom = 0.385
+offset_left = -0.0340004
+offset_top = -0.0400009
+offset_right = -0.0420074
+offset_bottom = 0.11499
+text = "UPGRADE"
+
+[connection signal="pressed" from="GUI/TemporaryGUI/UpgradeDraggableMenu/SellPanelContainer/SellBackgroundPanel/SellButton" to="TowerHandler" method="_on_sell_pressed"]
+[connection signal="pressed" from="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel/Upgrade1Button" to="TowerHandler" method="_on_upgrade1_pressed"]
+[connection signal="pressed" from="GUI/TemporaryGUI/UpgradeDraggableMenu/Upgrade2PanelContainer/Upgrade2BackgroundPanel/Upgrade2Button" to="TowerHandler" method="_on_upgrade2_pressed"]
+
 [editable path="TowerHandler"]
+[editable path="GUI/TemporaryGUI/UpgradeDraggableMenu"]

@@ -29,5 +29,4 @@ texture = ExtResource("2_som8n")
 [node name="Collider" parent="." index="5"]
 shape = SubResource("CircleShape2D_wp3s2")
 
-[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

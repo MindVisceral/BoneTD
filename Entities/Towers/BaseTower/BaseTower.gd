@@ -19,8 +19,8 @@ extends StaticBody2D
 			tower_handler = p_handler
 			update_configuration_warnings()
 
-## This Button is visible in-editor, but invisible in-game (we remove its Normal texture)
-@export var tower_selection_button: RadialTowerMenu
+## This Button is visible in-editor, but invisible in-game (we just remove its Normal texture)
+@export var tower_selection_button: TextureButton
 
 ###-------------------------------------------------------------------------###
 ##### References
@@ -156,7 +156,7 @@ func setup() -> void:
 	## fires the new_tower_selected signal - which is when a new Tower is selected.
 	tower_handler.new_tower_selected.connect(update_tower_visuals)
 	
-	## Remove this button's texture_normal on _ready to make it invisible in-game
+	## Remove this button's texture_normal to make it invisible in-game
 	tower_selection_button.texture_normal = null
 	
 	## Make sure the TowerRangeVisuals Sprite is invisible
@@ -164,6 +164,7 @@ func setup() -> void:
 	
 	## And make all the UI invisible too
 	update_tower_visuals()
+	
 
 
 ###-------------------------------------------------------------------------###
@@ -332,27 +333,17 @@ func update_tower_visuals() -> void:
 	## Everything that follows only matters when not in the Editor!
 	if not Engine.is_editor_hint():
 		
-		## NOTE: Toggle TowerRangeVisuals visibility - it only matters when Tower is selected;
-		## If a Tower is selected...
-		if tower_handler.player_selected_tower == true:
-			## And the selected Tower is this Tower...
-			if tower_handler.selected_tower_ref == self:
-				## Make this Tower's TowerRangeVisuals visible
-				tower_range_visuals.visible = true
-				## And enable the Tower's Radial Menu, if it's not enabled (active) already.
-				## NOTE: Without this, the Radial buttons just get further and further away from
-				## NOTE: the Main Button, because they're animated with Tweens. Could be useful?
-				if tower_selection_button.active == false:
-					tower_selection_button.enable()
-					
+		## NOTE: Toggle TowerRangeVisuals visibility - it only matters when this Tower is selected;
+		## If this Tower specifically is currently selected...
+		if tower_handler.selected_tower_ref == self:
+			## Make this Tower's TowerRangeVisuals visible
+			tower_range_visuals.visible = true
 				
 			
-			## Otherwise, when this Tower is not selected...
-			else:
-				## Make this Tower's TowerRangeVisuals invisible
-				tower_range_visuals.visible = false
-				## And disable this Tower's Radial Menu
-				tower_selection_button.disable()
+		## Otherwise, when this Tower is not selected...
+		else:
+			## Make this Tower's TowerRangeVisuals invisible
+			tower_range_visuals.visible = false
 			
 		
 		
@@ -366,15 +357,15 @@ func _on_tower_selection_pressed() -> void:
 	
 	## A Tower can only be selected if the Player isn't already trying to place a Tower.
 	if tower_handler.player_placing_tower == false:
-		## Make it known that a Tower is currently selected and that it is this Tower
-		tower_handler.player_selected_tower = true
+		## Make it known that this Tower is currently selected
 		tower_handler.selected_tower_ref = self
 		
 	
 	## Other Towers must know that they are not selected!
 	tower_handler.new_tower_selected.emit()
-	
-	## And finally, update this Tower's visuals
+	## ^This makes them hide their visuals,^
+	#
+	## while this Tower makes its own show up.
 	update_tower_visuals()
 
 
@@ -384,7 +375,9 @@ func _on_tower_selection_pressed() -> void:
 
 ## Both of these functions upgrade this Tower by one level, but each option offers a different path.
 ## Practically, this just instantiates a new, better Tower and deletes this Tower.
-## The right UpgradeButton is manually signal-connected to its respective function.
+## These functions are called by the level's TowerHandler, which is connected to the Upgrade Menu,
+## shared by all Towers.
+## 
 func upgrade_1_tower() -> void:
 	var replacement_upgrade_tower: BaseTower = upgrade_1.instantiate()
 	
@@ -443,4 +436,7 @@ func update_tower_cost() -> void:
 
 ## For whatever reason, this Tower must be queue_free()-d. Typically it's because it was sold.
 func destroy_tower() -> void:
+	## TowerHandler should forget about this Tower before we queue_free() it.
+	tower_handler.selected_tower_ref = null
+	
 	queue_free()

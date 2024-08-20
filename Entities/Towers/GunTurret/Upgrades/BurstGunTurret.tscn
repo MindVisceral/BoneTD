@@ -4,5 +4,4 @@
 
 [node name="BurstGunTurret" instance=ExtResource("1_nnotn")]
 
-[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]

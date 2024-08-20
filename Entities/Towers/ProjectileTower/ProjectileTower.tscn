@@ -8,5 +8,4 @@
 script = ExtResource("2_nispy")
 bullet_scene = ExtResource("3_4qeq7")
 
-[editable path="RadialTowerSelection"]
 [editable path="TowerRange"]
