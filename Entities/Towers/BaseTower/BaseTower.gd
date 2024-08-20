@@ -439,4 +439,10 @@ func destroy_tower() -> void:
 	## TowerHandler should forget about this Tower before we queue_free() it.
 	tower_handler.selected_tower_ref = null
 	
+	## Ignore the signal's name. This is here just to disable all Menus that rely on this Tower.
+	## NOTE: As things are currently, this also updates all other Towers' visuals!
+	## NOTE: HERE: Make a new signal if that is undesirable.
+	tower_handler.new_tower_selected.emit()
+	
+	
 	queue_free()
