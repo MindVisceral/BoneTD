@@ -63,8 +63,16 @@ extends StaticBody2D
 ## When this Tower is upgraded, it will be replaced by this "upgrade_1" Tower
 @export var upgrade_1: PackedScene
 
+## This String with a large TextEdit widget contains information about this Tower Upgrade 1.
+## Information written in this text field will be displayed on the shared SelectedTower Menu.
+@export_multiline var upgrade_1_details: String = "UPGRADE 1 DETAILS GO HERE"
+
 ## When this Tower is upgraded, it will be replaced by this "upgrade_2" Tower
 @export var upgrade_2: PackedScene
+
+## This String with a large TextEdit widget contains information about this Tower Upgrade 1.
+## Information written in this text field will be displayed on the shared SelectedTower Menu.
+@export_multiline var upgrade_2_details: String = "UPGRADE 2 DETAILS GO HERE"
 
 
 ###-------------------------------------------------------------------------###

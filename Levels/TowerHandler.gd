@@ -44,10 +44,10 @@ var selected_tower_ref: BaseTower = null
 ###-------------------------------------------------------------------------###
 
 func _ready() -> void:
-	## Disable the SelectedTowerMenu until a Tower is selected.
-	disable_SelectedTowerMenu()
-	## Selecting a Tower will call this update_tower_selection() function
-	self.new_tower_selected.connect(update_tower_selection)
+	## A Tower is not selected by default, so this will disable SelectedTowerMenu.
+	toggle_tower_selection()
+	## Selecting a Tower will call this toggle_tower_selection() function
+	self.new_tower_selected.connect(toggle_tower_selection)
 	
 
 
@@ -115,23 +115,38 @@ func _on_upgrade2_pressed() -> void:
 
 ## The SelectedTowerMenu depends on the new_tower_selected signal,
 ## which is connected to this function.
-func update_tower_selection() -> void:
+## Just toggles
+func toggle_tower_selection() -> void:
 	## Check whether SelectedTowerMenu should be enabled or not.
+	#
+	## If no Tower is selected, take SelectedTowerMenu off the screen.
 	if selected_tower_ref == null:
-		disable_SelectedTowerMenu()
+		selected_tower_menu.visible = false
+		
+	
+	## A Tower is selected, so make SelectedTowerMenu visible
+	## and update its information on the currently selected Tower
 	else:
-		enable_SelectedTowerMenu()
+		selected_tower_menu.visible = true
+		
+		update_tower_selection()
+		
+	
 
-func enable_SelectedTowerMenu() -> void:
-	selected_tower_menu.visible = true
-
-func disable_SelectedTowerMenu() -> void:
-	selected_tower_menu.visible = false
-
-
-
-#func update_sell_amount() -> void:
-	#selected_tower_ref.update_tower_cost
-	#$"../GUI/TemporaryGUI/SelectedTowerDraggableMenu/SellPanelContainer/SellBackgroundPanel
-	#/MoneyLabel".text = \
-		#"[center][img]res://placeholder_2.png[/img] " + str(selected_tower_ref.sell_value)
+## Updates all Tower-specific information available in SelectedTowerMenu.
+## This includes: Tower's cost, its upgrades, viewport showing the Tower.
+func update_tower_selection() -> void:
+	
+	## NOTE: HERE: This is almost certainly temporary;
+	## the UI is not yet finalized and the code is messy
+	
+	
+	## Update the label which shows currently selected Tower's sell value
+	%MoneyLabel.text = "[center]Value: [img]res://placeholder_2.png[/img]" + \
+		str(selected_tower_ref.sell_value)
+		
+	
+	## Update the description of Upgrade 1 and 2 - what do they do?
+	## This information is found in HERE: where?
+	%Upgrade1DetailsLabel.text = selected_tower_ref.upgrade_1_details
+	%Upgrade2DetailsLabel.text = selected_tower_ref.upgrade_2_details

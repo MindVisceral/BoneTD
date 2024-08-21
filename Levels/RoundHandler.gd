@@ -85,4 +85,5 @@ func _ready() -> void:
 ## Update the UI element that shows which Round the level is on.
 func update_round_tracker() -> void:
 	if current_round > 0:
-		%RoundTracker.text = "ROUND: " + str(current_round)
+		%RoundTracker.text = "[center]" + "ROUND: " + str(current_round) + \
+			" out of " + str(rounds.size())

@@ -79,11 +79,11 @@ mouse_filter = 2
 
 [node name="InfoPanel" type="Panel" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-offset_right = 108.0
-offset_bottom = 25.0
+offset_right = 194.0
+offset_bottom = 38.0
 mouse_filter = 2
 
-[node name="RoundTracker" type="Label" parent="GUI/TemporaryGUI/InfoPanel"]
+[node name="RoundTracker" type="RichTextLabel" parent="GUI/TemporaryGUI/InfoPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -91,20 +91,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "PREP PHASE"
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]PREP PHASE"
+fit_content = true
+shortcut_keys_enabled = false
 
 [node name="TowerPlacementUI" type="Panel" parent="GUI/TemporaryGUI"]
 auto_translate_mode = 2
 custom_minimum_size = Vector2(100, 200)
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -127.0
-offset_top = 23.0
-offset_right = -17.0
-offset_bottom = -772.0
+anchors_preset = -1
+anchor_left = 0.934
+anchor_top = 0.021
+anchor_right = 0.991
+anchor_bottom = 0.285
+offset_left = -0.280029
+offset_top = 0.319998
+offset_right = 0.279907
+offset_bottom = 0.199982
 grow_horizontal = 0
 grow_vertical = 2
 localize_numeral_system = false
@@ -112,11 +118,15 @@ localize_numeral_system = false
 [node name="VFlowContainer" type="HFlowContainer" parent="GUI/TemporaryGUI/TowerPlacementUI"]
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -100.0
-offset_bottom = 150.0
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.018
+anchor_right = 0.955
+anchor_bottom = 0.982
+offset_left = 0.0499997
+offset_top = -0.13
+offset_right = -0.0500031
+offset_bottom = 0.129974
 grow_horizontal = 0
 mouse_filter = 2
 
@@ -146,10 +156,10 @@ text = "NEXT ROUND
 [node name="SelectedTowerDraggableMenu" parent="GUI/TemporaryGUI" instance=ExtResource("8_gw4ds")]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 1
-offset_left = 660.0
-offset_top = 340.0
-offset_right = 1160.16
-offset_bottom = 639.56
+offset_left = 1295.0
+offset_top = 463.0
+offset_right = 1795.16
+offset_bottom = 762.56
 pivot_offset = Vector2(300, 200)
 
 [node name="BackgroundPanel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu" index="0"]
@@ -199,6 +209,7 @@ theme_type_variation = &"RedButton"
 text = "SELL"
 
 [node name="MoneyLabel" type="RichTextLabel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu/SellPanelContainer/SellBackgroundPanel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.069
@@ -212,7 +223,7 @@ offset_bottom = 0.0329895
 localize_numeral_system = false
 theme_type_variation = &"LightLabel"
 bbcode_enabled = true
-text = "[center][img]res://placeholder_2.png[/img] "
+text = "[center]Value: [img]res://placeholder_2.png[/img] "
 
 [node name="Upgrade1PanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu"]
 layout_mode = 1
@@ -241,6 +252,21 @@ offset_right = -0.0420074
 offset_bottom = 0.11499
 text = "UPGRADE"
 
+[node name="Upgrade1DetailsLabel" type="RichTextLabel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.104
+anchor_top = 0.452
+anchor_right = 0.907
+anchor_bottom = 0.954
+offset_left = -0.0801277
+offset_top = -0.104568
+offset_right = 0.0415649
+offset_bottom = -0.0481262
+bbcode_enabled = true
+text = "[center] This upgrade does X"
+
 [node name="Upgrade2PanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu"]
 layout_mode = 1
 anchors_preset = -1
@@ -267,6 +293,21 @@ offset_top = -0.0400009
 offset_right = -0.0420074
 offset_bottom = 0.11499
 text = "UPGRADE"
+
+[node name="Upgrade2DetailsLabel" type="RichTextLabel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade2PanelContainer/Upgrade2BackgroundPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.104
+anchor_top = 0.452
+anchor_right = 0.907
+anchor_bottom = 0.954
+offset_left = -0.0801277
+offset_top = -0.104568
+offset_right = 0.0415649
+offset_bottom = -0.0481262
+bbcode_enabled = true
+text = "[center] This upgrade does Y"
 
 [connection signal="pressed" from="GUI/TemporaryGUI/SelectedTowerDraggableMenu/SellPanelContainer/SellBackgroundPanel/SellButton" to="TowerHandler" method="_on_sell_pressed"]
 [connection signal="pressed" from="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel/Upgrade1Button" to="TowerHandler" method="_on_upgrade1_pressed"]
