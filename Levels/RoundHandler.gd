@@ -36,6 +36,11 @@ var current_round: int
 ## We use this instead of _ready() to avoid bugs.
 func _ready() -> void:
 	
+	## Connect the Global Money and Health signals.
+	## When one of these is fired, update Player's Stats UI
+	Globals.money_amount_changed.connect(update_stats_tracker)
+	Globals.health_amount_changed.connect(update_stats_tracker)
+	
 	## Loop through all the children of this RoundHandler (they should all be BaseRounds)
 	## and add them to the 'rounds' Array
 	for child in self.get_children():
@@ -44,8 +49,10 @@ func _ready() -> void:
 	
 	
 	## Update the UI before we do anything.
+	## NOTE: The LevelStats Node must be higher in the hierarchy than this Node for this to work!
+	## NOTE: Because its _ready() function must be called first for the Globals Stats to be updated
 	update_round_tracker()
-	
+	update_stats_tracker()
 	
 	
 	## Before anything happens, we listen for the nextRound_button to be pressed
@@ -87,3 +94,14 @@ func update_round_tracker() -> void:
 	if current_round > 0:
 		%RoundTracker.text = "[center]" + "ROUND: " + str(current_round) + \
 			" out of " + str(rounds.size())
+			
+		
+	
+
+## Update the UI element that shows how much Money and Health the Player has left.
+## Money and Health are copuled here, but that shouldn't have much impact on performance.
+func update_stats_tracker() -> void:
+	%StatsTracker.text = "[p]" + "[center]" + "MONEY: " + str(Globals.current_money) + \
+		"[p]" + "[center]" + "LIFE: " + str(Globals.current_health)
+		
+	

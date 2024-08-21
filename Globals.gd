@@ -26,10 +26,13 @@ var level_sell_multiplier: float
 ##### Global signals
 ###-------------------------------------------------------------------------###
 
-## Fired whener the Player's amount of Money is changed.
+## Fired whenever the Player's amount of Money is changed.
 ## Used for buying Towers - can't buy without enough money.
 signal money_amount_changed
 
+## Fired whenever the Player's amount of Health is changed.
+## Used for Game Over and changing UI info
+signal health_amount_changed
 
 ###-------------------------------------------------------------------------###
 ##### Global level functions
@@ -39,6 +42,7 @@ signal money_amount_changed
 func lose_health(health_lost: int) -> void:
 	current_health -= health_lost
 	
+	health_amount_changed.emit()
 	print("health remaining: ", current_health)
 	
 	if current_health <= 0:

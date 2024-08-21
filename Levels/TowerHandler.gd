@@ -110,7 +110,7 @@ func _on_upgrade2_pressed() -> void:
 	
 
 ###-------------------------------------------------------------------------###
-##### Selected Tower Menu
+##### UI - Selected Tower Menu
 ###-------------------------------------------------------------------------###
 
 ## The SelectedTowerMenu depends on the new_tower_selected signal,

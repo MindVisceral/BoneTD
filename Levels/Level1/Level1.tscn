@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=13 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
+[ext_resource type="PackedScene" uid="uid://bi1x5umu2euqm" path="res://Resources/SpeedUp.tscn" id="2_0j0fm"]
 [ext_resource type="PackedScene" uid="uid://xau7xbcers41" path="res://Levels/RoundHandler.tscn" id="2_7b7bi"]
 [ext_resource type="Script" path="res://Resources/RoundSingleEnemyData.gd" id="3_33haa"]
 [ext_resource type="PackedScene" uid="uid://5q3j0jjqbwtm" path="res://Levels/Rounds/BaseRound.tscn" id="3_gmuuh"]
@@ -34,6 +35,12 @@ func _ready() -> void:
 
 [node name="Level1" type="Node2D"]
 
+[node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
+default_health = 20
+default_money = 10
+
+[node name="SpeedUp" parent="." instance=ExtResource("2_0j0fm")]
+
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
 nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
@@ -47,7 +54,56 @@ enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 [node name="Round3" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 
-[node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
+[node name="Round4" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round5" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round6" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round7" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round8" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round9" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round10" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round11" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round12" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round13" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round14" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round15" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round16" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round17" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round18" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round19" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+
+[node name="Round20" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 
 [node name="EnvironmentObstacles" type="Node2D" parent="."]
 
@@ -77,13 +133,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="InfoPanel" type="Panel" parent="GUI/TemporaryGUI"]
+[node name="RoundPanel" type="Panel" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-offset_right = 194.0
-offset_bottom = 38.0
+anchors_preset = -1
+anchor_right = 0.101
+anchor_bottom = 0.035
+offset_right = 0.0799866
+offset_bottom = 0.200001
 mouse_filter = 2
 
-[node name="RoundTracker" type="RichTextLabel" parent="GUI/TemporaryGUI/InfoPanel"]
+[node name="RoundTracker" type="RichTextLabel" parent="GUI/TemporaryGUI/RoundPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -95,6 +154,33 @@ mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[center]PREP PHASE"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="StatsPanel" type="Panel" parent="GUI/TemporaryGUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.104
+anchor_right = 0.205
+anchor_bottom = 0.064
+offset_left = 0.319992
+offset_right = 0.399963
+offset_bottom = -7.12
+mouse_filter = 2
+
+[node name="StatsTracker" type="RichTextLabel" parent="GUI/TemporaryGUI/StatsPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[center]MONEY:
+[center]LIFE: "
 fit_content = true
 shortcut_keys_enabled = false
 
@@ -137,21 +223,37 @@ action_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 tower_handler = NodePath("../../../../../TowerHandler")
+tower_base_cost = 10
 
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchors_preset = -1
+anchor_left = 0.903
+anchor_top = 0.952
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -112.0
-offset_top = -31.0
+offset_left = 74.2399
+offset_top = 20.84
 grow_horizontal = 0
 grow_vertical = 0
 action_mode = 0
 text = "NEXT ROUND
 "
+
+[node name="speed_up_button" type="Button" parent="GUI/TemporaryGUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.886
+anchor_top = 0.894
+anchor_right = 1.0
+anchor_bottom = 0.943
+offset_left = 31.8799
+offset_top = 0.479919
+offset_bottom = -0.440002
+grow_horizontal = 0
+grow_vertical = 0
+action_mode = 0
+text = "CHANGE SPEED"
 
 [node name="SelectedTowerDraggableMenu" parent="GUI/TemporaryGUI" instance=ExtResource("8_gw4ds")]
 custom_minimum_size = Vector2(600, 400)
@@ -309,6 +411,7 @@ offset_bottom = -0.0481262
 bbcode_enabled = true
 text = "[center] This upgrade does Y"
 
+[connection signal="pressed" from="GUI/TemporaryGUI/speed_up_button" to="SpeedUp" method="change_time_scale"]
 [connection signal="pressed" from="GUI/TemporaryGUI/SelectedTowerDraggableMenu/SellPanelContainer/SellBackgroundPanel/SellButton" to="TowerHandler" method="_on_sell_pressed"]
 [connection signal="pressed" from="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel/Upgrade1Button" to="TowerHandler" method="_on_upgrade1_pressed"]
 [connection signal="pressed" from="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade2PanelContainer/Upgrade2BackgroundPanel/Upgrade2Button" to="TowerHandler" method="_on_upgrade2_pressed"]
