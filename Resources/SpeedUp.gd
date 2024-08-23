@@ -45,36 +45,30 @@ func _ready() -> void:
 ##### Core function
 ###-------------------------------------------------------------------------###
 
-## Function called when the Player wants to speed up the game.
-## NOTE: Connected with the right button through the Editor
+## This function is called when the Player wants to speed up the game or return it to default speed
+## NOTE: HERE: Connected with the right button through the Editor. This might have to be changed.
 func change_time_scale() -> void:
+	
+	## Instantiate a Tween.
+	time_tween = get_tree().create_tween()
+	
+	## We must make sure the Tween's time works in real time;
+	## isn't affected by the time_scale changing.
+	time_tween.set_speed_scale(1.0 / time_scale)
+	
 	
 	## If the game is going at its default speed, speed it up.
 	if not active:
-		
 		active = true
-		
-		## And now we may apply the new time scale.
-		time_tween = get_tree().create_tween()
-		
-		## We must make sure the Tween's time works in real time
-		## and isn't affected by the time_scale changing.
-		time_tween.set_speed_scale(1.0 / time_scale)
 		
 		time_tween.tween_property(Engine, "time_scale", target_time_scale, time_until_limit)
 		time_tween.tween_property(AudioServer, "playback_speed_scale", \
 			target_time_scale, time_until_limit)
 		
 	
-	## Otherwise, we tween back to default_time_scale time.
+	## Otherwise, tween back to default_time_scale time.
 	elif active:
-		
 		active = false
-		
-		## And now we may apply the new time scale.
-		time_tween = get_tree().create_tween()
-		
-		time_tween.set_speed_scale(1.0 / time_scale)
 		
 		time_tween.tween_property(Engine, "time_scale", default_time_scale, time_until_limit)
 		time_tween.tween_property(AudioServer, "playback_speed_scale", \
