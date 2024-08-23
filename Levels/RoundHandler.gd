@@ -73,9 +73,16 @@ func _ready() -> void:
 		## Pass on these two references and start the Round.
 		round.initialize(path_reference, self)
 		
+		## Disable the "NEXT ROUND" Button until the current Round is over.
+		nextRound_button.disabled = true
+		
 		## We wait for this Round to be over before we start the next one.
 		await round.round_is_over_signal
 		print("ROUND: ", round, " IS OVER, queue_free-d")
+		
+		## Enable the Button
+		nextRound_button.disabled = false
+		
 		## This round is over, now we can (and will) wait for the Player to start the next round
 		await nextRound_button.pressed
 		print("NEXT ROUND started")

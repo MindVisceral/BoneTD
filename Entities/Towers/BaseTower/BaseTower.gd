@@ -10,13 +10,20 @@ extends StaticBody2D
 
 @export_group("Editor-only")
 
+## How is this Tower named in-game? This name will show up in UI.
+@export var ingame_name: String = "":
+	set(w_name):
+		if w_name != ingame_name:
+			ingame_name = w_name
+			update_configuration_warnings()
+
 ## Reference to the level's TowerHandler, the parent of this child Tower.
 ## This is an @export-ed variable (for when a Tower is placed by the level author),
 ## but it is overwritten by this Tower's TempTower when this Tower is placed and added as a child.
 @export var tower_handler: TowerHandler = null:
-	set(p_handler):
-		if p_handler != tower_handler:
-			tower_handler = p_handler
+	set(w_handler):
+		if w_handler != tower_handler:
+			tower_handler = w_handler
 			update_configuration_warnings()
 
 ## This Button is visible in-editor, but invisible in-game (we just remove its Normal texture)
@@ -131,6 +138,9 @@ var angle_to_current_target: float
 ## Show a warning when the Tower is not set up properly in the Editor.
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
+	
+	if ingame_name == "":
+		warnings.append("This Tower does not have its in-game name set!")
 	
 	if tower_handler == null:
 		warnings.append("TowerHandler must be selected as an @export-ed variable
@@ -321,10 +331,10 @@ func update_tower_sprite() -> void:
 	pass
 
 
-## When the Tower is instantiated (including 'upgrades') or otherwise changed,
+## When the Tower is instantiated (including 'upgrades') or when it's otherwise changed,
 ## some of its visuals must be updated.
 ## NOTE: This function shouldn't be used every frame, though it is used that way in the Editor!
-## NOTE: During regular play, it should work more like signals.
+## NOTE: During regular play, it depends on signals.
 func update_tower_visuals() -> void:
 	## TowerRangeVisuals must match TowerRange collider's radius.
 	## To this end, we scale TowerRangeVisuals Sprite2D by the right amount, which I determinted to
@@ -341,7 +351,6 @@ func update_tower_visuals() -> void:
 	## Everything that follows only matters when not in the Editor!
 	if not Engine.is_editor_hint():
 		
-		## NOTE: Toggle TowerRangeVisuals visibility - it only matters when this Tower is selected;
 		## If this Tower specifically is currently selected...
 		if tower_handler.selected_tower_ref == self:
 			## Make this Tower's TowerRangeVisuals visible
@@ -356,8 +365,10 @@ func update_tower_visuals() -> void:
 		
 		
 		## HERE:
-		## presumably, bullet sprite should be included here too (???),
+		## presumably, bullet sprite should be included here too (???) - NOTE: Not anymore! Ignore.
 		## among other stuff. Function WIP!
+		
+	
 
 
 ## When this Tower's TowerSelectionButton is pressed...
@@ -370,11 +381,9 @@ func _on_tower_selection_pressed() -> void:
 		
 	
 	## Other Towers must know that they are not selected!
+	## This signal is connected to each Tower's update_tower_visuals() function.
+	## So this signal makes every Tower update its visuals, including this one!
 	tower_handler.new_tower_selected.emit()
-	## ^This makes them hide their visuals,^
-	#
-	## while this Tower makes its own show up.
-	update_tower_visuals()
 
 
 ###-------------------------------------------------------------------------###
@@ -447,7 +456,8 @@ func destroy_tower() -> void:
 	## TowerHandler should forget about this Tower before we queue_free() it.
 	tower_handler.selected_tower_ref = null
 	
-	## Ignore the signal's name. This is here just to disable all Menus that rely on this Tower.
+	## Ignore the signal's name. This is here just to disable all Menus that rely on this Tower,
+	## like the SelectedTowerMenu.
 	## NOTE: As things are currently, this also updates all other Towers' visuals!
 	## NOTE: HERE: Make a new signal if that is undesirable.
 	tower_handler.new_tower_selected.emit()

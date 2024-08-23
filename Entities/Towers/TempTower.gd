@@ -85,6 +85,9 @@ func setup() -> void:
 	
 	## Set the Collider shape to be the same as the Tower's
 	tower_collider.shape = new_tower.tower_collider.shape
+	
+	## HERE: Temporary!
+	tower_handler.disable_deselector()
 
 
 ###-------------------------------------------------------------------------###
@@ -116,12 +119,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			## Get things back to status quo
 			tower_handler.player_placing_tower = false
 			self.queue_free()
+			
+			
+			
+			## HERE: Temporary!
+			tower_handler.enable_deselector()
 		
 	
 	## Cancel placing the Tower.
 	elif Input.is_action_just_pressed("RMB"):
 		tower_handler.player_placing_tower = false
 		self.queue_free()
+		
+		
+		
+		## HERE: Temporary!
+		tower_handler.enable_deselector()
 
 
 ###-------------------------------------------------------------------------###

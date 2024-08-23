@@ -10,6 +10,10 @@ extends Node2D
 ## That's the placeholder which follows the mouse and displays where a Tower will be placed.
 @export var temp_tower: PackedScene
 
+## This Button takes up the whole scren, is invisible,
+## and when it's pressed selected_tower_ref is set to null to deselect the current Tower.
+@export var deselector: Button
+
 ## This Menu is used to Upgrade and Sell Towers.
 @export var selected_tower_menu: Control
 
@@ -77,6 +81,34 @@ func prepare_new_tower(tower_reference, tower_base_cost) -> void:
 
 
 ###-------------------------------------------------------------------------###
+##### UI - Tower deselection
+###-------------------------------------------------------------------------###
+
+## Deselect currently selected Tower
+func deselect_tower() -> void:
+	selected_tower_ref = null
+	
+	## All Towers are connected to this signal, and in result they all become deselected.
+	## This signal also fires the toggle_tower_selection function down below,
+	## which disables the shared SelectedTowerMenu.
+	new_tower_selected.emit()
+	
+
+## Disable the Deselector button - necessary when attempting to place a new Tower.
+## TempTower just cannot place anything, because it's blocked by the Button.
+func disable_deselector() -> void:
+	deselector.disabled = true
+	deselector.visible = false
+	
+
+## Enable the Deselector button.
+func enable_deselector() -> void:
+	deselector.disabled = false
+	deselector.visible = true
+	
+
+
+###-------------------------------------------------------------------------###
 ##### Tower functions
 ###-------------------------------------------------------------------------###
 
@@ -141,6 +173,10 @@ func update_tower_selection() -> void:
 	## the UI is not yet finalized and the code is messy
 	
 	
+	## Put up the Tower's in-game name in the UI's default Label in the top of the Window.
+	$"../GUI/TemporaryGUI/SelectedTowerDraggableMenu/Label".text = \
+		selected_tower_ref.ingame_name
+	
 	## Update the label which shows currently selected Tower's sell value
 	%MoneyLabel.text = "[center]Value: [img]res://placeholder_2.png[/img]" + \
 		str(selected_tower_ref.sell_value)
@@ -150,3 +186,4 @@ func update_tower_selection() -> void:
 	## This information is found in HERE: where?
 	%Upgrade1DetailsLabel.text = selected_tower_ref.upgrade_1_details
 	%Upgrade2DetailsLabel.text = selected_tower_ref.upgrade_2_details
+	

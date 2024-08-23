@@ -11,6 +11,7 @@ radius = 50.04
 radius = 12.0
 
 [node name="GunTurret" instance=ExtResource("1_5b2p6")]
+ingame_name = "Gun Turret"
 upgrade_1 = ExtResource("2_v6uwq")
 upgrade_1_details = "Makes the Turret shoot in short burst and deal higher damage"
 shot_delay = 0.6

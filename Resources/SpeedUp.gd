@@ -29,6 +29,8 @@ var time_scale: float = 1.0
 ## We only need one Tween; If we made a new one on every time, they would interfere with each other
 var time_tween: Tween
 
+## Is the game sped up at the momet?
+var active: bool = false
 
 ###-------------------------------------------------------------------------###
 ##### Setup
@@ -47,8 +49,10 @@ func _ready() -> void:
 ## NOTE: Connected with the right button through the Editor
 func change_time_scale() -> void:
 	
-	## If time_scale is about equal to default_time_scale time, we tween to target_time_scale
-	if time_scale >= (default_time_scale - 0.05):
+	## If the game is going at its default speed, speed it up.
+	if not active:
+		
+		active = true
 		
 		## And now we may apply the new time scale.
 		time_tween = get_tree().create_tween()
@@ -63,7 +67,9 @@ func change_time_scale() -> void:
 		
 	
 	## Otherwise, we tween back to default_time_scale time.
-	else:
+	elif active:
+		
+		active = false
 		
 		## And now we may apply the new time scale.
 		time_tween = get_tree().create_tween()
