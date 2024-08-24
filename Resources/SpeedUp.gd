@@ -1,8 +1,8 @@
 extends Node
 
 
-## THis Node/Script controls game speed.
-## This is extremly useful when Player wants to speed up the action when they have nothing to do.
+## This Node/Script controls game speed.
+## This is extremly useful; the Player can speed up the action when they have nothing to do.
 
 
 ###-------------------------------------------------------------------------###
@@ -49,7 +49,7 @@ func _ready() -> void:
 ## NOTE: HERE: Connected with the right button through the Editor. This might have to be changed.
 func change_time_scale() -> void:
 	
-	## Instantiate a Tween.
+	## Instantiate the Tween.
 	time_tween = get_tree().create_tween()
 	
 	## We must make sure the Tween's time works in real time;

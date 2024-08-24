@@ -6,7 +6,7 @@
 
 [node name="GunTurretSelectButton" instance=ExtResource("1_ukiyd")]
 tower_reference = ExtResource("2_bu5qt")
-tower_base_cost = 5
+tower_base_cost = 10
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_ph3oc")

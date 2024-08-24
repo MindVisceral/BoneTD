@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=19 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://bi1x5umu2euqm" path="res://Resources/SpeedUp.tscn" id="2_0j0fm"]
@@ -15,7 +15,49 @@ script = ExtResource("3_33haa")
 enemy_scene = ExtResource("4_o55tc")
 number_of_enemies = 5
 enemy_spawn_interval = 5.0
-time_until_next_enemies = 0.5
+time_until_next_enemies = 1.0
+
+[sub_resource type="Resource" id="Resource_yt1sj"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 10
+enemy_spawn_interval = 5.0
+time_until_next_enemies = 1.0
+
+[sub_resource type="Resource" id="Resource_nfqgi"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 10
+enemy_spawn_interval = 3.0
+time_until_next_enemies = 1.0
+
+[sub_resource type="Resource" id="Resource_natag"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 15
+enemy_spawn_interval = 2.0
+time_until_next_enemies = 1.0
+
+[sub_resource type="Resource" id="Resource_2hv01"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 15
+enemy_spawn_interval = 2.0
+time_until_next_enemies = 2.0
+
+[sub_resource type="Resource" id="Resource_1tywi"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 25
+enemy_spawn_interval = 2.0
+time_until_next_enemies = 1.0
+
+[sub_resource type="Resource" id="Resource_getvg"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 30
+enemy_spawn_interval = 1.5
+time_until_next_enemies = 1.0
 
 [sub_resource type="Curve2D" id="Curve2D_ja27w"]
 _data = {
@@ -49,61 +91,19 @@ nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
 enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 
 [node name="Round2" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_yt1sj")])
 
 [node name="Round3" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_nfqgi")])
 
 [node name="Round4" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_natag")])
 
 [node name="Round5" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_2hv01"), SubResource("Resource_1tywi")])
 
 [node name="Round6" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round7" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round8" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round9" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round10" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round11" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round12" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round13" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round14" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round15" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round16" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round17" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round18" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round19" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
-
-[node name="Round20" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_getvg")])
 
 [node name="Deselector" type="Button" parent="."]
 anchors_preset = 15
@@ -240,7 +240,7 @@ action_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 tower_handler = NodePath("../../../../../TowerHandler")
-tower_base_cost = 10
+tower_base_cost = 20
 
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1

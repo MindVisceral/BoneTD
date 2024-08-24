@@ -19,5 +19,5 @@ extends Resource
 ## NOTE: but I don't think it's worth making this script more advanced with @tool...
 
 ## When this Resource is exhausted, this variable controls how much time must pass until
-## the next Resource like this is activated by the Round.
-@export_range(0.01, 10, 0.01) var time_until_next_enemies: float = 0.5
+## the next Resource like this is activated by the Round (in seconds)
+@export_range(0.01, 10, 0.01) var time_until_next_enemies: float = 1.0
