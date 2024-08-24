@@ -394,6 +394,23 @@ offset_bottom = -0.0481262
 bbcode_enabled = true
 text = "[center] This upgrade does X"
 
+[node name="Upgrade1CostLabel" type="RichTextLabel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade1PanelContainer/Upgrade1BackgroundPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 1.017
+anchor_right = 0.944
+anchor_bottom = 1.121
+offset_left = 0.0524864
+offset_top = -0.0952759
+offset_right = 0.0210114
+offset_bottom = 0.119629
+localize_numeral_system = false
+theme_type_variation = &"LightLabel"
+bbcode_enabled = true
+text = "[center]Cost: [img]res://placeholder_2.png[/img] "
+
 [node name="Upgrade2PanelContainer" type="PanelContainer" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu"]
 layout_mode = 1
 anchors_preset = -1
@@ -435,6 +452,23 @@ offset_right = 0.0415649
 offset_bottom = -0.0481262
 bbcode_enabled = true
 text = "[center] This upgrade does Y"
+
+[node name="Upgrade2CostLabel" type="RichTextLabel" parent="GUI/TemporaryGUI/SelectedTowerDraggableMenu/Upgrade2PanelContainer/Upgrade2BackgroundPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 1.017
+anchor_right = 0.944
+anchor_bottom = 1.121
+offset_left = -0.667606
+offset_top = -0.0952759
+offset_right = -0.699081
+offset_bottom = 0.119629
+localize_numeral_system = false
+theme_type_variation = &"LightLabel"
+bbcode_enabled = true
+text = "[center]Cost: [img]res://placeholder_2.png[/img] "
 
 [connection signal="pressed" from="Deselector" to="TowerHandler" method="deselect_tower"]
 [connection signal="pressed" from="GUI/TemporaryGUI/speed_up_button" to="SpeedUp" method="change_time_scale"]

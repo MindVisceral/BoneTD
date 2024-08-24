@@ -3,5 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_nnotn"]
 
 [node name="BurstGunTurret" instance=ExtResource("1_nnotn")]
+ingame_name = "Burst Gun Turret"
+shot_delay = 1.7
+tower_base_cost = 10
 
 [editable path="TowerRange"]

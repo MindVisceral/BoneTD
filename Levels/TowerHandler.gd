@@ -182,8 +182,29 @@ func update_tower_selection() -> void:
 		str(selected_tower_ref.sell_value)
 		
 	
-	## Update the description of Upgrade 1 and 2 - what do they do?
+	## Update the description of Upgrades 1 and 2 - what do they do?
 	## This information is found in HERE: where?
 	%Upgrade1DetailsLabel.text = selected_tower_ref.upgrade_1_details
 	%Upgrade2DetailsLabel.text = selected_tower_ref.upgrade_2_details
 	
+	
+	## Update the Upgrade cost of Upgrades 1 and 2 - how much do they cost?
+	## HERE: We instantiate those upgrade Towers, but that's incredibly inefficient.
+	## HERE: Hopefully this won't have much impact on performance.
+	## NOTE: This is still better than tying Upgrade costs to the Tower which gets upgraded.
+	## NOTE: Maybe the same should be done for Upgrade Details?
+	if selected_tower_ref.upgrade_1 != null:
+		var temp_upgrade_1_instance: BaseTower = selected_tower_ref.upgrade_1.instantiate()
+		%Upgrade1CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]" + \
+			str(temp_upgrade_1_instance.tower_base_cost)
+		temp_upgrade_1_instance = null
+	else:
+		%Upgrade1CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"
+	#
+	if selected_tower_ref.upgrade_2 != null:
+		var temp_upgrade_2_instance: BaseTower = selected_tower_ref.upgrade_2.instantiate()
+		%Upgrade2CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]" + \
+			str(temp_upgrade_2_instance.tower_base_cost)
+		temp_upgrade_2_instance = null
+	else:
+		%Upgrade2CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"
