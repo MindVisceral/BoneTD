@@ -61,6 +61,22 @@ extends StaticBody2D
 ## The mask/layer on which all 'Environment' Nodes are on.
 @export_flags_2d_physics var environment_layer: int
 
+
+###-------------------------------------------------------------------------###
+##### Tower Variables
+###-------------------------------------------------------------------------###
+
+@export_group("Tower variables")
+
+## Time until the next singular shot can be fired
+@export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
+
+## How much does this Tower cost to place? If the Player doesn't have
+## at least this amount of Money, they can't place this Tower.
+## NOTE: This is passed to the Tower's SelectButton.
+@export_range(1, 99999, 1) var tower_base_cost: int = 1
+
+
 ###-------------------------------------------------------------------------###
 ##### Upgrades
 ###-------------------------------------------------------------------------###
@@ -94,22 +110,8 @@ extends StaticBody2D
 
 
 ###-------------------------------------------------------------------------###
-##### Shooting Variables
-###-------------------------------------------------------------------------###
-
-@export_group("Base Shooting")
-
-## Time until the next singular shot can be fired
-@export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
-
-
-###-------------------------------------------------------------------------###
 ##### Variable storage
 ###-------------------------------------------------------------------------###
-
-## How much did this Tower cost to place?
-## This is passed down from this Tower's SelectButton, which instantiates it in the first place.
-var tower_base_cost: int = 1
 
 ## Total amount of Money this Tower cost to place and upgrade.
 var current_cost: int = 0

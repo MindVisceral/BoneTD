@@ -5,15 +5,22 @@ extends BaseTower
 
 
 ###-------------------------------------------------------------------------###
-##### References
+##### DamageData
 ###-------------------------------------------------------------------------###
 
-@export_group("References")
+@export_group("DamageData")
 
 ## This DamageData Resource holds all the information this Tower's Target needs when it's been hit.
 ## This includes the Tower's damage dealth and the hit effect.
 ## NOTE: Read the DamageData script for more info.
 @export var damage_data: DamageData
+
+
+###-------------------------------------------------------------------------###
+##### References
+###-------------------------------------------------------------------------###
+
+@export_group("References")
 
 ## This TrailEffect PackedScene Node of class BaseTrail
 ## is instantiated to create the effect of a Bullet between this Tower and the Enemy

@@ -79,7 +79,7 @@ func _ready() -> void:
 
 [node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
 default_health = 20
-default_money = 10
+default_money = 15
 
 [node name="SpeedUp" parent="." instance=ExtResource("2_0j0fm")]
 
@@ -240,7 +240,6 @@ action_mode = 0
 shortcut_feedback = false
 shortcut_in_tooltip = false
 tower_handler = NodePath("../../../../../TowerHandler")
-tower_base_cost = 20
 
 [node name="next_round_button" type="Button" parent="GUI/TemporaryGUI"]
 layout_mode = 1

@@ -64,6 +64,11 @@ var direction: Vector2 = Vector2.ZERO
 ## the Enemy's position. This allows Towers that shoot projectiles to hit Enemies more reliably.
 var velocity: Vector2 = Vector2.ZERO
 
+## By default, the Player received Money when this Enemy dies.
+## But that should only happen when the Player kills this Enemy.
+## So whem the enemy reaches the end of the Path, no money will be received.
+var receive_money_for_death: bool = true
+
 
 ###-------------------------------------------------------------------------###
 ##### Misc. variables
@@ -120,7 +125,8 @@ func _physics_process(delta: float) -> void:
 		## Player loses health equal to this Enemy's damage value.
 		Globals.lose_health(damage)
 		
-		## And the Enemy "dies".
+		## The Enemy "dies", and the Player receives no Money for this Enemy's death.
+		receive_money_for_death = false
 		death()
 		
 	
@@ -171,8 +177,11 @@ func death() -> void:
 		printerr("Enemy: ", self, " is dead but wasn't assigned to a Wave!")
 		
 	
-	## This Enemy is dead, the Player should receive some Money for killing it
-	Globals.gain_money(default_money)
+	## This Enemy is dead, the Player should receive some Money for killing it.
+	## But only if the Player was the one to kill this Enemy.
+	## The Enemy reaching the end of the Path grants no Money.
+	if receive_money_for_death == true:
+		Globals.gain_money(default_money)
 	
 	## And now we can safely delete this Enemy
 	queue_free()
