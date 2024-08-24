@@ -1,10 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://orrfapo7vqan"]
+[gd_scene load_steps=9 format=3 uid="uid://orrfapo7vqan"]
 
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_nnotn"]
+[ext_resource type="Script" path="res://Entities/Towers/GunTurret/Upgrades/BurstGunTurret.gd" id="2_3dn56"]
+[ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_40vhq"]
+[ext_resource type="Script" path="res://Resources/DamageData.gd" id="2_xdpor"]
+[ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="4_4k2e7"]
+
+[sub_resource type="Resource" id="Resource_qebpy"]
+script = ExtResource("2_xdpor")
+damage_value = 0.5
+hit_effect = ExtResource("2_40vhq")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dtp8l"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qr62b"]
+radius = 12.0
 
 [node name="BurstGunTurret" instance=ExtResource("1_nnotn")]
+script = ExtResource("2_3dn56")
+shots_in_a_burst = 3
+shot_interval = 0.08
+damage_data = SubResource("Resource_qebpy")
 ingame_name = "Burst Gun Turret"
-shot_delay = 1.7
+shot_delay = 2.0
 tower_base_cost = 10
+
+[node name="TowerRangeVisuals" parent="." index="0"]
+scale = Vector2(0.78125, 0.78125)
+
+[node name="Collider" parent="TowerRange" index="0"]
+shape = SubResource("CircleShape2D_dtp8l")
+
+[node name="Sprite" parent="." index="4"]
+self_modulate = Color(0.36, 0.36, 0.36, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_4k2e7")
+
+[node name="Collider" parent="." index="5"]
+shape = SubResource("CircleShape2D_qr62b")
 
 [editable path="TowerRange"]

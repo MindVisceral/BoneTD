@@ -250,7 +250,6 @@ func can_see_target() -> bool:
 func shoot_at_target() -> void:
 	
 	## First, we must determine variables that all types of Towers need to shoot at Targets.
-	
 	angle_to_current_target = self.global_position.angle_to_point(current_target.global_position)
 	
 	## Fire a Bullet - this function is a dummy! Read its NOTE down below.
@@ -262,7 +261,7 @@ func shoot_at_target() -> void:
 
 
 ## NOTE: This is a dummy function! The actual firing function is located in the inheriting
-## NOTE: Towers, and this functions code depends on that Tower's code.
+## NOTE: Towers, and this function's code depends on that Tower's code.
 func fire() -> void:
 	pass
 
