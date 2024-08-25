@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c34u3lp40uq6y"]
+[gd_scene load_steps=10 format=3 uid="uid://c34u3lp40uq6y"]
 
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_5b2p6"]
 [ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_pvoay"]
 [ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_som8n"]
 [ext_resource type="PackedScene" uid="uid://orrfapo7vqan" path="res://Entities/Towers/GunTurret/Upgrades/BurstGunTurret.tscn" id="2_v6uwq"]
 [ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_qupad"]
+[ext_resource type="PackedScene" uid="uid://b8cx22nh2de5i" path="res://Entities/Towers/GunTurret/Upgrades/SniperGunTurret.tscn" id="5_mj44r"]
 
 [sub_resource type="Resource" id="Resource_wbajn"]
 script = ExtResource("3_qupad")
@@ -23,7 +24,9 @@ ingame_name = "Gun Turret"
 shot_delay = 1.2
 tower_base_cost = 15
 upgrade_1 = ExtResource("2_v6uwq")
-upgrade_1_details = "This Turret now shoots in bursts of 3 individual shots, but the delay between burst is higher than singular shots."
+upgrade_1_details = "This Turret now shoots in bursts of 3 individual shots."
+upgrade_2 = ExtResource("5_mj44r")
+upgrade_2_details = "Very large detection radius, very slow shooting speed, high damage."
 
 [node name="TowerRangeVisuals" parent="." index="0"]
 scale = Vector2(0.78125, 0.78125)

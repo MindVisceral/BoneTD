@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8cx22nh2de5i"]
+
+[ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_ab1dw"]
+[ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_1mvl4"]
+[ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_bccji"]
+[ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_khhmq"]
+
+[sub_resource type="Resource" id="Resource_gn6jj"]
+script = ExtResource("3_khhmq")
+damage_value = 4.0
+hit_effect = ExtResource("2_bccji")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_klaj5"]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7ol7"]
+radius = 12.0
+
+[node name="SniperGunTurret" instance=ExtResource("1_ab1dw")]
+damage_data = SubResource("Resource_gn6jj")
+ingame_name = "Sniper Turret"
+shot_delay = 5.0
+tower_base_cost = 13
+
+[node name="TowerRangeVisuals" parent="." index="0"]
+scale = Vector2(2.34375, 2.34375)
+
+[node name="Collider" parent="TowerRange" index="0"]
+shape = SubResource("CircleShape2D_klaj5")
+
+[node name="Sprite" parent="." index="4"]
+self_modulate = Color(1, 0.07, 0.07, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_1mvl4")
+
+[node name="Collider" parent="." index="5"]
+shape = SubResource("CircleShape2D_q7ol7")
+
+[editable path="TowerRange"]
