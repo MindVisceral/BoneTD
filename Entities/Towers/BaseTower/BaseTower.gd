@@ -68,8 +68,10 @@ extends StaticBody2D
 
 @export_group("Tower variables")
 
-## Time until the next singular shot can be fired
-@export_range(0.05, 15.0, 0.05) var shot_delay: float = 1.0
+## Time until the next singular shot can be fired; Dictates how many shots per second there are.
+## Value of '1' is one shot per second, '0.2' is five shots per second;
+## (shot per second = 1.0 / shot_delay)
+@export_range(0.05, 15.0, 0.01) var shot_delay: float = 1.0
 
 ## How much does this Tower cost to place? If the Player doesn't have
 ## at least this amount of Money, they can't place this Tower.
@@ -258,6 +260,7 @@ func shoot_at_target() -> void:
 	
 	## Start the Timer again
 	ShotDelayTimer.start()
+	
 
 
 ## NOTE: This is a dummy function! The actual firing function is located in the inheriting

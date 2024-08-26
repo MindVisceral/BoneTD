@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://iq4hunaccf0"]
+[gd_scene load_steps=21 format=3 uid="uid://iq4hunaccf0"]
 
 [ext_resource type="PackedScene" uid="uid://deff34inq0ldo" path="res://Levels/LevelStats.tscn" id="1_luyuo"]
 [ext_resource type="PackedScene" uid="uid://bi1x5umu2euqm" path="res://Resources/SpeedUp.tscn" id="2_0j0fm"]
@@ -8,7 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://ixusat1leq8h" path="res://Levels/TowerHandler.tscn" id="4_6772l"]
 [ext_resource type="PackedScene" uid="uid://wxc3a7eqicl0" path="res://Entities/Enemies/FodderEnemy/FodderEnemy.tscn" id="4_o55tc"]
 [ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
+[ext_resource type="PackedScene" uid="uid://cbxbdiftunnt3" path="res://Entities/Towers/GunTurret/Upgrades/AutoGunTurret.tscn" id="8_fvu8a"]
 [ext_resource type="PackedScene" uid="uid://b5dp0gcijhisy" path="res://UI/DraggableMenu/DraggableMenu.tscn" id="8_gw4ds"]
+
+[sub_resource type="Resource" id="Resource_8200r"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 50
+enemy_spawn_interval = 0.01
+time_until_next_enemies = 1.0
 
 [sub_resource type="Resource" id="Resource_0sdhy"]
 script = ExtResource("3_33haa")
@@ -79,13 +87,16 @@ func _ready() -> void:
 
 [node name="LevelStats" parent="." instance=ExtResource("1_luyuo")]
 default_health = 20
-default_money = 15
+default_money = 9999
 
 [node name="SpeedUp" parent="." instance=ExtResource("2_0j0fm")]
 
 [node name="RoundHandler" parent="." node_paths=PackedStringArray("path_reference", "nextRound_button") instance=ExtResource("2_7b7bi")]
 path_reference = NodePath("../MovementPath")
 nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
+
+[node name="Round7" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_8200r")])
 
 [node name="Round1" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
@@ -126,6 +137,11 @@ flat = true
 [node name="TowerHandler" parent="." node_paths=PackedStringArray("deselector", "selected_tower_menu") instance=ExtResource("4_6772l")]
 deselector = NodePath("../Deselector")
 selected_tower_menu = NodePath("../GUI/TemporaryGUI/SelectedTowerDraggableMenu")
+
+[node name="AutoGunTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_fvu8a")]
+position = Vector2(98, 105)
+time_until_cooled_down = 5.0
+tower_handler = NodePath("..")
 
 [node name="MovementPath" type="Path2D" parent="."]
 z_index = 1

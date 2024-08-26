@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbxbdiftunnt3"]
+
+[ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_dd0kh"]
+[ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_fgbej"]
+[ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_qwuio"]
+[ext_resource type="Script" path="res://Entities/Towers/GunTurret/Upgrades/AutoGunTurret.gd" id="2_wjsi1"]
+[ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_sqysl"]
+
+[sub_resource type="Resource" id="Resource_ognmq"]
+script = ExtResource("3_sqysl")
+damage_value = 0.5
+hit_effect = ExtResource("2_qwuio")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_538pf"]
+radius = 75.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7c7d"]
+radius = 12.0
+
+[node name="AutoGunTower" node_paths=PackedStringArray("HeatDissipationTimer") instance=ExtResource("1_dd0kh")]
+script = ExtResource("2_wjsi1")
+HeatDissipationTimer = NodePath("HeatDissipationTimer")
+heat_gain_per_shot = 2.0
+time_until_heat_dissipation = 0.7
+heat_lost_per_second = 20.0
+damage_data = SubResource("Resource_ognmq")
+ingame_name = "Automatic Turret"
+tower_base_cost = 35
+
+[node name="TowerRangeVisuals" parent="." index="0"]
+scale = Vector2(1.17188, 1.17188)
+
+[node name="Collider" parent="TowerRange" index="0"]
+shape = SubResource("CircleShape2D_538pf")
+
+[node name="Sprite" parent="." index="4"]
+self_modulate = Color(0.08, 0.08, 0.08, 1)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_fgbej")
+
+[node name="Collider" parent="." index="5"]
+shape = SubResource("CircleShape2D_q7c7d")
+
+[node name="HeatDissipationTimer" type="Timer" parent="." index="7"]
+wait_time = 0.7
+one_shot = true
+
+[editable path="TowerRange"]

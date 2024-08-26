@@ -13,7 +13,11 @@ extends BaseTower
 ## This DamageData Resource holds all the information this Tower's Target needs when it's been hit.
 ## This includes the Tower's damage dealth and the hit effect.
 ## NOTE: Read the DamageData script for more info.
-@export var damage_data: DamageData
+@export var damage_data: DamageData:
+	set(w_damagedata):
+		if w_damagedata != damage_data:
+			damage_data = w_damagedata
+			update_configuration_warnings()
 
 
 ###-------------------------------------------------------------------------###
@@ -41,6 +45,23 @@ extends BaseTower
 ##### Variable storage
 ###-------------------------------------------------------------------------###
 
+
+###-------------------------------------------------------------------------###
+##### Editor-only functions
+###-------------------------------------------------------------------------###
+
+## Show a warning when the Tower is not set up properly in the Editor.
+func _get_configuration_warnings() -> PackedStringArray:
+	## This is a derived class, so take superior warnings into account.
+	var warnings: PackedStringArray = super()
+	
+	if damage_data == null:
+		## We we want this warning to show up first in the Array. Weirdly, PackedStringArray
+		## have no 'push_front' function like regular Arrays - hence 'insert' at index 0 instead.
+		warnings.insert(0, "No DamageData is set for this Tower!")
+		
+	
+	return warnings
 
 ###-------------------------------------------------------------------------###
 ##### Setup functions
@@ -75,12 +96,7 @@ func fire() -> void:
 	#super() ## This might be unnecessary because it's an empty dummy function.
 	
 	## Send over an exported DamageData Resource to the Target
-	if damage_data:
-		current_target.receive_DamageData(damage_data)
-		
-	## This error print is useful; it's easy to forget to set up the DamageData for each Tower.
-	else:
-		printerr("DamageData Resource has not been set for ", self, "!")
+	current_target.receive_DamageData(damage_data)
 	
 	## And create a Trail between this Tower and the Target
 	var trail_effect_instance: BaseTrail = trail_effect.instantiate()

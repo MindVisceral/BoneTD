@@ -9,7 +9,7 @@ extends DirectTower
 ###-------------------------------------------------------------------------###
 
 ## How many times does this Turret shoot in a single burst?
-@export_range(1, 10, 1) var shots_in_a_burst: int = 3
+@export_range(1, 100, 1) var shots_in_a_burst: int = 3
 
 ## Time between each individual shot in each burst.
 @export_range(0.05, 1.0, 0.05) var shot_interval: float = 0.08
