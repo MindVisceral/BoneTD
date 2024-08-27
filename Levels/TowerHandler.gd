@@ -183,11 +183,7 @@ func update_tower_selection() -> void:
 		
 	
 	## Update the description of Upgrades 1 and 2 - what do they do?
-	## This information is found in HERE: where?
-	%Upgrade1DetailsLabel.text = selected_tower_ref.upgrade_1_details
-	%Upgrade2DetailsLabel.text = selected_tower_ref.upgrade_2_details
-	
-	
+	## and
 	## Update the Upgrade cost of Upgrades 1 and 2 - how much do they cost?
 	## HERE: We instantiate those upgrade Towers, but that's incredibly inefficient.
 	## HERE: Hopefully this won't have much impact on performance.
@@ -197,6 +193,9 @@ func update_tower_selection() -> void:
 		var temp_upgrade_1_instance: BaseTower = selected_tower_ref.upgrade_1.instantiate()
 		%Upgrade1CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]" + \
 			str(temp_upgrade_1_instance.tower_base_cost)
+			
+		%Upgrade1DetailsLabel.text = temp_upgrade_1_instance.tower_details
+		
 		temp_upgrade_1_instance = null
 	else:
 		%Upgrade1CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"
@@ -205,6 +204,9 @@ func update_tower_selection() -> void:
 		var temp_upgrade_2_instance: BaseTower = selected_tower_ref.upgrade_2.instantiate()
 		%Upgrade2CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]" + \
 			str(temp_upgrade_2_instance.tower_base_cost)
+			
+		%Upgrade2DetailsLabel.text = temp_upgrade_2_instance.tower_details
+		
 		temp_upgrade_2_instance = null
 	else:
 		%Upgrade2CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"

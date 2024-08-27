@@ -12,7 +12,7 @@ damage_value = 0.5
 hit_effect = ExtResource("2_qwuio")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_538pf"]
-radius = 75.0
+radius = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7c7d"]
 radius = 12.0
@@ -22,13 +22,14 @@ script = ExtResource("2_wjsi1")
 HeatDissipationTimer = NodePath("HeatDissipationTimer")
 heat_gain_per_shot = 2.0
 time_until_heat_dissipation = 0.7
-heat_lost_per_second = 20.0
+time_until_cooled_down = 5.0
 damage_data = SubResource("Resource_ognmq")
 ingame_name = "Automatic Turret"
+tower_details = "Slightly higer range, fires continuously until it overheats."
 tower_base_cost = 35
 
 [node name="TowerRangeVisuals" parent="." index="0"]
-scale = Vector2(1.17188, 1.17188)
+scale = Vector2(0.9375, 0.9375)
 
 [node name="Collider" parent="TowerRange" index="0"]
 shape = SubResource("CircleShape2D_538pf")

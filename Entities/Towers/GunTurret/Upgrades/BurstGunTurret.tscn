@@ -24,10 +24,10 @@ shots_in_a_burst = 3
 shot_interval = 0.08
 damage_data = SubResource("Resource_qebpy")
 ingame_name = "Burst Gun Turret"
+tower_details = "This Turret shoots in bursts of 3 individual shots."
 shot_delay = 2.0
 tower_base_cost = 10
 upgrade_1 = ExtResource("5_phndn")
-upgrade_1_details = "Fires constantly until it overheats."
 
 [node name="TowerRangeVisuals" parent="." index="0"]
 scale = Vector2(0.78125, 0.78125)

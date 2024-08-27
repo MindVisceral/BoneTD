@@ -19,6 +19,7 @@ radius = 12.0
 [node name="SniperGunTurret" instance=ExtResource("1_ab1dw")]
 damage_data = SubResource("Resource_gn6jj")
 ingame_name = "Sniper Turret"
+tower_details = "Very large detection radius, very slow shooting speed, high damage."
 shot_delay = 5.0
 tower_base_cost = 13
 

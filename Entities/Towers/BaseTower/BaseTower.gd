@@ -10,12 +10,27 @@ extends StaticBody2D
 
 @export_group("Editor-only")
 
-## How is this Tower named in-game? This name will show up in UI.
+## What is this Tower named in-game? This name will show up in UI.
 @export var ingame_name: String = "":
 	set(w_name):
 		if w_name != ingame_name:
 			ingame_name = w_name
 			update_configuration_warnings()
+			
+		
+	
+
+## What does this Tower do, especially when compared to its weaker counterpart (if its an Upgrade)?
+## This will show up in the Upgrade/SelectedTowerMenu.
+@export_multiline var tower_details: String = "":
+	set(w_details):
+		if w_details != tower_details:
+			tower_details = w_details
+			update_configuration_warnings()
+			
+		
+	
+
 
 ## Reference to the level's TowerHandler, the parent of this child Tower.
 ## This is an @export-ed variable (for when a Tower is placed by the level author),
@@ -25,6 +40,9 @@ extends StaticBody2D
 		if w_handler != tower_handler:
 			tower_handler = w_handler
 			update_configuration_warnings()
+			
+		
+	
 
 ## This Button is visible in-editor, but invisible in-game (we just remove its Normal texture)
 @export var tower_selection_button: TextureButton
@@ -88,17 +106,8 @@ extends StaticBody2D
 ## When this Tower is upgraded, it will be replaced by this "upgrade_1" Tower
 @export var upgrade_1: PackedScene
 
-## This String with a large TextEdit widget contains information about this Tower Upgrade 1.
-## Information written in this text field will be displayed on the shared SelectedTower Menu.
-@export_multiline var upgrade_1_details: String = "UPGRADE 1 DETAILS GO HERE"
-
-
 ## When this Tower is upgraded, it will be replaced by this "upgrade_2" Tower
 @export var upgrade_2: PackedScene
-
-## This String with a large TextEdit widget contains information about this Tower Upgrade 1.
-## Information written in this text field will be displayed on the shared SelectedTower Menu.
-@export_multiline var upgrade_2_details: String = "UPGRADE 2 DETAILS GO HERE"
 
 
 ###-------------------------------------------------------------------------###
@@ -146,6 +155,11 @@ func _get_configuration_warnings() -> PackedStringArray:
 	
 	if ingame_name == "":
 		warnings.append("This Tower does not have its in-game name set!")
+		
+	
+	if tower_details == "":
+		warnings.append("This Tower does not have its details/description set!")
+		
 	
 	if tower_handler == null:
 		warnings.append("TowerHandler must be selected as an @export-ed variable

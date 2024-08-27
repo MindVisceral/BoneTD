@@ -24,9 +24,7 @@ ingame_name = "Gun Turret"
 shot_delay = 1.2
 tower_base_cost = 15
 upgrade_1 = ExtResource("2_v6uwq")
-upgrade_1_details = "This Turret now shoots in bursts of 3 individual shots."
 upgrade_2 = ExtResource("5_mj44r")
-upgrade_2_details = "Very large detection radius, very slow shooting speed, high damage."
 
 [node name="TowerRangeVisuals" parent="." index="0"]
 scale = Vector2(0.78125, 0.78125)
