@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://m5ujrh2u7dvc"]
+
+[ext_resource type="PackedScene" uid="uid://u1qyk1m1yco0" path="res://Entities/Towers/BaseTower/BaseTower.tscn" id="1_8y2ya"]
+[ext_resource type="Script" path="res://Entities/Towers/HitscanTower/HitscanTower.gd" id="2_gy1t4"]
+[ext_resource type="PackedScene" uid="uid://cdmssx6y1y2pk" path="res://Entities/Towers/BaseTower/BaseTrail.tscn" id="3_pi8x0"]
+
+[node name="HitscanTower" instance=ExtResource("1_8y2ya")]
+script = ExtResource("2_gy1t4")
+raycast_layers = 33
+piercings = null
+damage_data = null
+trail_effect = ExtResource("3_pi8x0")
+environment_layer = 0
+
+[editable path="TowerRange"]
