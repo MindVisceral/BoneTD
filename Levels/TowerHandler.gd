@@ -199,6 +199,7 @@ func update_tower_selection() -> void:
 		temp_upgrade_1_instance = null
 	else:
 		%Upgrade1CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"
+		%Upgrade1DetailsLabel.text = "NO UPGRADE INFO"
 	#
 	if selected_tower_ref.upgrade_2 != null:
 		var temp_upgrade_2_instance: BaseTower = selected_tower_ref.upgrade_2.instantiate()
@@ -210,3 +211,4 @@ func update_tower_selection() -> void:
 		temp_upgrade_2_instance = null
 	else:
 		%Upgrade2CostLabel.text = "[center]Cost: [img]res://placeholder_2.png[/img]"
+		%Upgrade2DetailsLabel.text = "NO UPGRADE INFO"

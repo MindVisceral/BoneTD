@@ -128,11 +128,16 @@ extends StaticBody2D
 ## Total amount of Money this Tower cost to place and upgrade.
 var current_cost: int = 0
 
-## Total amount of Money this Tower will give back when Sold
+## Total amount of Money this Tower will give back when Sold. Updated in update_tower_cost()
 var sell_value: int = 0
 
-## 1 pixel of TowerRange is worth '0.015625' in TowerRangeVisuals scale
-## When TowerRange is 20px, TowerRangeVisuals scale is set to 0.3125
+## This Tower's Upgrade 1 & 2 Towers should include this Tower's base cost in their sell_value
+## (and the costs of the Tower that this Tower is an upgrade of, if that's the case);
+## In result, each Upgrade sell for exponentially higher values.
+var total_upgrade_value: int = 0
+
+## Value of 1 pixel of TowerRange Collider is worth '0.015625' in TowerRangeVisuals' scale value
+## When TowerRange Collider is set to 20px, TowerRangeVisuals scale is set to 0.3125
 const range_to_range_visuals_rate: float = 0.015625
 
 ## All Enemies in range of this tower. The first entry in this Array is the first tower added.
@@ -420,10 +425,19 @@ func upgrade_1_tower() -> void:
 	replacement_upgrade_tower.global_position = self.global_position
 	replacement_upgrade_tower.tower_handler = self.tower_handler
 	
+	## This new Upgraded Tower's sell_value should include this Tower's cost too
+	## (and the costs of the Tower that this Tower is an upgrade of, if that's the case)
+	self.total_upgrade_value += self.tower_base_cost
+	replacement_upgrade_tower.total_upgrade_value = self.total_upgrade_value
+	
+	## This new Tower (Upgrade) will be selected automatically.
+	replacement_upgrade_tower._on_tower_selection_pressed()
+	
 	## And finally create this new "upgraded" Tower
 	tower_handler.add_child(replacement_upgrade_tower)
-	## And now we can get rid of this Tower.
-	destroy_tower()
+	
+	## Now we can get rid of this Tower, but we make sure that it is not automatically deselected
+	destroy_tower(false)
 #
 func upgrade_2_tower() -> void:
 	var replacement_upgrade_tower: BaseTower = upgrade_2.instantiate()
@@ -431,10 +445,14 @@ func upgrade_2_tower() -> void:
 	replacement_upgrade_tower.global_position = self.global_position
 	replacement_upgrade_tower.tower_handler = self.tower_handler
 	
-	## And finally create this new "upgraded" Tower
+	self.total_upgrade_value += self.tower_base_cost
+	replacement_upgrade_tower.total_upgrade_value = self.total_upgrade_value
+	
+	replacement_upgrade_tower._on_tower_selection_pressed()
+	
 	tower_handler.add_child(replacement_upgrade_tower)
-	## And now we can get rid of this Tower.
-	destroy_tower()
+	
+	destroy_tower(false)
 
 
 ###-------------------------------------------------------------------------###
@@ -447,7 +465,7 @@ func sell_tower() -> void:
 	## Calculate how much this Tower cost and how much it will sell for
 	update_tower_cost()
 	
-	## Give the Player the rigth amount of Money, equivalent to this Tower's sell_value
+	## Give the Player the right amount of Money, equivalent to this Tower's sell_value
 	Globals.gain_money(sell_value)
 	## Now we may delete this Tower.
 	destroy_tower()
@@ -457,9 +475,8 @@ func sell_tower() -> void:
 func update_tower_cost() -> void:
 	## First, reset current_cost back to this Tower's base cost
 	current_cost = tower_base_cost
-	## Add up the cost of all individual upgrades
-	current_cost
-	
+	## Add up the cost of all individual Upgrades up until now.
+	current_cost += total_upgrade_value
 	
 	## Recalculate how much Money this Tower will give back when Sold,
 	## rounded to the nearest(?) full integer.
@@ -471,15 +488,21 @@ func update_tower_cost() -> void:
 ###-------------------------------------------------------------------------###
 
 ## For whatever reason, this Tower must be queue_free()-d. Typically it's because it was sold.
-func destroy_tower() -> void:
-	## TowerHandler should forget about this Tower before we queue_free() it.
-	tower_handler.selected_tower_ref = null
-	
-	## Ignore the signal's name. This is here just to disable all Menus that rely on this Tower,
-	## like the SelectedTowerMenu.
-	## NOTE: As things are currently, this also updates all other Towers' visuals!
-	## NOTE: HERE: Make a new signal if that is undesirable.
-	tower_handler.new_tower_selected.emit()
+## NOTE: The passed variable, true by default, makes the tower_handler deselect this Tower.
+## NOTE: This func is called with this var as false when we don't want this Tower's destruction
+## NOTE: to overwrite another Tower's selection - like when Upgrading this Tower.
+func destroy_tower(deselect_this_tower: bool = true) -> void:
+	## Only matters when this Tower must be deselected.
+	if deselect_this_tower == true:
+		## TowerHandler should forget about this Tower before we queue_free() it.
+		tower_handler.selected_tower_ref = null
+		
+		## Ignore the signal's name. This is here just to disable all Menus that rely on this Tower,
+		## like the SelectedTowerMenu.
+		## NOTE: As things are currently, this also updates all other Towers' visuals!
+		## NOTE: HERE: Make a new signal if that is undesirable.
+		tower_handler.new_tower_selected.emit()
+		
 	
 	
 	queue_free()

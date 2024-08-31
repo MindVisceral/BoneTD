@@ -20,8 +20,8 @@ radius = 12.0
 piercings = 8
 damage_data = SubResource("Resource_v3vwl")
 ingame_name = "Railgun Turret"
-tower_details = "Fires a highly-damaging piercing shot which gets weaker with each pierce."
-shot_delay = 5.0
+tower_details = "Lower range, but fires a highly-damaging piercing shot."
+shot_delay = 8.0
 tower_base_cost = 35
 
 [node name="TowerRangeVisuals" parent="." index="0"]

@@ -7,7 +7,8 @@
 [node name="HitscanTower" instance=ExtResource("1_8y2ya")]
 script = ExtResource("2_gy1t4")
 raycast_layers = 33
-piercings = null
+piercings = 0
+is_weaker_with_each_pierce = true
 damage_data = null
 trail_effect = ExtResource("3_pi8x0")
 environment_layer = 0

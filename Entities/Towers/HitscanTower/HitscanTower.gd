@@ -16,6 +16,9 @@ extends BaseTower
 ## How many Enemies can the shot go through before it stops?
 @export_range(0, 9999) var piercings: int = 0
 
+## Should this Tower's shots get weaker with each pierce through an Enemy?
+@export var is_weaker_with_each_pierce: bool = true
+
 
 ###-------------------------------------------------------------------------###
 ##### DamageData
@@ -153,7 +156,7 @@ func fire() -> void:
 		if (result != null) and (result.has("collider")):
 			## Get the collider info from the result dictionary and add it to the Array.
 			all_colliders.append(result.collider)
-				
+			
 			
 		## If no collider was found, clean the exlusion Array and break the loop
 		else:
@@ -162,10 +165,14 @@ func fire() -> void:
 			
 		
 	
+	
 	## This Tower can pierce through Enemies.
 	## In the 'for' loop, we only go to the next Enemy if there is still some piercing power left
 	## after the first Enemy.
 	var piercings_left: int = piercings
+	## Remember what the damage_value of damage_data is by default, because we will overwrite it
+	## (if 'is_weaker_with_each_pierce' is set to true)
+	var original_damage_value: float = damage_data.damage_value
 	#
 	## Loop through all the colliders caught in the Ray.
 	for collider: Hurtbox in all_colliders:
@@ -173,11 +180,23 @@ func fire() -> void:
 		## We can only damage as many Enemies in the 'all_colliders' Array as there are 'piercings'
 		if piercings_left >= 0:
 			
+			## We divide piercings_left by total piercings to get the (kinda arbitrary)
+			## percentage by which the damage will be reduced; In practise, this probably means
+			## that the damage reduces linearly.
+			damage_data.damage_value = snappedf((damage_data.damage_value * \
+				(float(piercings_left) / float(piercings))), 0.5)
+				
+			## And the damage is capped to always be 0.5 at minimum. Without this, the final
+			## bit of damage would be 0.
+			damage_data.damage_value = clampf(damage_data.damage_value, 0.5, INF)
+			
+			
 			## Send over an exported DamageData Resource to the Target, if it accepts such a Resource.
 			if collider is Hurtbox:
 				collider.pass_DamageData(damage_data)
 				
 			
+		
 		## All 'piercing power' is gone, we cannot damage any more Enemies.
 		else:
 			break
@@ -186,6 +205,12 @@ func fire() -> void:
 		## Remove one 'piercing power' point every interation through the loop
 		piercings_left -= 1
 		
+		## Restore damage_data's damage_value back to its original
+		damage_data.damage_value = original_damage_value
+		
+	
+	## Also restore damage_data's damage_value back to its original utside the loop, just in case.
+	damage_data.damage_value = original_damage_value
 	
 	
 	
