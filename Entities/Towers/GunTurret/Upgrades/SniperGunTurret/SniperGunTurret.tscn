@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_1mvl4"]
 [ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_bccji"]
 [ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_khhmq"]
-[ext_resource type="PackedScene" uid="uid://wg7cb76ahvb" path="res://Entities/Towers/GunTurret/Upgrades/RailgunTurret.tscn" id="4_ygv1a"]
+[ext_resource type="PackedScene" uid="uid://wg7cb76ahvb" path="res://Entities/Towers/GunTurret/Upgrades/RailgunTurret/RailgunTurret.tscn" id="4_ygv1a"]
 
 [sub_resource type="Resource" id="Resource_gn6jj"]
 script = ExtResource("3_khhmq")

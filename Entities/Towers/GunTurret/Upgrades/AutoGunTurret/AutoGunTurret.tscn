@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dn0yn7md0iu0y" path="res://Entities/Towers/DirectTower/DirectTower.tscn" id="1_dd0kh"]
 [ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="2_fgbej"]
 [ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_qwuio"]
-[ext_resource type="Script" path="res://Entities/Towers/GunTurret/Upgrades/AutoGunTurret.gd" id="2_wjsi1"]
+[ext_resource type="Script" path="res://Entities/Towers/GunTurret/Upgrades/AutoGunTurret/AutoGunTurret.gd" id="2_wjsi1"]
 [ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_sqysl"]
 
 [sub_resource type="Resource" id="Resource_ognmq"]

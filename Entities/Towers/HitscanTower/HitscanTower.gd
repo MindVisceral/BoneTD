@@ -196,6 +196,7 @@ func fire() -> void:
 				collider.pass_DamageData(damage_data)
 				
 			
+			
 		
 		## All 'piercing power' is gone, we cannot damage any more Enemies.
 		else:
@@ -209,9 +210,8 @@ func fire() -> void:
 		damage_data.damage_value = original_damage_value
 		
 	
-	## Also restore damage_data's damage_value back to its original utside the loop, just in case.
+	## Also restore damage_data's damage_value back to its original outside the loop, just in case.
 	damage_data.damage_value = original_damage_value
-	
 	
 	
 	## And create a Trail between this Tower and the Target
