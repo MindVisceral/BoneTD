@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://wg7cb76ahvb"]
+[gd_scene load_steps=9 format=3 uid="uid://wg7cb76ahvb"]
 
-[ext_resource type="PackedScene" uid="uid://m5ujrh2u7dvc" path="res://Entities/Towers/HitscanTower/HitscanTower.tscn" id="1_w22wf"]
-[ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_20wuo"]
-[ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_6lec4"]
-[ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="4_84hu3"]
+[ext_resource type="PackedScene" uid="uid://m5ujrh2u7dvc" path="res://Entities/Towers/HitscanTower/HitscanTower.tscn" id="1_210vu"]
+[ext_resource type="PackedScene" uid="uid://dv57srrnagcgo" path="res://Entities/Towers/BaseTower/BaseHitEffect.tscn" id="2_sjkkw"]
+[ext_resource type="Script" path="res://Resources/DamageData.gd" id="3_p0akm"]
+[ext_resource type="PackedScene" uid="uid://btl5vrby043dc" path="res://Entities/Towers/GunTurret/Upgrades/RailgunTurret/RailgunTrail.tscn" id="4_m25c0"]
+[ext_resource type="Texture2D" uid="uid://dbuegf60t4tck" path="res://placeholder_4.png" id="5_n8ttc"]
 
 [sub_resource type="Resource" id="Resource_v3vwl"]
-script = ExtResource("3_6lec4")
+script = ExtResource("3_p0akm")
 damage_value = 5.0
-hit_effect = ExtResource("2_20wuo")
+hit_effect = ExtResource("2_sjkkw")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pmax1"]
 radius = 115.0
@@ -16,9 +17,10 @@ radius = 115.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_k6p52"]
 radius = 12.0
 
-[node name="RailgunTurret" instance=ExtResource("1_w22wf")]
+[node name="RailgunTurret" instance=ExtResource("1_210vu")]
 piercings = 8
 damage_data = SubResource("Resource_v3vwl")
+trail_effect = ExtResource("4_m25c0")
 ingame_name = "Railgun Turret"
 tower_details = "Lower range, but fires a highly-damaging piercing shot."
 shot_delay = 8.0
@@ -36,7 +38,7 @@ position = Vector2(6, -6)
 [node name="Sprite" parent="." index="4"]
 self_modulate = Color(0, 0.2755, 0.87, 1)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("4_84hu3")
+texture = ExtResource("5_n8ttc")
 
 [node name="Collider" parent="." index="5"]
 shape = SubResource("CircleShape2D_k6p52")

@@ -9,7 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://wxc3a7eqicl0" path="res://Entities/Enemies/FodderEnemy/FodderEnemy.tscn" id="4_o55tc"]
 [ext_resource type="PackedScene" uid="uid://c7ytai1x670kx" path="res://Entities/Towers/GunTurret/GunTurretSelectButton.tscn" id="7_uuix3"]
 [ext_resource type="PackedScene" uid="uid://b5dp0gcijhisy" path="res://UI/DraggableMenu/DraggableMenu.tscn" id="8_gw4ds"]
-[ext_resource type="PackedScene" uid="uid://wg7cb76ahvb" path="res://Entities/Towers/GunTurret/Upgrades/RailgunTurret/RailgunTurret.tscn" id="8_tdjs4"]
+[ext_resource type="PackedScene" uid="uid://bgusriup4vgta" path="res://Entities/Towers/GunTurret/Upgrades/ExplosiveSniperTurret/ExplosiveSniperTurret.tscn" id="8_iu7cj"]
+
+[sub_resource type="Resource" id="Resource_8200r"]
+script = ExtResource("3_33haa")
+enemy_scene = ExtResource("4_o55tc")
+number_of_enemies = 50
+enemy_spawn_interval = 0.01
+time_until_next_enemies = 1.0
 
 [sub_resource type="Resource" id="Resource_0sdhy"]
 script = ExtResource("3_33haa")
@@ -60,13 +67,6 @@ number_of_enemies = 30
 enemy_spawn_interval = 1.5
 time_until_next_enemies = 1.0
 
-[sub_resource type="Resource" id="Resource_8200r"]
-script = ExtResource("3_33haa")
-enemy_scene = ExtResource("4_o55tc")
-number_of_enemies = 50
-enemy_spawn_interval = 0.01
-time_until_next_enemies = 1.0
-
 [sub_resource type="Curve2D" id="Curve2D_ja27w"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -20, 222, -22.5, 24, 22.5, -24, 85, 228, -7, 40.5, 7, -40.5, 62, 105, -36.5, -2, 36.5, 2, 152, 51, -6, -9.5, 6, 9.5, 207, 85, -15, -43.5, 15, 43.5, 203, 195, -22, -2.5, 22, 2.5, 255, 242, -7, 43, 7, -43, 323, 204, 12.5, 14.5, -12.5, -14.5, 275, 142, -33, 45, 33, -45, 270, 61, -45.5, -25, 45.5, 25, 399, 26, 10, -32, -10, 32, 434, 105, -33.5, -30, 33.5, 30, 405, 191, -21, -2.5, 21, 2.5, 474, 236, 0, 0, 0, 0, 511, 237)
@@ -95,6 +95,9 @@ default_money = 9999
 path_reference = NodePath("../MovementPath")
 nextRound_button = NodePath("../GUI/TemporaryGUI/next_round_button")
 
+[node name="Round7" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
+enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_8200r")])
+
 [node name="Round1" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_0sdhy")])
 
@@ -112,9 +115,6 @@ enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_2hv01"), 
 
 [node name="Round6" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
 enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_getvg")])
-
-[node name="Round7" parent="RoundHandler" instance=ExtResource("3_gmuuh")]
-enemy_resources = Array[ExtResource("3_33haa")]([SubResource("Resource_8200r")])
 
 [node name="Deselector" type="Button" parent="."]
 anchors_preset = 15
@@ -138,8 +138,8 @@ flat = true
 deselector = NodePath("../Deselector")
 selected_tower_menu = NodePath("../GUI/TemporaryGUI/SelectedTowerDraggableMenu")
 
-[node name="RailgunTurret" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_tdjs4")]
-position = Vector2(53, 73)
+[node name="DirectTower" parent="TowerHandler" node_paths=PackedStringArray("tower_handler") instance=ExtResource("8_iu7cj")]
+position = Vector2(176, 137)
 tower_handler = NodePath("..")
 
 [node name="MovementPath" type="Path2D" parent="."]
